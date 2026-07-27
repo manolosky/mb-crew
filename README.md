@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# mb-crew — Portfolio de Manuel Bolaños
 
-## Getting Started
+Sitio de presentación personal: single one page con secciones ancladas (`/about`, `/stack`, `/experience`, `/projects`, `/contact`), construido con **Next.js (App Router) + React (JS) + Tailwind CSS v4** y desplegado en **Vercel** mediante GitHub Actions.
 
-First, run the development server:
+- Plan de trabajo y decisiones: [docs/PLAN.md](docs/PLAN.md)
+- Diseño de referencia (screenshots y datos extraídos): [reference/](reference/)
+
+## Requisitos
+
+- **Node.js 22** (la versión está fijada en [.nvmrc](.nvmrc); con nvm: `nvm use`)
+- npm (incluido con Node)
+
+## Ejecutar el proyecto en local
 
 ```bash
+# 1. Clonar e instalar dependencias (también instala los hooks de git via husky)
+git clone https://github.com/manolosky/mb-crew.git
+cd mb-crew
+npm install
+
+# 2. Levantar el servidor de desarrollo
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abre <http://localhost:3000> en el navegador. La página se recarga automáticamente al editar archivos en `src/`.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Para probar el build de producción en local:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm run start   # sirve el build en http://localhost:3000
+```
 
-## Learn More
+## Scripts disponibles
 
-To learn more about Next.js, take a look at the following resources:
+| Script                 | Qué hace                                                             |
+| ---------------------- | -------------------------------------------------------------------- |
+| `npm run dev`          | Servidor de desarrollo con hot reload                                |
+| `npm run build`        | Build de producción                                                  |
+| `npm run start`        | Sirve el build de producción                                         |
+| `npm run lint`         | ESLint sobre todo el proyecto                                        |
+| `npm run lint:fix`     | ESLint corrigiendo lo autocorregible                                 |
+| `npm run format`       | Prettier sobre todo el proyecto (ordena también las clases Tailwind) |
+| `npm run format:check` | Verifica formato sin escribir                                        |
+| `npm test`             | Suite de tests (Vitest + React Testing Library), una sola pasada     |
+| `npm run test:watch`   | Tests en modo watch                                                  |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Calidad y pre-commit
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Cada commit ejecuta automáticamente (via Husky + lint-staged):
 
-## Deploy on Vercel
+1. **ESLint** (cero warnings permitidos) y **Prettier** sobre los archivos staged.
+2. **La suite de tests completa** (`npm test`).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Si algo falla, el commit se bloquea. Los mismos checks correrán en GitHub Actions antes de cada deploy.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Estructura del proyecto
+
+```
+src/
+├── app/            # App Router: layout raíz, página, estilos globales (tokens)
+├── components/ui/  # Átomos reutilizables (Button, Badge, Chip, Card, …)
+├── data/           # portfolio.json — todo el contenido del sitio
+└── lib/            # Acceso a datos, registro de iconos, helpers
+```
+
+Convención: los archivos que contienen JSX usan extensión `.jsx`.
