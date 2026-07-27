@@ -1,4 +1,5 @@
 import {
+  FaArrowUpRightFromSquare,
   FaBrain,
   FaCartShopping,
   FaCode,
@@ -6,6 +7,7 @@ import {
   FaDownload,
   FaEnvelope,
   FaGithub,
+  FaGlobe,
   FaGraduationCap,
   FaHeart,
   FaLinkedinIn,
@@ -23,6 +25,8 @@ import {
 // The portfolio JSON stores Font Awesome class names; this registry resolves
 // them to tree-shakeable react-icons components.
 const ICONS = {
+  'fa-solid fa-arrow-up-right-from-square': FaArrowUpRightFromSquare,
+  'fa-solid fa-globe': FaGlobe,
   'fa-solid fa-brain': FaBrain,
   'fa-solid fa-cart-shopping': FaCartShopping,
   'fa-solid fa-code': FaCode,

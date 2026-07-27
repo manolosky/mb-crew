@@ -293,6 +293,51 @@
         "Prompt engineering and AI-assisted development as part of the everyday toolkit."
       ],
       "tech": ["LLMs", "AI agents", "Claude Code", "MCP", "Prompt engineering"]
+    },
+    {
+      "title": "Munck Wilson Mandala",
+      "tag": "WordPress · Client work",
+      "kind": "Web / Law firm",
+      "icon": "fa-solid fa-globe",
+      "url": "https://www.munckwilson.com/",
+      "blurb": "Corporate website for Munck Wilson Mandala, an AI-focused law firm with nine offices across the US and South Korea.",
+      "points": [
+        "Custom WordPress theme built end-to-end, front-end and back-end.",
+        "Attorney, practice-area and insights architecture with searchable listings.",
+        "Performance work on a content-heavy, image-rich site."
+      ],
+      "tech": ["WordPress", "PHP", "JavaScript", "Sass", "MySQL"],
+      "attribution": "Authored by Content Pilot — 100% of the development by Manuel Bolaños."
+    },
+    {
+      "title": "Modern Vacation Rental Management",
+      "tag": "WordPress · Client work",
+      "kind": "Web / Travel",
+      "icon": "fa-solid fa-globe",
+      "url": "https://www.modernvrm.com/",
+      "blurb": "Booking-oriented website for a luxury vacation rental company, from property catalog to inquiry.",
+      "points": [
+        "Filtered property search: location, dates, guests, bedrooms and amenities.",
+        "Custom WordPress development delivered end-to-end.",
+        "Fast, media-rich listing pages tuned for conversion."
+      ],
+      "tech": ["WordPress", "PHP", "JavaScript", "Sass", "MySQL"],
+      "attribution": "Authored by Content Pilot — 100% of the development by Manuel Bolaños."
+    },
+    {
+      "title": "Grant & Eisenhofer P.A.",
+      "tag": "WordPress · Client work",
+      "kind": "Web / Law firm",
+      "icon": "fa-solid fa-globe",
+      "url": "https://www.gelaw.com/",
+      "blurb": "Website for Grant & Eisenhofer P.A., a plaintiffs’ litigation firm with $30B+ in client recoveries.",
+      "points": [
+        "Practice areas, representative cases and professional directory architecture.",
+        "Bespoke WordPress theme built end-to-end.",
+        "Ongoing support and iterative improvements on a live site."
+      ],
+      "tech": ["WordPress", "PHP", "JavaScript", "Sass", "MySQL"],
+      "attribution": "Authored by Content Pilot — 100% of the development by Manuel Bolaños."
     }
   ],
   "education": [

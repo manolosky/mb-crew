@@ -1,6 +1,9 @@
 @import 'tailwindcss';
 
 @theme {
+  /* Desktop navigation kicks in above the reference's 820px mobile breakpoint */
+  --breakpoint-nav: 51.3125rem;
+
   /* Typography — variables provided by next/font in the root layout */
   --font-sans: var(--font-plex-sans), system-ui, sans-serif;
   --font-mono: var(--font-plex-mono), ui-monospace, monospace;
