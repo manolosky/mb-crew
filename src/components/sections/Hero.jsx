@@ -45,7 +45,7 @@ export const Hero = ({ profile }) => {
         </p>
 
         <div className="flex flex-wrap items-center gap-3.5">
-          <Button href="#contact">
+          <Button href="/contact">
             <Icon name="fa-solid fa-paper-plane" /> Get in touch
           </Button>
           <Button variant="glass" href={profile.cvHref}>

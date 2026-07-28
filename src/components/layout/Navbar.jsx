@@ -1,15 +1,17 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
+import { cn } from '@/lib/cn';
 import { Icon } from '@/lib/icons';
 
 const NAV_LINKS = [
-  { label: 'About', href: '#about' },
-  { label: 'Stack', href: '#stack' },
-  { label: 'Experience', href: '#experience' },
-  { label: 'Projects', href: '#projects' },
+  { label: 'About', href: '/about' },
+  { label: 'Stack', href: '/stack' },
+  { label: 'Experience', href: '/experience' },
+  { label: 'Projects', href: '/projects' },
 ];
 
 const LogoMark = ({ className }) => (
@@ -22,6 +24,7 @@ const LogoMark = ({ className }) => (
 
 export const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   const closeMenu = () => setMenuOpen(false);
 
@@ -29,7 +32,7 @@ export const Navbar = () => {
     <>
       <nav className="border-line-strong sticky top-0 z-50 flex h-[68px] items-center justify-between gap-5 border-b bg-[rgba(11,10,9,.82)] px-[clamp(20px,5vw,48px)] backdrop-blur-xl">
         <Link
-          href="#top"
+          href="/"
           onClick={closeMenu}
           className="font-heading text-ink flex min-w-0 items-center gap-2.5 text-[clamp(15px,4vw,18px)] font-bold tracking-[-0.01em] whitespace-nowrap"
         >
@@ -43,13 +46,17 @@ export const Navbar = () => {
             <Link
               key={link.href}
               href={link.href}
-              className="text-slate hover:text-ink rounded-[9px] px-3 py-2 text-[14.5px] font-medium transition hover:bg-[#232019]"
+              aria-current={pathname === link.href ? 'page' : undefined}
+              className={cn(
+                'text-slate hover:text-ink rounded-[9px] px-3 py-2 text-[14.5px] font-medium transition hover:bg-[#232019]',
+                pathname === link.href && 'text-brand-start bg-[#232019]',
+              )}
             >
               {link.label}
             </Link>
           ))}
           <Link
-            href="#contact"
+            href="/contact"
             className="bg-brand-gradient-soft shadow-nav-cta ml-1.5 inline-flex items-center gap-2 rounded-[10px] px-[18px] py-[9px] text-[14.5px] font-semibold text-white transition hover:brightness-[1.06]"
           >
             <Icon name="fa-solid fa-paper-plane" className="text-xs" /> Contact
@@ -78,13 +85,17 @@ export const Navbar = () => {
               key={link.href}
               href={link.href}
               onClick={closeMenu}
-              className="text-ink-soft border-line-soft border-b px-2 py-3 text-base font-semibold"
+              aria-current={pathname === link.href ? 'page' : undefined}
+              className={cn(
+                'text-ink-soft border-line-soft border-b px-2 py-3 text-base font-semibold',
+                pathname === link.href && 'text-brand-start',
+              )}
             >
               {link.label}
             </Link>
           ))}
           <Link
-            href="#contact"
+            href="/contact"
             onClick={closeMenu}
             className="bg-brand-gradient-soft mt-2 rounded-[11px] p-3 text-center text-base font-bold text-white"
           >

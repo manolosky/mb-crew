@@ -8,7 +8,8 @@ import { Projects } from '@/components/sections/Projects';
 import { Stack } from '@/components/sections/Stack';
 import { getExperience, getHobbies, getProfile, getProjects, getSkills } from '@/lib/portfolio';
 
-const Home = () => {
+// The whole one-page; every route renders this and scrolls to its section.
+export const OnePage = () => {
   const profile = getProfile();
 
   return (
@@ -26,5 +27,3 @@ const Home = () => {
     </div>
   );
 };
-
-export default Home;

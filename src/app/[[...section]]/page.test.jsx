@@ -1,0 +1,55 @@
+import { render, screen } from '@testing-library/react';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+
+import portfolio from '@/data/portfolio.json';
+
+import Page, { generateMetadata, generateStaticParams, SECTIONS } from './page';
+
+const renderPage = async (section) => {
+  render(await Page({ params: Promise.resolve({ section }) }));
+};
+
+describe('one-page route', () => {
+  beforeEach(() => {
+    // jsdom does not implement scrollIntoView
+    Element.prototype.scrollIntoView = vi.fn();
+  });
+
+  it('renders the one-page at the root path', async () => {
+    await renderPage(undefined);
+
+    expect(
+      screen.getByRole('heading', { level: 1, name: portfolio.profile.name }),
+    ).toBeInTheDocument();
+  });
+
+  it('renders every section anchor', async () => {
+    await renderPage(undefined);
+
+    ['top', ...Object.keys(SECTIONS)].forEach((id) => {
+      expect(document.querySelector(`#${id}`), `missing #${id}`).toBeInTheDocument();
+    });
+  });
+
+  it('prerenders the root path plus one path per section', () => {
+    const params = generateStaticParams();
+
+    expect(params).toContainEqual({ section: [] });
+    Object.keys(SECTIONS).forEach((section) => {
+      expect(params).toContainEqual({ section: [section] });
+    });
+    expect(params).toHaveLength(Object.keys(SECTIONS).length + 1);
+  });
+
+  it('builds a per-section page title', async () => {
+    const metadata = await generateMetadata({ params: Promise.resolve({ section: ['about'] }) });
+
+    expect(metadata.title).toBe('About — Manuel Bolaños');
+  });
+
+  it('scrolls to the requested section', async () => {
+    await renderPage(['experience']);
+
+    expect(document.querySelector('#experience').scrollIntoView).toHaveBeenCalled();
+  });
+});
