@@ -6,7 +6,10 @@ import { Icon } from '@/lib/icons';
 export const Contact = ({ profile }) => {
   return (
     <Section id="contact">
-      <Reveal className="bg-hero relative overflow-hidden rounded-[26px] p-[clamp(32px,6vw,72px)] text-white">
+      <Reveal
+        direction="fade"
+        className="bg-hero relative overflow-hidden rounded-[26px] p-[clamp(32px,6vw,72px)] text-white"
+      >
         <video
           autoPlay
           muted

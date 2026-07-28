@@ -20,7 +20,7 @@ export const About = ({ profile, hobbies }) => {
         </Reveal>
 
         <div className="mt-9 grid grid-cols-[repeat(auto-fit,minmax(min(280px,100%),1fr))] items-start gap-[clamp(20px,3vw,36px)]">
-          <Reveal>
+          <Reveal direction="left">
             <p className="text-body mb-5 text-[clamp(16px,1.8vw,18px)] leading-[1.62]">
               {profile.summary}
             </p>
@@ -28,7 +28,7 @@ export const About = ({ profile, hobbies }) => {
               {profile.hybrid}
             </p>
           </Reveal>
-          <Reveal>
+          <Reveal direction="right">
             {/* Placeholder until the real photo arrives */}
             <div className="border-line flex aspect-4/5 items-center justify-center rounded-[20px] border bg-[repeating-linear-gradient(135deg,#1b1916_0_12px,#211e1a_12px_24px)]">
               <span className="text-muted rounded-lg bg-black/50 px-4 py-2.5 font-mono text-[13px]">
@@ -38,17 +38,22 @@ export const About = ({ profile, hobbies }) => {
           </Reveal>
         </div>
 
-        <Reveal className="mt-[clamp(36px,5vw,56px)]">
-          <h3 className="font-heading mb-1 text-xl font-semibold">Beyond the keyboard</h3>
-          <p className="text-muted mb-5 max-w-[52ch] text-[15px] leading-[1.55]">
-            The habits and side quests that keep the engineering sharp.
-          </p>
-          <div className="grid grid-cols-[repeat(auto-fit,minmax(min(210px,100%),1fr))] gap-4">
+        <div className="mt-[clamp(36px,5vw,56px)]">
+          <Reveal>
+            <h3 className="font-heading mb-1 text-xl font-semibold">Beyond the keyboard</h3>
+            <p className="text-muted mb-5 max-w-[52ch] text-[15px] leading-[1.55]">
+              The habits and side quests that keep the engineering sharp.
+            </p>
+          </Reveal>
+          <Reveal
+            staggerChildren
+            className="grid grid-cols-[repeat(auto-fit,minmax(min(210px,100%),1fr))] gap-4"
+          >
             {hobbies.map((hobby) => (
               <HobbyCard key={hobby.title} hobby={hobby} />
             ))}
-          </div>
-        </Reveal>
+          </Reveal>
+        </div>
       </div>
     </section>
   );
