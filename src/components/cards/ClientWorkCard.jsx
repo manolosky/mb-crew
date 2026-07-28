@@ -27,12 +27,14 @@ export const ClientWorkCard = ({ clientWork }) => {
       <div className="flex flex-1 flex-col p-[22px]">
         <div className="text-brand mb-2 font-mono text-xs">WordPress · Under NDA</div>
         <div className="font-heading mb-2.5 text-xl leading-[1.2] font-bold">
-          {clientWork.built} production websites built for {clientWork.client}.
+          {clientWork.built} production websites built for {clientWork.client} ({clientWork.period}
+          ).
         </div>
         <p className="text-body-soft mb-4 text-[14.5px] leading-[1.55]">
-          As {clientWork.role} for {clientWork.client}, I have developed {clientWork.built}{' '}
-          production websites end-to-end — owning 100% of the development — and provide ongoing
-          support for {clientWork.supported} live projects for the same client.
+          As {clientWork.role} for {clientWork.client}, over the {clientWork.period} I have
+          developed {clientWork.built} production websites end-to-end — owning 100% of the
+          development — and provide ongoing support for {clientWork.supported} live projects for the
+          same client.
         </p>
         <p className="mb-[18px] text-[13.5px] leading-[1.5] text-[#a9a49a]">
           These sites are not listed publicly for confidentiality reasons; I am happy to walk
