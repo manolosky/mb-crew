@@ -53,6 +53,15 @@ Every commit automatically runs (via Husky + lint-staged):
 
 If anything fails, the commit is blocked. The same checks run in GitHub Actions before every deploy.
 
+## CI/CD
+
+Deployments are handled exclusively by GitHub Actions — Vercel's own git integration is disabled (`vercel.json` → `git.deploymentEnabled: false`), so nothing reaches production without passing the quality gate.
+
+- **Pull requests** (`.github/workflows/ci.yml`): lint → format check → tests → build, then a **preview deploy** whose URL appears in the workflow run summary.
+- **Push to `main`** (`.github/workflows/deploy.yml`): the same quality gate, then `vercel build` + `vercel deploy --prebuilt --prod`. Build artifacts live only in the runner; the repository stays source-only.
+
+Required repository secrets: `VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`.
+
 ## Project structure
 
 ```
