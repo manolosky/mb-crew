@@ -8,7 +8,7 @@ export const ExperienceItem = ({ job }) => {
     <Reveal className="grid grid-cols-[22px_1fr] gap-[clamp(16px,3vw,30px)] pb-[34px]">
       <div className="flex flex-col items-center">
         <span className="bg-brand-gradient mt-[5px] h-4 w-4 flex-none rounded-full shadow-[0_0_0_5px_rgba(242,92,5,.14)]" />
-        <span className="mt-1.5 w-0.5 flex-1 bg-gradient-to-b from-[#e0ddd6] to-transparent" />
+        <span className="mt-1.5 w-0.5 flex-1 bg-gradient-to-b from-[#2c2925] to-transparent" />
       </div>
       <Card
         hover
@@ -32,7 +32,7 @@ export const ExperienceItem = ({ job }) => {
         </ul>
         <div className="flex flex-wrap gap-[7px]">
           {job.stack.map((tech) => (
-            <Chip key={tech} size="sm" className="border-line-soft bg-[#f2f1ec] text-[#5f5b53]">
+            <Chip key={tech} size="sm" className="border-line-soft bg-[#1f1d19] text-[#b5b1a8]">
               {tech}
             </Chip>
           ))}

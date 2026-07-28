@@ -30,8 +30,8 @@ export const About = ({ profile, hobbies }) => {
           </Reveal>
           <Reveal>
             {/* Placeholder until the real photo arrives */}
-            <div className="border-line flex aspect-4/5 items-center justify-center rounded-[20px] border bg-[repeating-linear-gradient(135deg,#edebe5_0_12px,#e4e2db_12px_24px)]">
-              <span className="text-dim rounded-lg bg-white/70 px-4 py-2.5 font-mono text-[13px]">
+            <div className="border-line flex aspect-4/5 items-center justify-center rounded-[20px] border bg-[repeating-linear-gradient(135deg,#1b1916_0_12px,#211e1a_12px_24px)]">
+              <span className="text-muted rounded-lg bg-black/50 px-4 py-2.5 font-mono text-[13px]">
                 your photo
               </span>
             </div>

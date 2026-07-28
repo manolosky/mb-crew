@@ -1,12 +1,16 @@
 import { cn } from '@/lib/cn';
 
 // Page section: anchor target with sticky-nav offset and 1120px container.
-// `band` renders the white full-width background with top/bottom borders.
+// `band` renders a slightly raised full-width background with top/bottom borders.
 export const Section = ({ id, band = false, className, containerClassName, children }) => {
   return (
     <section
       id={id}
-      className={cn('scroll-mt-[84px]', band && 'border-line-soft border-y bg-white', className)}
+      className={cn(
+        'scroll-mt-[84px]',
+        band && 'border-line-soft border-y bg-[#12100e]',
+        className,
+      )}
     >
       <div
         className={cn(
