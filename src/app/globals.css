@@ -9,40 +9,40 @@
   --font-mono: var(--font-plex-mono), ui-monospace, monospace;
   --font-heading: var(--font-space-grotesk), system-ui, sans-serif;
 
-  /* Text */
-  --color-ink: #191c2b;
-  --color-ink-soft: #2a3048;
-  --color-body: #3d4463;
-  --color-body-soft: #4c5375;
-  --color-slate: #4a5170;
-  --color-muted: #626a86;
-  --color-faint: #7a8099;
-  --color-dim: #8a90a8;
+  /* Text — warm charcoal and stone grays */
+  --color-ink: #1c1b19;
+  --color-ink-soft: #2c2a27;
+  --color-body: #44423d;
+  --color-body-soft: #55524c;
+  --color-slate: #5f5b53;
+  --color-muted: #6f6b63;
+  --color-faint: #8a867d;
+  --color-dim: #9a968d;
 
   /* Surfaces */
-  --color-canvas: #eceef5;
-  --color-surface: #fbfbfe;
-  --color-tint: #eef0f8;
-  --color-hero: #0b0d1a;
+  --color-canvas: #f3f2ef;
+  --color-surface: #fbfaf8;
+  --color-tint: #f0efeb;
+  --color-hero: #0b0a09;
 
   /* Borders */
-  --color-line: #e2e5f0;
-  --color-line-soft: #e6e9f4;
-  --color-line-strong: #e0e3ef;
+  --color-line: #e5e3dd;
+  --color-line-soft: #e9e7e2;
+  --color-line-strong: #e2e0da;
 
-  /* Brand */
-  --color-brand-start: #5b6cff;
-  --color-brand: #7c5cff;
-  --color-brand-end: #c14bff;
-  --color-link: #6a4bff;
+  /* Brand — ember orange */
+  --color-brand-start: #ff9a3d;
+  --color-brand: #f25c05;
+  --color-brand-end: #c93400;
+  --color-link: #e04e00;
   --color-mint: #3ecf8e;
 
   /* Shadows */
-  --shadow-card: 0 1px 2px rgba(20, 25, 50, 0.04);
-  --shadow-lift: 0 14px 30px rgba(108, 92, 255, 0.14);
-  --shadow-lift-lg: 0 20px 44px rgba(108, 92, 255, 0.16);
-  --shadow-cta: 0 14px 34px rgba(108, 92, 255, 0.5);
-  --shadow-nav-cta: 0 6px 18px rgba(108, 92, 255, 0.32);
+  --shadow-card: 0 1px 2px rgba(35, 30, 25, 0.05);
+  --shadow-lift: 0 14px 30px rgba(242, 92, 5, 0.14);
+  --shadow-lift-lg: 0 20px 44px rgba(242, 92, 5, 0.16);
+  --shadow-cta: 0 14px 34px rgba(242, 92, 5, 0.45);
+  --shadow-nav-cta: 0 6px 18px rgba(242, 92, 5, 0.32);
 
   /* Motion */
   --animate-floaty: floaty 12s ease-in-out infinite;
@@ -86,7 +86,7 @@
 
 /* Gradient-filled text, as in hero stats */
 @utility text-gradient-brand {
-  background-image: linear-gradient(135deg, #b7c1ff, #e9b6ff);
+  background-image: linear-gradient(135deg, #ffd2a8, #ff9e57);
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;

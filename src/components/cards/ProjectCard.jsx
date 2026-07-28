@@ -3,9 +3,9 @@ import { Icon } from '@/lib/icons';
 
 export const ProjectCard = ({ project }) => {
   return (
-    <div className="bg-surface border-line-soft hover:shadow-lift-lg flex flex-col overflow-hidden rounded-[20px] border transition duration-200 hover:-translate-y-1 hover:border-[#c9c2ff]">
+    <div className="bg-surface border-line-soft hover:shadow-lift-lg flex flex-col overflow-hidden rounded-[20px] border transition duration-200 hover:-translate-y-1 hover:border-[#f0b285]">
       {/* Placeholder art area until real project images arrive */}
-      <div className="border-line-soft relative flex h-[172px] items-center justify-center border-b bg-[repeating-linear-gradient(45deg,#eef0f8_0_11px,#e5e8f4_11px_22px)]">
+      <div className="border-line-soft relative flex h-[172px] items-center justify-center border-b bg-[repeating-linear-gradient(45deg,#f0efeb_0_11px,#e7e5df_11px_22px)]">
         <span className="bg-brand-gradient absolute top-3.5 left-3.5 rounded-full px-2.5 py-[5px] font-mono text-[11px] text-white">
           {project.kind}
         </span>
@@ -31,7 +31,7 @@ export const ProjectCard = ({ project }) => {
         <p className="text-body-soft mb-4 text-[14.5px] leading-[1.55]">{project.blurb}</p>
         <ul className="mb-[18px] flex list-disc flex-col gap-1.5 pl-[17px]">
           {project.points.map((point) => (
-            <li key={point} className="text-[13.5px] leading-[1.5] text-[#565d7d]">
+            <li key={point} className="text-[13.5px] leading-[1.5] text-[#57544c]">
               {point}
             </li>
           ))}

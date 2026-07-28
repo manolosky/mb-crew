@@ -18,8 +18,8 @@ export const Contact = ({ profile }) => {
         >
           <source src="/videos/contact.mp4" type="video/mp4" />
         </video>
-        <div className="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(135deg,rgba(75,69,199,.9),rgba(106,75,255,.82)_45%,rgba(161,59,255,.72))]" />
-        <div className="pointer-events-none absolute -top-20 -right-10 z-[1] h-[280px] w-[280px] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,.22),transparent_68%)]" />
+        <div className="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(135deg,rgba(18,15,12,.92),rgba(58,32,12,.8)_45%,rgba(190,75,10,.62))]" />
+        <div className="pointer-events-none absolute -top-20 -right-10 z-[1] h-[280px] w-[280px] rounded-full bg-[radial-gradient(circle,rgba(255,170,90,.25),transparent_68%)]" />
         <div className="relative z-[2] max-w-[620px]">
           <div className="mb-3.5 font-mono text-[13px] tracking-[0.12em] text-white/75 uppercase">
             05 — Contact
@@ -51,7 +51,7 @@ export const Contact = ({ profile }) => {
               <a
                 key={social.label}
                 href={social.href}
-                className="inline-flex max-w-full items-center gap-[9px] rounded-[11px] bg-white px-[18px] py-[11px] text-[14.5px] font-semibold [overflow-wrap:anywhere] text-[#4b45c7] transition hover:brightness-[0.96]"
+                className="inline-flex max-w-full items-center gap-[9px] rounded-[11px] bg-white px-[18px] py-[11px] text-[14.5px] font-semibold [overflow-wrap:anywhere] text-[#c2440a] transition hover:brightness-[0.96]"
               >
                 <Icon name={social.icon} className="text-[15px]" />
                 {social.label} <span className="font-mono text-xs opacity-60">{social.handle}</span>

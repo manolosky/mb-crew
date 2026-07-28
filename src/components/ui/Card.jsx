@@ -7,7 +7,7 @@ export const Card = ({ hover = false, className, children, ...props }) => {
       className={cn(
         'border-line shadow-card rounded-2xl border bg-white',
         hover &&
-          'hover:shadow-lift transition duration-200 hover:-translate-y-[3px] hover:border-[#c9c2ff]',
+          'hover:shadow-lift transition duration-200 hover:-translate-y-[3px] hover:border-[#f0b285]',
         className,
       )}
       {...props}

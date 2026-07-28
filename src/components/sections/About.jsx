@@ -7,11 +7,11 @@ export const About = ({ profile, hobbies }) => {
   return (
     <section id="about" className="relative scroll-mt-[84px] overflow-hidden">
       <GradientBlob
-        variant="violet"
+        variant="ember"
         className="-top-[60px] -right-20 h-[min(560px,70vw)] w-[min(560px,70vw)]"
       />
       <GradientBlob
-        variant="blue"
+        variant="amber"
         className="-bottom-[120px] -left-[100px] h-[min(480px,60vw)] w-[min(480px,60vw)]"
       />
       <div className="relative z-[1] mx-auto w-full max-w-[1120px] px-[clamp(20px,5vw,48px)] py-[clamp(48px,7vw,96px)]">
@@ -30,7 +30,7 @@ export const About = ({ profile, hobbies }) => {
           </Reveal>
           <Reveal>
             {/* Placeholder until the real photo arrives */}
-            <div className="border-line flex aspect-4/5 items-center justify-center rounded-[20px] border bg-[repeating-linear-gradient(135deg,#e9ebf6_0_12px,#e1e4f2_12px_24px)]">
+            <div className="border-line flex aspect-4/5 items-center justify-center rounded-[20px] border bg-[repeating-linear-gradient(135deg,#edebe5_0_12px,#e4e2db_12px_24px)]">
               <span className="text-dim rounded-lg bg-white/70 px-4 py-2.5 font-mono text-[13px]">
                 your photo
               </span>

@@ -27,7 +27,7 @@ export const Navbar = () => {
 
   return (
     <>
-      <nav className="border-line-strong sticky top-0 z-50 flex h-[68px] items-center justify-between gap-5 border-b bg-[rgba(236,238,245,.78)] px-[clamp(20px,5vw,48px)] backdrop-blur-xl">
+      <nav className="border-line-strong sticky top-0 z-50 flex h-[68px] items-center justify-between gap-5 border-b bg-[rgba(243,242,239,.8)] px-[clamp(20px,5vw,48px)] backdrop-blur-xl">
         <Link
           href="#top"
           onClick={closeMenu}
@@ -43,7 +43,7 @@ export const Navbar = () => {
             <Link
               key={link.href}
               href={link.href}
-              className="text-slate hover:text-ink rounded-[9px] px-3 py-2 text-[14.5px] font-medium transition hover:bg-[#e3e6f2]"
+              className="text-slate hover:text-ink rounded-[9px] px-3 py-2 text-[14.5px] font-medium transition hover:bg-[#eae8e2]"
             >
               {link.label}
             </Link>
@@ -72,7 +72,7 @@ export const Navbar = () => {
 
       {/* Mobile menu */}
       {menuOpen ? (
-        <div className="border-line-strong nav:hidden sticky top-[68px] z-40 flex flex-col gap-0.5 border-b bg-[rgba(236,238,245,.96)] px-[clamp(20px,5vw,48px)] pt-3 pb-[18px] backdrop-blur-xl">
+        <div className="border-line-strong nav:hidden sticky top-[68px] z-40 flex flex-col gap-0.5 border-b bg-[rgba(243,242,239,.96)] px-[clamp(20px,5vw,48px)] pt-3 pb-[18px] backdrop-blur-xl">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}

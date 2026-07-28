@@ -8,7 +8,7 @@ const VARIANT_STYLES = {
   gradient: 'bg-brand-gradient text-white shadow-cta hover:-translate-y-px hover:brightness-[1.08]',
   glass:
     'border border-white/30 bg-white/10 text-white backdrop-blur-sm hover:border-white hover:bg-white/20',
-  white: 'bg-white text-[#4b45c7] hover:brightness-[0.96]',
+  white: 'bg-white text-[#c2440a] hover:brightness-[0.96]',
 };
 
 const SIZE_STYLES = {

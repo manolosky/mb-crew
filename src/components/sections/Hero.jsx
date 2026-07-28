@@ -21,8 +21,8 @@ export const Hero = ({ profile }) => {
       >
         <source src="/videos/hero.mp4" type="video/mp4" />
       </video>
-      <div className="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(120deg,rgba(9,11,24,.94)_0%,rgba(20,16,54,.74)_44%,rgba(96,44,150,.44)_100%)]" />
-      <div className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(120%_92%_at_18%_108%,rgba(124,92,255,.4),transparent_56%)]" />
+      <div className="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(120deg,rgba(10,9,8,.94)_0%,rgba(28,18,10,.74)_44%,rgba(150,62,10,.45)_100%)]" />
+      <div className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(120%_92%_at_18%_108%,rgba(242,92,5,.38),transparent_56%)]" />
 
       <Reveal className="relative z-[2] mx-auto w-full max-w-[1120px]">
         <Badge variant="status" className="mb-7">
@@ -35,7 +35,7 @@ export const Hero = ({ profile }) => {
         <div className="mt-7 mb-6 flex flex-wrap gap-2.5">
           {profile.roles.map((role) => (
             <Badge key={role.label}>
-              <Icon name={role.icon} className="text-sm text-[#d9c4ff]" />
+              <Icon name={role.icon} className="text-sm text-[#ffc59b]" />
               {role.label}
             </Badge>
           ))}

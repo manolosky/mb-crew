@@ -1,19 +1,19 @@
 import { cn } from '@/lib/cn';
 
 const VARIANT_STYLES = {
-  violet: {
+  ember: {
     className: 'animate-floaty blur-[30px]',
     background:
-      'radial-gradient(circle at 35% 35%, rgba(124,92,255,.32), rgba(193,75,255,.1) 58%, transparent 72%)',
+      'radial-gradient(circle at 35% 35%, rgba(242,92,5,.26), rgba(201,52,0,.09) 58%, transparent 72%)',
   },
-  blue: {
+  amber: {
     className: 'animate-floaty-slow blur-[32px]',
-    background: 'radial-gradient(circle at 50% 50%, rgba(91,108,255,.26), transparent 70%)',
+    background: 'radial-gradient(circle at 50% 50%, rgba(255,154,61,.22), transparent 70%)',
   },
 };
 
 // Decorative floating orb; position and size it via className.
-export const GradientBlob = ({ variant = 'violet', className }) => {
+export const GradientBlob = ({ variant = 'ember', className }) => {
   const styles = VARIANT_STYLES[variant];
 
   return (
