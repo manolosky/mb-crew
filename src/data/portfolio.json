@@ -44,18 +44,18 @@
       },
       {
         "label": "LinkedIn",
-        "handle": "/in/your-handle",
-        "href": "#",
+        "handle": "/in/manuel-bolaños",
+        "href": "https://www.linkedin.com/in/manuel-bolaños-69a09a129",
         "icon": "fa-brands fa-linkedin-in"
       },
       {
         "label": "GitHub",
-        "handle": "/your-handle",
-        "href": "#",
+        "handle": "/manolosky",
+        "href": "https://github.com/manolosky",
         "icon": "fa-brands fa-github"
       }
     ],
-    "cvHref": "#"
+    "cvHref": "/cv/manuel-bolanos-cv.pdf"
   },
   "hobbies": [
     {
@@ -145,7 +145,7 @@
   ],
   "experience": [
     {
-      "company": "Content Pilot",
+      "company": "TakeOff Media — Client: Content Pilot",
       "place": "Dallas, Texas, USA",
       "period": "Dec 2022 – Present",
       "current": true,
@@ -167,7 +167,10 @@
         "MySQL",
         "Webpack",
         "SEO",
-        "Scrum"
+        "Scrum",
+        "AI",
+        "LLMs",
+        "Prompt engineering"
       ]
     },
     {
@@ -266,7 +269,9 @@
         "FPV video streaming; work spans mechanics, electronics and embedded firmware (C/C++).",
         "One project touching mechanical design, electronics and low-level firmware end-to-end."
       ],
-      "tech": ["ESP32", "C/C++", "BTS7960", "PETG / 3D design", "FPV"]
+      "tech": ["ESP32", "C/C++", "BTS7960", "PETG / 3D design", "FPV"],
+      "image": "/images/projects/rover-4wd.jpg",
+      "imageAlt": "CAD render of the 4WD exploration rover chassis and suspension"
     },
     {
       "title": "Embedded & IoT Experiments",
@@ -279,7 +284,9 @@
         "TFT LCD (ST7735) driven over SPI with the TFT_eSPI library.",
         "Hands-on sensor integration and display-driver troubleshooting."
       ],
-      "tech": ["ESP32", "TFT_eSPI", "SPI", "NewsAPI", "ArduinoJson"]
+      "tech": ["ESP32", "TFT_eSPI", "SPI", "NewsAPI", "ArduinoJson"],
+      "image": "/images/projects/embedded-iot.jpg",
+      "imageAlt": "ESP32 on a breadboard driving a TFT display with a live weather and world-clock app"
     },
     {
       "title": "AI-Assisted Development & LLM Integration",
@@ -292,52 +299,9 @@
         "Claude Code with MCP servers — GitHub, MySQL, filesystem, Playwright, Figma.",
         "Prompt engineering and AI-assisted development as part of the everyday toolkit."
       ],
-      "tech": ["LLMs", "AI agents", "Claude Code", "MCP", "Prompt engineering"]
-    },
-    {
-      "title": "Munck Wilson Mandala",
-      "tag": "WordPress · Client work",
-      "kind": "Web / Law firm",
-      "icon": "fa-solid fa-globe",
-      "url": "https://www.munckwilson.com/",
-      "blurb": "Corporate website for Munck Wilson Mandala, an AI-focused law firm with nine offices across the US and South Korea.",
-      "points": [
-        "Custom WordPress theme built end-to-end, front-end and back-end.",
-        "Attorney, practice-area and insights architecture with searchable listings.",
-        "Performance work on a content-heavy, image-rich site."
-      ],
-      "tech": ["WordPress", "PHP", "JavaScript", "Sass", "MySQL"],
-      "attribution": "Authored by Content Pilot — 100% of the development by Manuel Bolaños."
-    },
-    {
-      "title": "Modern Vacation Rental Management",
-      "tag": "WordPress · Client work",
-      "kind": "Web / Travel",
-      "icon": "fa-solid fa-globe",
-      "url": "https://www.modernvrm.com/",
-      "blurb": "Booking-oriented website for a luxury vacation rental company, from property catalog to inquiry.",
-      "points": [
-        "Filtered property search: location, dates, guests, bedrooms and amenities.",
-        "Custom WordPress development delivered end-to-end.",
-        "Fast, media-rich listing pages tuned for conversion."
-      ],
-      "tech": ["WordPress", "PHP", "JavaScript", "Sass", "MySQL"],
-      "attribution": "Authored by Content Pilot — 100% of the development by Manuel Bolaños."
-    },
-    {
-      "title": "Grant & Eisenhofer P.A.",
-      "tag": "WordPress · Client work",
-      "kind": "Web / Law firm",
-      "icon": "fa-solid fa-globe",
-      "url": "https://www.gelaw.com/",
-      "blurb": "Website for Grant & Eisenhofer P.A., a plaintiffs’ litigation firm with $30B+ in client recoveries.",
-      "points": [
-        "Practice areas, representative cases and professional directory architecture.",
-        "Bespoke WordPress theme built end-to-end.",
-        "Ongoing support and iterative improvements on a live site."
-      ],
-      "tech": ["WordPress", "PHP", "JavaScript", "Sass", "MySQL"],
-      "attribution": "Authored by Content Pilot — 100% of the development by Manuel Bolaños."
+      "tech": ["LLMs", "AI agents", "Claude Code", "MCP", "Prompt engineering"],
+      "image": "/images/projects/ai-llm.png",
+      "imageAlt": "AI microchip icon over a dark background"
     }
   ],
   "education": [
@@ -377,5 +341,11 @@
       "year": "Ongoing",
       "title": "CS50x, C/C++, Arduino, ESP32/IoT — toward ROS 2 & STM32"
     }
-  ]
+  ],
+  "clientWork": {
+    "client": "Content Pilot",
+    "role": "Full-Stack Web Developer",
+    "built": "10+",
+    "supported": "40+"
+  }
 }

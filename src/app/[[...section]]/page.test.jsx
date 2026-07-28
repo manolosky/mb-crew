@@ -52,4 +52,13 @@ describe('one-page route', () => {
 
     expect(document.querySelector('#experience').scrollIntoView).toHaveBeenCalled();
   });
+
+  it('summarizes confidential client work instead of listing client sites', async () => {
+    await renderPage(undefined);
+
+    expect(screen.getByText(/Under NDA/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(/10\+ production websites built for Content Pilot/i),
+    ).toBeInTheDocument();
+  });
 });

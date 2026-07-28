@@ -1,66 +1,66 @@
-# mb-crew — Portfolio de Manuel Bolaños
+# mb-crew — Manuel Bolaños' Portfolio
 
-Sitio de presentación personal: single one page con secciones ancladas (`/about`, `/stack`, `/experience`, `/projects`, `/contact`), construido con **Next.js (App Router) + React (JS) + Tailwind CSS v4** y desplegado en **Vercel** mediante GitHub Actions.
+Personal presentation site: a single one-page with anchored section routes (`/about`, `/stack`, `/experience`, `/projects`, `/contact`), built with **Next.js (App Router) + React (JS) + Tailwind CSS v4**, animated with **anime.js**, and deployed to **Vercel** through GitHub Actions.
 
-> El material de construcción (plan de trabajo, diseño de referencia, screenshots) vive fuera del control de versiones, en las carpetas locales `docs/` y `reference/`.
+> Working material (work plan, reference design, screenshots) lives outside version control, in the local `docs/` and `reference/` folders.
 
-## Requisitos
+## Requirements
 
-- **Node.js 22** (la versión está fijada en [.nvmrc](.nvmrc); con nvm: `nvm use`)
-- npm (incluido con Node)
+- **Node.js 22** (pinned in [.nvmrc](.nvmrc); with nvm: `nvm use`)
+- npm (bundled with Node)
 
-## Ejecutar el proyecto en local
+## Running the project locally
 
 ```bash
-# 1. Clonar e instalar dependencias (también instala los hooks de git via husky)
+# 1. Clone and install dependencies (also installs git hooks via husky)
 git clone https://github.com/manolosky/mb-crew.git
 cd mb-crew
 npm install
 
-# 2. Levantar el servidor de desarrollo
+# 2. Start the development server
 npm run dev
 ```
 
-Abre <http://localhost:3000> en el navegador. La página se recarga automáticamente al editar archivos en `src/`.
+Open <http://localhost:3000> in your browser. The page hot-reloads as you edit files under `src/`.
 
-Para probar el build de producción en local:
+To try the production build locally:
 
 ```bash
 npm run build
-npm run start   # sirve el build en http://localhost:3000
+npm run start   # serves the build at http://localhost:3000
 ```
 
-## Scripts disponibles
+## Available scripts
 
-| Script                 | Qué hace                                                             |
-| ---------------------- | -------------------------------------------------------------------- |
-| `npm run dev`          | Servidor de desarrollo con hot reload                                |
-| `npm run build`        | Build de producción                                                  |
-| `npm run start`        | Sirve el build de producción                                         |
-| `npm run lint`         | ESLint sobre todo el proyecto                                        |
-| `npm run lint:fix`     | ESLint corrigiendo lo autocorregible                                 |
-| `npm run format`       | Prettier sobre todo el proyecto (ordena también las clases Tailwind) |
-| `npm run format:check` | Verifica formato sin escribir                                        |
-| `npm test`             | Suite de tests (Vitest + React Testing Library), una sola pasada     |
-| `npm run test:watch`   | Tests en modo watch                                                  |
+| Script                 | What it does                                                  |
+| ---------------------- | ------------------------------------------------------------- |
+| `npm run dev`          | Development server with hot reload                            |
+| `npm run build`        | Production build                                              |
+| `npm run start`        | Serves the production build                                   |
+| `npm run lint`         | ESLint over the whole project                                 |
+| `npm run lint:fix`     | ESLint fixing what is auto-fixable                            |
+| `npm run format`       | Prettier over the whole project (also sorts Tailwind classes) |
+| `npm run format:check` | Checks formatting without writing                             |
+| `npm test`             | Test suite (Vitest + React Testing Library), single run       |
+| `npm run test:watch`   | Tests in watch mode                                           |
 
-## Calidad y pre-commit
+## Quality gate and pre-commit
 
-Cada commit ejecuta automáticamente (via Husky + lint-staged):
+Every commit automatically runs (via Husky + lint-staged):
 
-1. **ESLint** (cero warnings permitidos) y **Prettier** sobre los archivos staged.
-2. **La suite de tests completa** (`npm test`).
+1. **ESLint** (zero warnings allowed) and **Prettier** over the staged files.
+2. **The full test suite** (`npm test`).
 
-Si algo falla, el commit se bloquea. Los mismos checks correrán en GitHub Actions antes de cada deploy.
+If anything fails, the commit is blocked. The same checks run in GitHub Actions before every deploy.
 
-## Estructura del proyecto
+## Project structure
 
 ```
 src/
-├── app/            # App Router: layout raíz, página, estilos globales (tokens)
-├── components/ui/  # Átomos reutilizables (Button, Badge, Chip, Card, …)
-├── data/           # portfolio.json — todo el contenido del sitio
-└── lib/            # Acceso a datos, registro de iconos, helpers
+├── app/            # App Router: root layout, catch-all section route, global styles (tokens)
+├── components/     # OnePage, sections, layout, domain cards and UI atoms
+├── data/           # portfolio.json — all site content
+└── lib/            # Data access, icon registry, helpers
 ```
 
-Convención: los archivos que contienen JSX usan extensión `.jsx`.
+Convention: files containing JSX use the `.jsx` extension.

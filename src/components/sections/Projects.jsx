@@ -1,16 +1,17 @@
+import { ClientWorkCard } from '@/components/cards/ClientWorkCard';
 import { ProjectCard } from '@/components/cards/ProjectCard';
 import { Section } from '@/components/layout/Section';
 import { Reveal } from '@/components/ui/Reveal';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 
-export const Projects = ({ projects }) => {
+export const Projects = ({ projects, clientWork }) => {
   return (
     <Section id="projects" band>
       <Reveal>
         <SectionHeading
           kicker="04 — Projects"
           title="Client work, embedded & AI."
-          description="Personal builds that span mechanics, firmware and the model in the loop — alongside production websites shipped end-to-end at Content Pilot."
+          description="Personal builds that span mechanics, firmware and the model in the loop — alongside production client work shipped end-to-end."
         />
       </Reveal>
       <Reveal
@@ -20,6 +21,9 @@ export const Projects = ({ projects }) => {
         {projects.map((project) => (
           <ProjectCard key={project.title} project={project} />
         ))}
+      </Reveal>
+      <Reveal direction="fade" className="mt-[22px]">
+        <ClientWorkCard clientWork={clientWork} />
       </Reveal>
     </Section>
   );

@@ -48,7 +48,7 @@ export const Hero = ({ profile }) => {
           <Button href="/contact">
             <Icon name="fa-solid fa-paper-plane" /> Get in touch
           </Button>
-          <Button variant="glass" href={profile.cvHref}>
+          <Button variant="glass" href={profile.cvHref} target="_blank" rel="noopener noreferrer">
             <Icon name="fa-solid fa-download" /> Download CV
           </Button>
         </div>

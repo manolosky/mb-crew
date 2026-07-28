@@ -6,7 +6,14 @@ import { Experience } from '@/components/sections/Experience';
 import { Hero } from '@/components/sections/Hero';
 import { Projects } from '@/components/sections/Projects';
 import { Stack } from '@/components/sections/Stack';
-import { getExperience, getHobbies, getProfile, getProjects, getSkills } from '@/lib/portfolio';
+import {
+  getClientWork,
+  getExperience,
+  getHobbies,
+  getProfile,
+  getProjects,
+  getSkills,
+} from '@/lib/portfolio';
 
 // The whole one-page; every route renders this and scrolls to its section.
 export const OnePage = () => {
@@ -20,7 +27,7 @@ export const OnePage = () => {
         <About profile={profile} hobbies={getHobbies()} />
         <Stack skills={getSkills()} />
         <Experience experience={getExperience()} />
-        <Projects projects={getProjects()} />
+        <Projects projects={getProjects()} clientWork={getClientWork()} />
         <Contact profile={profile} />
       </main>
       <Footer />

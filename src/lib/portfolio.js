@@ -15,3 +15,5 @@ export const getExperience = () => portfolio.experience;
 export const getProjects = () => portfolio.projects;
 
 export const getEducation = () => portfolio.education;
+
+export const getClientWork = () => portfolio.clientWork;
