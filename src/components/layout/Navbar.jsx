@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
@@ -15,11 +16,13 @@ const NAV_LINKS = [
 ];
 
 const LogoMark = ({ className }) => (
-  <span
-    className={`bg-brand-gradient font-heading inline-flex items-center justify-center rounded-[9px] font-bold text-white ${className}`}
-  >
-    MB
-  </span>
+  <Image
+    src="/images/logo-mb.png"
+    alt="Manuel Bolaños hand-drawn MB logo"
+    width={167}
+    height={160}
+    className={cn('w-auto', className)}
+  />
 );
 
 export const Navbar = () => {
@@ -36,7 +39,7 @@ export const Navbar = () => {
           onClick={closeMenu}
           className="font-heading text-ink flex min-w-0 items-center gap-2.5 text-[clamp(15px,4vw,18px)] font-bold tracking-[-0.01em] whitespace-nowrap"
         >
-          <LogoMark className="h-[30px] w-[30px] text-sm" />
+          <LogoMark className="h-[42px]" />
           Manuel Bolaños
         </Link>
 
