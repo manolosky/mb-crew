@@ -1,5 +1,8 @@
+import { GoogleTagManager } from '@next/third-parties/google';
 import { IBM_Plex_Mono, IBM_Plex_Sans, Space_Grotesk } from 'next/font/google';
 import './globals.css';
+
+const GTM_ID = 'GTM-KBCX8VQ2';
 
 const spaceGrotesk = Space_Grotesk({
   variable: '--font-space-grotesk',
@@ -32,7 +35,19 @@ const RootLayout = ({ children }) => {
       lang="en"
       className={`${spaceGrotesk.variable} ${plexSans.variable} ${plexMono.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col">{children}</body>
+      <GoogleTagManager gtmId={GTM_ID} />
+      <body className="flex min-h-full flex-col">
+        <noscript>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+            height="0"
+            width="0"
+            style={{ display: 'none', visibility: 'hidden' }}
+            title="Google Tag Manager"
+          />
+        </noscript>
+        {children}
+      </body>
     </html>
   );
 };
