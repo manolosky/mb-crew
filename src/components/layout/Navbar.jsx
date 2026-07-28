@@ -17,9 +17,9 @@ const NAV_LINKS = [
 
 const LogoMark = ({ className }) => (
   <Image
-    src="/images/logo-mb.png"
+    src="/images/logo-mb-light.png"
     alt="Manuel Bolaños hand-drawn MB logo"
-    width={167}
+    width={109}
     height={160}
     className={cn('w-auto', className)}
   />
