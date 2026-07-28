@@ -26,10 +26,10 @@ export const ClientWorkCard = ({ clientWork }) => {
       </div>
       <div className="flex flex-1 flex-col p-[22px]">
         <div className="text-brand mb-2 font-mono text-xs">WordPress · Under NDA</div>
-        <div className="font-heading mb-2.5 text-xl leading-[1.2] font-bold">
+        <h3 className="font-heading mb-2.5 text-xl leading-[1.2] font-bold">
           {clientWork.built} production websites built for {clientWork.client} ({clientWork.period}
           ).
-        </div>
+        </h3>
         <p className="text-body-soft mb-4 text-[14.5px] leading-[1.55]">
           As {clientWork.role} for {clientWork.client}, over the {clientWork.period} I have
           developed {clientWork.built} production websites end-to-end — owning 100% of the

@@ -33,7 +33,10 @@ export const Navbar = () => {
 
   return (
     <>
-      <nav className="border-line-strong sticky top-0 z-50 flex h-[68px] items-center justify-between gap-5 border-b bg-[rgba(11,10,9,.82)] px-[clamp(20px,5vw,48px)] backdrop-blur-xl">
+      <nav
+        aria-label="Main"
+        className="border-line-strong sticky top-0 z-50 flex h-[68px] items-center justify-between gap-5 border-b bg-[rgba(11,10,9,.82)] px-[clamp(20px,5vw,48px)] backdrop-blur-xl"
+      >
         <Link
           href="/"
           onClick={closeMenu}

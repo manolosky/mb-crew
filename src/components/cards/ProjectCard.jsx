@@ -26,19 +26,21 @@ export const ProjectCard = ({ project }) => {
       </div>
       <div className="flex flex-1 flex-col p-[22px]">
         <div className="text-brand mb-2 font-mono text-xs">{project.tag}</div>
-        {project.url ? (
-          <a
-            href={project.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-heading hover:text-brand mb-2.5 inline-flex items-baseline gap-2 text-xl leading-[1.2] font-bold transition"
-          >
-            {project.title}
-            <Icon name="fa-solid fa-arrow-up-right-from-square" className="text-xs opacity-60" />
-          </a>
-        ) : (
-          <div className="font-heading mb-2.5 text-xl leading-[1.2] font-bold">{project.title}</div>
-        )}
+        <h3 className="font-heading mb-2.5 text-xl leading-[1.2] font-bold">
+          {project.url ? (
+            <a
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-brand inline-flex items-baseline gap-2 transition"
+            >
+              {project.title}
+              <Icon name="fa-solid fa-arrow-up-right-from-square" className="text-xs opacity-60" />
+            </a>
+          ) : (
+            project.title
+          )}
+        </h3>
         <p className="text-body-soft mb-4 text-[14.5px] leading-[1.55]">{project.blurb}</p>
         <ul className="mb-[18px] flex list-disc flex-col gap-1.5 pl-[17px]">
           {project.points.map((point) => (

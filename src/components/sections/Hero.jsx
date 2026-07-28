@@ -1,3 +1,7 @@
+import Image from 'next/image';
+import { preload } from 'react-dom';
+
+import { BackgroundVideo } from '@/components/ui/BackgroundVideo';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import { Reveal } from '@/components/ui/Reveal';
@@ -5,22 +9,26 @@ import { Stat } from '@/components/ui/Stat';
 import { Icon } from '@/lib/icons';
 
 export const Hero = ({ profile }) => {
+  // The poster is the LCP element — ask the browser for it as early as possible.
+  preload('/images/hero-poster.webp', { as: 'image', fetchPriority: 'high' });
+
   return (
     <header
       id="top"
       className="bg-hero relative flex min-h-[calc(100svh-68px)] scroll-mt-[84px] items-center overflow-hidden px-[clamp(20px,5vw,48px)] py-[clamp(56px,9vw,112px)]"
     >
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="metadata"
-        poster="/images/hero-poster.jpg"
-        className="absolute inset-0 z-0 h-full w-full object-cover"
-      >
-        <source src="/videos/hero.mp4" type="video/mp4" />
-      </video>
+      {/* Hand-optimized poster paints as the LCP element; the video fades in later */}
+      <Image
+        src="/images/hero-poster.webp"
+        alt=""
+        fill
+        unoptimized
+        priority
+        sizes="100vw"
+        aria-hidden="true"
+        className="z-0 object-cover"
+      />
+      <BackgroundVideo src="/videos/hero.mp4" poster="/images/hero-poster.webp" />
       <div className="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(120deg,rgba(10,9,8,.94)_0%,rgba(28,18,10,.74)_44%,rgba(150,62,10,.45)_100%)]" />
       <div className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(120%_92%_at_18%_108%,rgba(242,92,5,.38),transparent_56%)]" />
 

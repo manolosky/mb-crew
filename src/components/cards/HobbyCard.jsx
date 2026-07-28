@@ -8,7 +8,7 @@ export const HobbyCard = ({ hobby }) => {
       <IconTile className="mb-3.5">
         <Icon name={hobby.icon} />
       </IconTile>
-      <div className="font-heading mb-1.5 text-[16.5px] font-semibold">{hobby.title}</div>
+      <h4 className="font-heading mb-1.5 text-[16.5px] font-semibold">{hobby.title}</h4>
       <div className="text-faint text-[13.5px] leading-[1.5]">{hobby.note}</div>
     </Card>
   );

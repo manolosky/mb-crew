@@ -16,8 +16,8 @@
   --color-body-soft: #b5b1a8;
   --color-slate: #aca79d;
   --color-muted: #8f8b82;
-  --color-faint: #7c786f;
-  --color-dim: #6b6760;
+  --color-faint: #827e75;
+  --color-dim: #7f7b72;
 
   /* Surfaces — warm blacks */
   --color-canvas: #0b0a09;
@@ -113,4 +113,9 @@ body {
 ::selection {
   background: var(--color-brand);
   color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-brand-start);
+  outline-offset: 2px;
 }

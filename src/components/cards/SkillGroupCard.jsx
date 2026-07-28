@@ -6,12 +6,12 @@ import { Icon } from '@/lib/icons';
 export const SkillGroupCard = ({ group }) => {
   return (
     <Card className="bg-surface border-line-soft rounded-[18px] p-[22px]">
-      <div className="font-heading mb-3.5 flex items-center gap-[11px] text-base font-semibold">
+      <h3 className="font-heading mb-3.5 flex items-center gap-[11px] text-base font-semibold">
         <IconTile size="sm">
           <Icon name={group.icon} />
         </IconTile>
         {group.group}
-      </div>
+      </h3>
       <div className="flex flex-wrap gap-2">
         {group.items.map((item) => (
           <Chip key={item} interactive>

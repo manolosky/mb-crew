@@ -21,6 +21,12 @@ export const OnePage = () => {
 
   return (
     <div className="relative flex-1 overflow-x-clip">
+      <a
+        href="#top"
+        className="focus:bg-brand sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:rounded-lg focus:px-4 focus:py-2 focus:font-semibold focus:text-white"
+      >
+        Skip to content
+      </a>
       <Navbar />
       <main>
         <Hero profile={profile} />
