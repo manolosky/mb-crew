@@ -40,9 +40,9 @@ export const Navbar = () => {
         <Link
           href="/"
           onClick={closeMenu}
-          className="font-heading text-ink flex min-w-0 items-center gap-2.5 text-[clamp(15px,4vw,18px)] font-bold tracking-[-0.01em] whitespace-nowrap"
+          className="font-heading text-ink flex min-w-0 items-center gap-3 text-[clamp(17px,4.5vw,22px)] font-bold tracking-[-0.01em] whitespace-nowrap"
         >
-          <LogoMark className="h-[42px]" />
+          <LogoMark className="h-[55px]" />
           Manuel Bolaños
         </Link>
 
