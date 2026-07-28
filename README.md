@@ -2,8 +2,7 @@
 
 Sitio de presentación personal: single one page con secciones ancladas (`/about`, `/stack`, `/experience`, `/projects`, `/contact`), construido con **Next.js (App Router) + React (JS) + Tailwind CSS v4** y desplegado en **Vercel** mediante GitHub Actions.
 
-- Plan de trabajo y decisiones: [docs/PLAN.md](docs/PLAN.md)
-- Diseño de referencia (screenshots y datos extraídos): [reference/](reference/)
+> El material de construcción (plan de trabajo, diseño de referencia, screenshots) vive fuera del control de versiones, en las carpetas locales `docs/` y `reference/`.
 
 ## Requisitos
 

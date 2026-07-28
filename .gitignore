@@ -36,6 +36,10 @@ yarn-error.log*
 # vercel
 .vercel
 
+# project working material — docs, reference design and build assets stay local
+/docs/
+/reference/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

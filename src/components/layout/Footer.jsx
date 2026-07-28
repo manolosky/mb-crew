@@ -7,7 +7,6 @@ export const Footer = () => {
         <LogoMark className="h-[26px] w-[26px] rounded-lg text-xs" />© {new Date().getFullYear()}{' '}
         Manuel Bolaños
       </div>
-      <div className="font-mono text-[12.5px]">Built with Next.js &amp; Tailwind CSS</div>
     </footer>
   );
 };
