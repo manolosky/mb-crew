@@ -31,7 +31,7 @@ export const Contact = ({ profile }) => {
             Let&apos;s build something.
           </h2>
           <p className="mb-8 text-[clamp(16px,2vw,19px)] leading-[1.55] text-white/85">
-            Full-stack, embedded or an LLM in the loop — happy to talk. Reach me directly:
+            Full-stack, an LLM in the loop or embedded — happy to talk. Reach me directly:
           </p>
 
           <div className="mb-[30px] flex flex-wrap gap-3.5">

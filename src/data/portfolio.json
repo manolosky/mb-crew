@@ -7,20 +7,20 @@
         "icon": "fa-solid fa-code"
       },
       {
-        "label": "Embedded Systems & IoT",
-        "icon": "fa-solid fa-microchip"
-      },
-      {
         "label": "AI Integration",
         "icon": "fa-solid fa-robot"
+      },
+      {
+        "label": "Embedded Systems & IoT",
+        "icon": "fa-solid fa-microchip"
       }
     ],
     "location": "Spain",
     "email": "manuelb.diseno@gmail.com",
     "phone": "+34 675 989 629",
-    "tagline": "A decade shipping the web stack — now wiring microcontrollers and LLMs into the loop.",
-    "summary": "Full-stack web developer with over a decade of experience and 200+ delivered projects, now deliberately expanding into embedded systems and IoT. My core is the web stack — PHP, Laravel, WordPress, React and JavaScript — backed by solid experience leading teams as Scrum Master and Technical Lead under agile methodologies. I'm building on that foundation with hands-on ESP32 firmware (C/C++), IoT devices, and the integration of AI agents and LLMs into real products.",
-    "hybrid": "The result is a rare hybrid profile: equally comfortable shipping a Laravel application, building a professional website, flashing firmware to a microcontroller, and wiring an LLM into the loop.",
+    "tagline": "A decade shipping the web stack — now wiring LLMs and microcontrollers into the loop.",
+    "summary": "Full-stack web developer with over a decade of experience and 200+ delivered projects, now deliberately expanding into AI and embedded systems. My core is the web stack — PHP, Laravel, WordPress, React and JavaScript — backed by solid experience leading teams as Scrum Master and Technical Lead under agile methodologies. I am building on that foundation with the integration of AI agents and LLMs into real products, plus hands-on ESP32 firmware (C/C++) and IoT devices.",
+    "hybrid": "The result is a rare hybrid profile: equally comfortable shipping a Laravel application, building a professional website, wiring an LLM into the loop, and flashing firmware to a microcontroller.",
     "stats": [
       {
         "value": "10+",
@@ -114,6 +114,11 @@
       "items": ["Shopify", "VTEX", "WooCommerce"]
     },
     {
+      "group": "AI",
+      "icon": "fa-solid fa-robot",
+      "items": ["LLM integration", "AI agents", "Prompt engineering", "Claude Code", "MCP"]
+    },
+    {
       "group": "Embedded & IoT",
       "icon": "fa-solid fa-microchip",
       "items": [
@@ -126,11 +131,6 @@
         "Sensors & displays",
         "BTS7960"
       ]
-    },
-    {
-      "group": "AI",
-      "icon": "fa-solid fa-robot",
-      "items": ["LLM integration", "AI agents", "Prompt engineering", "Claude Code", "MCP"]
     },
     {
       "group": "Tooling & DevOps",
@@ -259,19 +259,19 @@
   ],
   "projects": [
     {
-      "title": "4WD Exploration Rover",
-      "tag": "ESP32 · Personal build",
-      "kind": "Embedded / Robotics",
-      "icon": "fa-solid fa-robot",
-      "blurb": "A four-wheel-drive exploration rover built around ESP32, with a custom suspension system and a self-designed hexagonal PETG chassis.",
+      "title": "AI-Assisted Development & LLM Integration",
+      "tag": "AI · Ongoing",
+      "kind": "AI",
+      "icon": "fa-solid fa-brain",
+      "blurb": "Integrating LLMs and agent-style workflows into applications, and using AI-assisted tooling to accelerate delivery.",
       "points": [
-        "Skid-steer motor control via BTS7960 drivers and a phased, modular firmware architecture.",
-        "FPV video streaming; work spans mechanics, electronics and embedded firmware (C/C++).",
-        "One project touching mechanical design, electronics and low-level firmware end-to-end."
+        "LLM and agent workflows wired into real product loops.",
+        "Claude Code with MCP servers — GitHub, MySQL, filesystem, Playwright, Figma.",
+        "Prompt engineering and AI-assisted development as part of the everyday toolkit."
       ],
-      "tech": ["ESP32", "C/C++", "BTS7960", "PETG / 3D design", "FPV"],
-      "image": "/images/projects/rover-4wd.jpg",
-      "imageAlt": "CAD render of the 4WD exploration rover chassis and suspension"
+      "tech": ["LLMs", "AI agents", "Claude Code", "MCP", "Prompt engineering"],
+      "image": "/images/projects/ai-integration.png",
+      "imageAlt": "AI microchip icon over a dark background"
     },
     {
       "title": "Embedded & IoT Experiments",
@@ -289,19 +289,19 @@
       "imageAlt": "ESP32 on a breadboard driving a TFT display with a live weather and world-clock app"
     },
     {
-      "title": "AI-Assisted Development & LLM Integration",
-      "tag": "AI · Ongoing",
-      "kind": "AI",
-      "icon": "fa-solid fa-brain",
-      "blurb": "Integrating LLMs and agent-style workflows into applications, and using AI-assisted tooling to accelerate delivery.",
+      "title": "4WD Exploration Rover",
+      "tag": "ESP32 · Personal build",
+      "kind": "Embedded / Robotics",
+      "icon": "fa-solid fa-robot",
+      "blurb": "A four-wheel-drive exploration rover built around ESP32, with a custom suspension system and a self-designed hexagonal PETG chassis.",
       "points": [
-        "LLM and agent workflows wired into real product loops.",
-        "Claude Code with MCP servers — GitHub, MySQL, filesystem, Playwright, Figma.",
-        "Prompt engineering and AI-assisted development as part of the everyday toolkit."
+        "Skid-steer motor control via BTS7960 drivers and a phased, modular firmware architecture.",
+        "FPV video streaming; work spans mechanics, electronics and embedded firmware (C/C++).",
+        "One project touching mechanical design, electronics and low-level firmware end-to-end."
       ],
-      "tech": ["LLMs", "AI agents", "Claude Code", "MCP", "Prompt engineering"],
-      "image": "/images/projects/ai-integration.png",
-      "imageAlt": "AI microchip icon over a dark background"
+      "tech": ["ESP32", "C/C++", "BTS7960", "PETG / 3D design", "FPV"],
+      "image": "/images/projects/rover-4wd.jpg",
+      "imageAlt": "CAD render of the 4WD exploration rover chassis and suspension"
     }
   ],
   "education": [

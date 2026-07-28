@@ -27,7 +27,7 @@ export const Hero = ({ profile }) => {
       <Reveal className="relative z-[2] mx-auto w-full max-w-[1120px]">
         <Badge variant="status" className="mb-7">
           <span className="bg-mint h-2 w-2 rounded-full shadow-[0_0_0_3px_rgba(62,207,142,.28)]" />
-          Open to embedded &amp; full-stack roles · {profile.location}
+          Open to full-stack, AI &amp; embedded roles · {profile.location}
         </Badge>
         <h1 className="font-heading max-w-[15ch] text-[clamp(44px,9vw,100px)] leading-none font-bold tracking-[-0.035em] text-white [text-shadow:0_2px_44px_rgba(0,0,0,.4)]">
           {profile.name}

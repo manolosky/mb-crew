@@ -11,7 +11,7 @@ export const Stack = ({ skills }) => {
         <SectionHeading
           kicker="02 — Tech stack"
           title="Tools I reach for."
-          description="From production web apps to firmware on bare metal — organized by where they live in the stack."
+          description="From production web apps to LLMs in the loop to firmware on bare metal — organized by where they live in the stack."
         />
       </Reveal>
       <Reveal

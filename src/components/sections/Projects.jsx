@@ -10,20 +10,15 @@ export const Projects = ({ projects, clientWork }) => {
       <Reveal>
         <SectionHeading
           kicker="04 — Projects"
-          title="Client work, embedded & AI."
-          description="Personal builds that span mechanics, firmware and the model in the loop — alongside production client work shipped end-to-end."
+          title="Client work, AI & embedded."
+          description="Production client work shipped end-to-end — alongside personal builds that span the model in the loop, firmware and mechanics."
         />
       </Reveal>
-      <Reveal
-        staggerChildren
-        className="mt-[38px] grid grid-cols-[repeat(auto-fit,minmax(min(300px,100%),1fr))] gap-[22px]"
-      >
+      <Reveal staggerChildren className="nav:grid-cols-2 mt-[38px] grid grid-cols-1 gap-[22px]">
+        <ClientWorkCard clientWork={clientWork} />
         {projects.map((project) => (
           <ProjectCard key={project.title} project={project} />
         ))}
-      </Reveal>
-      <Reveal direction="fade" className="mt-[22px]">
-        <ClientWorkCard clientWork={clientWork} />
       </Reveal>
     </Section>
   );

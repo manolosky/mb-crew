@@ -1,52 +1,49 @@
 import { Button } from '@/components/ui/Button';
-import { Card } from '@/components/ui/Card';
-import { IconTile } from '@/components/ui/IconTile';
 import { Icon } from '@/lib/icons';
 
-// Confidential client work: shown as an aggregate summary instead of
-// individual project cards, since those sites are covered by NDA.
+// Confidential client work rendered in the same card format as the personal
+// projects — an aggregate summary, since those sites are covered by NDA.
 export const ClientWorkCard = ({ clientWork }) => {
   return (
-    <Card className="rounded-[20px] p-[clamp(24px,4vw,40px)]">
-      <div className="flex flex-wrap items-start gap-[clamp(20px,3vw,32px)]">
-        <IconTile>
-          <Icon name="fa-solid fa-globe" />
-        </IconTile>
-        <div className="min-w-[min(280px,100%)] flex-1">
-          <div className="text-brand mb-2 font-mono text-xs tracking-[0.08em] uppercase">
-            Client work · Under NDA
+    <div className="bg-surface border-line-soft hover:shadow-lift-lg flex flex-col overflow-hidden rounded-[20px] border transition duration-200 hover:-translate-y-1 hover:border-[#b4560f]">
+      {/* Stats header in place of a project image */}
+      <div className="border-line-soft relative flex h-[172px] items-center justify-center gap-12 border-b bg-[repeating-linear-gradient(45deg,#1b1916_0_11px,#211e1a_11px_22px)]">
+        <span className="bg-brand-gradient absolute top-3.5 left-3.5 rounded-full px-2.5 py-[5px] font-mono text-[11px] text-white">
+          Professional / Client work
+        </span>
+        <div className="text-center">
+          <div className="text-gradient-brand font-heading text-[42px] leading-none font-bold">
+            {clientWork.built}
           </div>
-          <h3 className="font-heading mb-3 text-[clamp(19px,2.4vw,24px)] leading-[1.2] font-bold">
-            {clientWork.built} production websites built for {clientWork.client}.
-          </h3>
-          <p className="text-body-soft mb-5 max-w-[68ch] text-[14.5px] leading-[1.6]">
-            As {clientWork.role} for {clientWork.client}, I have developed {clientWork.built}{' '}
-            production websites end-to-end — owning 100% of the development — and provide ongoing
-            support for {clientWork.supported} live projects for the same client. These sites are
-            not listed publicly for confidentiality reasons; I am happy to walk through them in a
-            closer conversation.
-          </p>
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
-            <Button size="sm" href="/contact">
-              <Icon name="fa-solid fa-paper-plane" className="text-xs" /> Ask me about them
-            </Button>
-            <div className="flex gap-6">
-              <div>
-                <div className="text-gradient-brand font-heading text-[26px] leading-none font-bold">
-                  {clientWork.built}
-                </div>
-                <div className="text-faint mt-1 text-xs">built end-to-end</div>
-              </div>
-              <div>
-                <div className="text-gradient-brand font-heading text-[26px] leading-none font-bold">
-                  {clientWork.supported}
-                </div>
-                <div className="text-faint mt-1 text-xs">projects supported</div>
-              </div>
-            </div>
+          <div className="text-faint mt-2 text-xs">built end-to-end</div>
+        </div>
+        <div className="text-center">
+          <div className="text-gradient-brand font-heading text-[42px] leading-none font-bold">
+            {clientWork.supported}
           </div>
+          <div className="text-faint mt-2 text-xs">projects supported</div>
         </div>
       </div>
-    </Card>
+      <div className="flex flex-1 flex-col p-[22px]">
+        <div className="text-brand mb-2 font-mono text-xs">WordPress · Under NDA</div>
+        <div className="font-heading mb-2.5 text-xl leading-[1.2] font-bold">
+          {clientWork.built} production websites built for {clientWork.client}.
+        </div>
+        <p className="text-body-soft mb-4 text-[14.5px] leading-[1.55]">
+          As {clientWork.role} for {clientWork.client}, I have developed {clientWork.built}{' '}
+          production websites end-to-end — owning 100% of the development — and provide ongoing
+          support for {clientWork.supported} live projects for the same client.
+        </p>
+        <p className="mb-[18px] text-[13.5px] leading-[1.5] text-[#a9a49a]">
+          These sites are not listed publicly for confidentiality reasons; I am happy to walk
+          through them in a closer conversation.
+        </p>
+        <div className="mt-auto">
+          <Button size="sm" href="/contact">
+            <Icon name="fa-solid fa-paper-plane" className="text-xs" /> Ask me about them
+          </Button>
+        </div>
+      </div>
+    </div>
   );
 };
