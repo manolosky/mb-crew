@@ -1,3 +1,4 @@
+import { AboutPortrait } from '@/components/cards/AboutPortrait';
 import { HobbyCard } from '@/components/cards/HobbyCard';
 import { GradientBlob } from '@/components/ui/GradientBlob';
 import { Reveal } from '@/components/ui/Reveal';
@@ -29,12 +30,7 @@ export const About = ({ profile, hobbies }) => {
             </p>
           </Reveal>
           <Reveal direction="right">
-            {/* Placeholder until the real photo arrives */}
-            <div className="border-line flex aspect-4/5 items-center justify-center rounded-[20px] border bg-[repeating-linear-gradient(135deg,#1b1916_0_12px,#211e1a_12px_24px)]">
-              <span className="text-muted rounded-lg bg-black/50 px-4 py-2.5 font-mono text-[13px]">
-                your photo
-              </span>
-            </div>
+            <AboutPortrait />
           </Reveal>
         </div>
 
