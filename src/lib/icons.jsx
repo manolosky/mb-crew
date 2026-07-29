@@ -1,24 +1,23 @@
 import {
   FaArrowUpRightFromSquare,
-  FaBrain,
   FaCartShopping,
   FaCode,
   FaCube,
   FaDownload,
   FaEnvelope,
   FaGithub,
-  FaGlobe,
   FaGraduationCap,
   FaHeart,
   FaLinkedinIn,
   FaMicrochip,
   FaPaperPlane,
+  FaPause,
   FaPeopleGroup,
   FaPhone,
+  FaPlay,
   FaRobot,
   FaScrewdriverWrench,
   FaServer,
-  FaWifi,
   FaWindowMaximize,
 } from 'react-icons/fa6';
 
@@ -26,8 +25,6 @@ import {
 // them to tree-shakeable react-icons components.
 const ICONS = {
   'fa-solid fa-arrow-up-right-from-square': FaArrowUpRightFromSquare,
-  'fa-solid fa-globe': FaGlobe,
-  'fa-solid fa-brain': FaBrain,
   'fa-solid fa-cart-shopping': FaCartShopping,
   'fa-solid fa-code': FaCode,
   'fa-solid fa-cube': FaCube,
@@ -39,12 +36,13 @@ const ICONS = {
   'fa-brands fa-linkedin-in': FaLinkedinIn,
   'fa-solid fa-microchip': FaMicrochip,
   'fa-solid fa-paper-plane': FaPaperPlane,
+  'fa-solid fa-pause': FaPause,
+  'fa-solid fa-play': FaPlay,
   'fa-solid fa-people-group': FaPeopleGroup,
   'fa-solid fa-phone': FaPhone,
   'fa-solid fa-robot': FaRobot,
   'fa-solid fa-screwdriver-wrench': FaScrewdriverWrench,
   'fa-solid fa-server': FaServer,
-  'fa-solid fa-wifi': FaWifi,
   'fa-solid fa-window-maximize': FaWindowMaximize,
 };
 

@@ -58,6 +58,7 @@ export const Hero = ({ profile }) => {
           </Button>
           <Button variant="glass" href={profile.cvHref} target="_blank" rel="noopener noreferrer">
             <Icon name="fa-solid fa-download" /> Download CV
+            <span className="sr-only">(opens in new tab)</span>
           </Button>
         </div>
 

@@ -3,6 +3,8 @@
 import { animate, onScroll } from 'animejs';
 import { useEffect, useRef } from 'react';
 
+import { areAnimationsPaused, onAnimationsChange, prefersReducedMotion } from '@/lib/motion';
+
 const COLORS = ['#f25c05', '#ff9a3d', '#ffd2a8', '#c93400'];
 const DESKTOP_COUNT = 44;
 const MOBILE_COUNT = 22;
@@ -33,10 +35,6 @@ const buildParticles = (count) =>
   });
 
 const PARTICLES = buildParticles(DESKTOP_COUNT);
-
-const prefersReducedMotion = () =>
-  'function' === typeof window.matchMedia &&
-  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // Floating ember particles behind a section, with a scroll-scrubbed parallax
 // drift. Static (dim, motionless) with reduced motion or without observers.
@@ -74,24 +72,33 @@ export const EmberParticles = () => {
       autoplay: onScroll({ target: layer.parentElement, sync: 0.35 }),
     });
 
+    const all = [...floats, scrub];
+    let onScreen = true;
+
+    const applyPlayState = () => {
+      const shouldRun = onScreen && !areAnimationsPaused();
+      all.forEach((animation) => (shouldRun ? animation.play() : animation.pause()));
+    };
+
     // Save cycles while the section is off screen.
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          floats.forEach((animation) =>
-            entry.isIntersecting ? animation.play() : animation.pause(),
-          );
+          onScreen = entry.isIntersecting;
+          applyPlayState();
         });
       },
       { rootMargin: '10% 0px 10% 0px' },
     );
 
     observer.observe(layer.parentElement);
+    applyPlayState();
+    const unsubscribe = onAnimationsChange(applyPlayState);
 
     return () => {
+      unsubscribe();
       observer.disconnect();
-      floats.forEach((animation) => animation.cancel());
-      scrub.cancel();
+      all.forEach((animation) => animation.cancel());
     };
   }, []);
 

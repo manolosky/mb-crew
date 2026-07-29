@@ -1,4 +1,4 @@
-import { LogoMark } from '@/components/layout/Navbar';
+import { LogoMark } from '@/components/layout/LogoMark';
 
 export const Footer = () => {
   return (

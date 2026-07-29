@@ -17,7 +17,6 @@
   --color-slate: #aca79d;
   --color-muted: #8f8b82;
   --color-faint: #827e75;
-  --color-dim: #7f7b72;
 
   /* Surfaces — warm blacks */
   --color-canvas: #0b0a09;
@@ -34,7 +33,11 @@
   --color-brand-start: #ff9a3d;
   --color-brand: #f25c05;
   --color-brand-end: #c93400;
-  --color-link: #e04e00;
+  /* Near-black text for orange CTA surfaces — AA on both gradient stops */
+  --color-ink-on-brand: #0b0a09;
+  /* Ember accents on borders and on white surfaces */
+  --color-brand-line: #b4560f;
+  --color-brand-strong: #c2440a;
   --color-mint: #3ecf8e;
 
   /* Shadows */
@@ -106,7 +109,6 @@ body {
   background: var(--color-canvas);
   color: var(--color-ink);
   font-family: var(--font-sans);
-  -webkit-font-smoothing: antialiased;
   text-wrap: pretty;
 }
 
@@ -118,4 +120,9 @@ body {
 :focus-visible {
   outline: 2px solid var(--color-brand-start);
   outline-offset: 2px;
+}
+
+/* Site-wide pause switch for decorative CSS animations (WCAG 2.2.2) */
+html[data-animations='paused'] * {
+  animation-play-state: paused !important;
 }

@@ -1,12 +1,16 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+
+import { areAnimationsPaused, onAnimationsChange } from '@/lib/motion';
 
 // Decorative ambient video that mounts well after the page has loaded, so it
 // never competes with the initial render or affects LCP. The poster itself is
 // rendered by the parent server component and stays untouched by hydration.
+// Respects the site-wide animation pause switch (WCAG 2.2.2).
 export const BackgroundVideo = ({ src, poster }) => {
   const [showVideo, setShowVideo] = useState(false);
+  const videoRef = useRef(null);
 
   useEffect(() => {
     const EVENTS = ['scroll', 'pointerdown', 'pointermove', 'keydown', 'touchstart'];
@@ -23,13 +27,39 @@ export const BackgroundVideo = ({ src, poster }) => {
     };
   }, []);
 
+  useEffect(() => {
+    if (!showVideo) {
+      return undefined;
+    }
+
+    const applyPlayState = () => {
+      const video = videoRef.current;
+
+      if (null === video) {
+        return;
+      }
+
+      if (areAnimationsPaused()) {
+        video.pause();
+      } else {
+        // play() may return undefined in older engines; rejection means the
+        // browser refused autoplay and the poster keeps showing.
+        video.play()?.catch(() => {});
+      }
+    };
+
+    applyPlayState();
+    return onAnimationsChange(applyPlayState);
+  }, [showVideo]);
+
   if (!showVideo) {
     return null;
   }
 
   return (
     <video
-      autoPlay
+      ref={videoRef}
+      autoPlay={!areAnimationsPaused()}
       muted
       loop
       playsInline
