@@ -28,6 +28,11 @@ export const AboutPortrait = () => {
           onError={() => setPhotoFailed(true)}
         />
       )}
+      {/* Vignette: melts the edges into the page's dark background */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_48%,rgba(11,10,9,.62)_100%)] shadow-[inset_0_0_70px_rgba(11,10,9,.55)]"
+      />
     </div>
   );
 };
