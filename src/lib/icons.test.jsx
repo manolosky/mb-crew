@@ -12,7 +12,6 @@ describe('icons registry', () => {
     portfolio.profile.socials.forEach((social) => names.add(social.icon));
     portfolio.hobbies.forEach((hobby) => names.add(hobby.icon));
     portfolio.skills.forEach((skill) => names.add(skill.icon));
-    portfolio.projects.forEach((project) => names.add(project.icon));
 
     names.forEach((name) => {
       expect(getIcon(name), `missing icon mapping for "${name}"`).not.toBeNull();

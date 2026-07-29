@@ -35,7 +35,7 @@ export const ExperienceItem = ({ job }) => {
         </ul>
         <div className="flex flex-wrap gap-[7px]">
           {job.stack.map((tech) => (
-            <Chip key={tech} size="sm" className="border-line-soft bg-[#1f1d19] text-[#b5b1a8]">
+            <Chip key={tech} size="sm" className="border-line-soft text-body-soft bg-[#1f1d19]">
               {tech}
             </Chip>
           ))}

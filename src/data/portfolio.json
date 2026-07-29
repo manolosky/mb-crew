@@ -148,7 +148,6 @@
       "company": "TakeOff Media — Client: Content Pilot",
       "place": "Dallas, Texas, USA",
       "period": "Dec 2022 – Present",
-      "current": true,
       "role": "Full Stack Developer",
       "points": [
         "Build custom and headless WordPress websites end-to-end using WordPress, JS frameworks and React, owning both front-end and back-end/database design.",
@@ -262,7 +261,6 @@
       "title": "AI-Assisted Development & LLM Integration",
       "tag": "AI · Ongoing",
       "kind": "AI",
-      "icon": "fa-solid fa-brain",
       "blurb": "Integrating LLMs and agent-style workflows into applications, and using AI-assisted tooling to accelerate delivery.",
       "points": [
         "LLM and agent workflows wired into real product loops.",
@@ -277,7 +275,6 @@
       "title": "Embedded & IoT Experiments",
       "tag": "ESP32 · Personal build",
       "kind": "IoT",
-      "icon": "fa-solid fa-wifi",
       "blurb": "WiFi-connected applications on ESP32 boards, including a live news ticker with category rotation on a TFT display.",
       "points": [
         "NewsAPI + ArduinoJson pipeline feeding a rotating, categorized ticker.",
@@ -292,7 +289,6 @@
       "title": "4WD Exploration Rover",
       "tag": "ESP32 · Personal build",
       "kind": "Embedded / Robotics",
-      "icon": "fa-solid fa-robot",
       "blurb": "A four-wheel-drive exploration rover built around ESP32, with a custom suspension system and a self-designed hexagonal PETG chassis.",
       "points": [
         "Skid-steer motor control via BTS7960 drivers and a phased, modular firmware architecture.",

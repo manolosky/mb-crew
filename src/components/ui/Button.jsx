@@ -5,10 +5,11 @@ import { cn } from '@/lib/cn';
 const BASE_STYLES = 'inline-flex items-center justify-center font-semibold transition duration-200';
 
 const VARIANT_STYLES = {
-  gradient: 'bg-brand-gradient text-white shadow-cta hover:-translate-y-px hover:brightness-[1.08]',
+  gradient:
+    'bg-brand-gradient-soft text-ink-on-brand shadow-cta hover:-translate-y-px hover:brightness-[1.08]',
   glass:
     'border border-white/30 bg-white/10 text-white backdrop-blur-sm hover:border-white hover:bg-white/20',
-  white: 'bg-white text-[#c2440a] hover:brightness-[0.96]',
+  white: 'text-brand-strong bg-white hover:brightness-[0.96]',
 };
 
 const SIZE_STYLES = {
