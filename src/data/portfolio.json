@@ -19,8 +19,8 @@
     "email": "manuelb.diseno@gmail.com",
     "phone": "+34 675 989 629",
     "tagline": "A decade shipping the web stack — now wiring LLMs and microcontrollers into the loop.",
-    "summary": "Full-stack web developer with over a decade of experience and 200+ delivered projects, now deliberately expanding into AI and embedded systems. My core is the web stack — PHP, Laravel, WordPress, React and JavaScript — backed by solid experience leading teams as Scrum Master and Technical Lead under agile methodologies. I am building on that foundation with the integration of AI agents and LLMs into real products, plus hands-on ESP32 firmware (C/C++) and IoT devices.",
-    "hybrid": "The result is a rare hybrid profile: equally comfortable shipping a Laravel application, building a professional website, wiring an LLM into the loop, and flashing firmware to a microcontroller.",
+    "summary": "Full-stack web developer with over a decade of experience and 200+ delivered projects, with a growing side interest in embedded systems and IoT. My core is the web stack — PHP, Laravel, WordPress, React and JavaScript — with deep experience in CRM-driven enterprise development: custom solutions on SugarCRM, custom-endpoint integrations connecting the CRM to e-commerce platforms and third-party systems, and marketing automation on ActiveCampaign. I have delivered large-scale billing, ticketing, scheduling and queue-management systems for the automotive, security and healthcare sectors, and I currently work on WordPress platforms for U.S. law firms in the legal marketing space. Along the way I have led teams as Scrum Master and Technical Lead under agile methodologies, and I actively integrate AI agents and LLMs into real products.",
+    "hybrid": "Equally comfortable architecting a Laravel application, shipping a professional website, or wiring an LLM into an existing workflow.",
     "stats": [
       {
         "value": "10+",
@@ -150,9 +150,10 @@
       "period": "Dec 2022 – Present",
       "role": "Full Stack Developer",
       "points": [
-        "Build custom and headless WordPress websites end-to-end using WordPress, JS frameworks and React, owning both front-end and back-end/database design.",
-        "Develop bespoke WordPress themes and plugins tailored to client-specific requirements.",
-        "Conduct website performance audits and optimizations, improving load times on content-heavy, image-rich sites.",
+        "Build custom WordPress and headless websites end-to-end — including bespoke themes and plugins tailored to client-specific requirements — owning front-end development with React and JS frameworks alongside back-end and database design.",
+        "Develop custom property listing experiences with search, filtering and detail views, plus end-to-end viewing scheduling and booking flows that keep availability, appointments and confirmations in sync with third-party reservation systems.",
+        "Design custom API integration layers on top of WordPress — REST endpoints, GraphQL queries, response normalization and caching — connecting external platforms to both traditional and headless front ends while keeping listing-heavy pages fast on large datasets.",
+        "Conduct website performance audits and optimizations, improving load times on content-heavy, image and data-rich sites.",
         "Collaborate in Scrum ceremonies with developers, tech leads and PMs to scope and deliver features.",
         "Provide ongoing support and troubleshooting for live websites, documenting solutions and tracking ticket resolution."
       ],
@@ -165,23 +166,26 @@
         "Sass",
         "MySQL",
         "Webpack",
+        "REST API",
+        "GraphQL",
+        "Algolia",
+        "Schema",
         "SEO",
         "Scrum",
-        "AI",
-        "LLMs",
-        "Prompt engineering"
+        "LLMs"
       ]
     },
     {
       "company": "Existaya.com",
       "place": "Cali, Colombia",
       "period": "Nov 2020 – Dec 2022",
-      "role": "Operations Leader / Technical Leader",
+      "role": "Technical & Operations Leader",
       "points": [
-        "Led IT operations and a team of developers, defining processes, work schedules and performance goals.",
-        "Acted as Technical Lead and Scrum Master, coordinating delivery across web and UX teams under agile methodologies.",
-        "Reported progress and metrics to the COO and key stakeholders; managed vendor and client relationships.",
-        "Contributed to business expansion initiatives (partnerships, acquisitions and corporate alliances)."
+        "Led IT operations and a team of developers, acting as Technical Lead and Scrum Master: defined processes, work schedules and performance goals while coordinating delivery across web and UX teams under agile methodologies.",
+        "Owned the company's CRM practice, delivering custom development on SugarCRM — modules, workflows and business logic — and designing integrations with third-party platforms through custom REST endpoints that connected the CRM to e-commerce stores and internal business systems.",
+        "Directed marketing automation projects on ActiveCampaign, including custom integrations between the platform and client CRMs to keep contacts, events and sales pipelines in sync.",
+        "Delivered enterprise software for clients in the automotive, security and healthcare sectors: large-scale billing platforms, ticketing systems and appointment/queue-management systems.",
+        "Reported progress and metrics to the COO and key stakeholders, managed vendor and client relationships, and contributed to business expansion initiatives (partnerships, acquisitions and corporate alliances)."
       ],
       "stack": [
         "WordPress",
@@ -194,7 +198,10 @@
         "VTEX",
         "WooCommerce",
         "MySQL",
-        "REST"
+        "REST",
+        "SugarCRM",
+        "ActiveCampaign",
+        "Elasticsearch"
       ]
     },
     {
