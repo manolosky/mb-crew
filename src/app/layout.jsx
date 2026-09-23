@@ -24,7 +24,7 @@ const plexMono = IBM_Plex_Mono({
 
 export const metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mb-crew.vercel.app'),
-  title: 'Manuel Bolaños — Full-Stack, Embedded & AI',
+  title: 'Manuel Bolaños — Full-Stack, AI & IoT/Embedded',
   description:
     'A decade shipping the web stack — now wiring LLMs and microcontrollers into the loop.',
 };
