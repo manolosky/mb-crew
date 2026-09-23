@@ -24,6 +24,15 @@ const cspHeader = [
 const nextConfig = {
   // Hide the floating Next.js dev-tools badge shown during `next dev`.
   devIndicators: false,
+  // The one-page moved from `/` to `/portfolio`; keep the old section URLs alive.
+  // The ids mirror SECTION_IDS in src/lib/routes.js (a test keeps them in sync).
+  redirects: async () => [
+    {
+      source: '/:section(about|stack|experience|projects|contact)',
+      destination: '/portfolio/:section',
+      permanent: true,
+    },
+  ],
   headers: async () => [
     {
       source: '/(.*)',

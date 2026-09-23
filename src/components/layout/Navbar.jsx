@@ -8,13 +8,16 @@ import { LogoMark } from '@/components/layout/LogoMark';
 import { AnimationToggle } from '@/components/ui/AnimationToggle';
 import { cn } from '@/lib/cn';
 import { Icon } from '@/lib/icons';
+import { portfolioHref } from '@/lib/routes';
 
 const NAV_LINKS = [
-  { label: 'About', href: '/about' },
-  { label: 'Stack', href: '/stack' },
-  { label: 'Experience', href: '/experience' },
-  { label: 'Projects', href: '/projects' },
+  { label: 'About', href: portfolioHref('about') },
+  { label: 'Stack', href: portfolioHref('stack') },
+  { label: 'Experience', href: portfolioHref('experience') },
+  { label: 'Projects', href: portfolioHref('projects') },
 ];
+
+const CONTACT_HREF = portfolioHref('contact');
 
 export const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -61,7 +64,7 @@ export const Navbar = () => {
             </Link>
           ))}
           <Link
-            href="/contact"
+            href={CONTACT_HREF}
             className="bg-brand-gradient-soft shadow-nav-cta text-ink-on-brand ml-1.5 inline-flex items-center gap-2 rounded-[10px] px-[18px] py-[9px] text-[14.5px] font-semibold transition hover:brightness-[1.06]"
           >
             <Icon name="fa-solid fa-paper-plane" className="text-xs" /> Contact
@@ -111,7 +114,7 @@ export const Navbar = () => {
             </Link>
           ))}
           <Link
-            href="/contact"
+            href={CONTACT_HREF}
             onClick={closeMenu}
             className="bg-brand-gradient-soft text-ink-on-brand mt-2 rounded-[11px] p-3 text-center text-base font-bold"
           >

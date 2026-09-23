@@ -1,13 +1,18 @@
-import { SECTIONS } from '@/app/[[...section]]/page';
+import { portfolioHref, SECTION_IDS } from '@/lib/routes';
+import { getSiteUrl } from '@/lib/site';
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mb-crew.vercel.app';
+// The bare /portfolio path is left out on purpose: until the new homepage
+// launches it mirrors `/`, which stays the canonical URL.
+const sitemap = () => {
+  const baseUrl = getSiteUrl();
 
-const sitemap = () => [
-  { url: BASE_URL, priority: 1 },
-  ...Object.keys(SECTIONS).map((section) => ({
-    url: `${BASE_URL}/${section}`,
-    priority: 0.8,
-  })),
-];
+  return [
+    { url: baseUrl, priority: 1 },
+    ...SECTION_IDS.map((section) => ({
+      url: `${baseUrl}${portfolioHref(section)}`,
+      priority: 0.8,
+    })),
+  ];
+};
 
 export default sitemap;

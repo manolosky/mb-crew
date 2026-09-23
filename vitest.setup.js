@@ -2,8 +2,9 @@ import '@testing-library/jest-dom/vitest';
 import { vi } from 'vitest';
 
 // App Router hooks need a router context that jsdom tests don't provide.
+// usePathname is a mock so tests can simulate other routes.
 vi.mock('next/navigation', () => ({
-  usePathname: () => '/',
+  usePathname: vi.fn(() => '/'),
   useRouter: () => ({ push: vi.fn(), replace: vi.fn(), prefetch: vi.fn() }),
 }));
 

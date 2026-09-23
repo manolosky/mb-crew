@@ -1,6 +1,7 @@
 import { ProjectFrame } from '@/components/cards/ProjectFrame';
 import { Button } from '@/components/ui/Button';
 import { Icon } from '@/lib/icons';
+import { portfolioHref } from '@/lib/routes';
 
 const HeaderStat = ({ value, label }) => (
   <div className="text-center">
@@ -13,7 +14,8 @@ const HeaderStat = ({ value, label }) => (
 
 // Confidential client work rendered in the same card format as the personal
 // projects — an aggregate summary, since those sites are covered by NDA.
-export const ClientWorkCard = ({ clientWork }) => {
+// `contactHref` lets hosts other than the portfolio point the CTA elsewhere.
+export const ClientWorkCard = ({ clientWork, contactHref = portfolioHref('contact') }) => {
   return (
     <ProjectFrame
       badge="Professional / Client work"
@@ -38,7 +40,7 @@ export const ClientWorkCard = ({ clientWork }) => {
         them in a closer conversation.
       </p>
       <div className="mt-auto">
-        <Button size="sm" href="/contact">
+        <Button size="sm" href={contactHref}>
           <Icon name="fa-solid fa-paper-plane" className="text-xs" /> Ask me about them
         </Button>
       </div>
