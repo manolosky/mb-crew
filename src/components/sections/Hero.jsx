@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/Button';
 import { Reveal } from '@/components/ui/Reveal';
 import { Stat } from '@/components/ui/Stat';
 import { Icon } from '@/lib/icons';
+import { portfolioHref } from '@/lib/routes';
 
 export const Hero = ({ profile }) => {
   // The poster is the LCP element — ask the browser for it as early as possible.
@@ -53,7 +54,7 @@ export const Hero = ({ profile }) => {
         </p>
 
         <div className="flex flex-wrap items-center gap-3.5">
-          <Button href="/contact">
+          <Button href={portfolioHref('contact')}>
             <Icon name="fa-solid fa-paper-plane" /> Get in touch
           </Button>
           <Button variant="glass" href={profile.cvHref} target="_blank" rel="noopener noreferrer">

@@ -1,5 +1,7 @@
 import { GoogleTagManager } from '@next/third-parties/google';
 import { IBM_Plex_Mono, IBM_Plex_Sans, Space_Grotesk } from 'next/font/google';
+
+import { getSiteUrl } from '@/lib/site';
 import './globals.css';
 
 const GTM_ID = 'GTM-KBCX8VQ2';
@@ -23,8 +25,8 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mb-crew.vercel.app'),
-  title: 'Manuel Bolaños — Full-Stack, Embedded & AI',
+  metadataBase: new URL(getSiteUrl()),
+  title: 'Manuel Bolaños — Full-Stack, AI & IoT/Embedded',
   description:
     'A decade shipping the web stack — now wiring LLMs and microcontrollers into the loop.',
 };

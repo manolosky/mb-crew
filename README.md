@@ -1,6 +1,6 @@
 # mb-crew — Manuel Bolaños' Portfolio
 
-Personal presentation site: a single one-page with anchored section routes (`/about`, `/stack`, `/experience`, `/projects`, `/contact`), built with **Next.js (App Router) + React (JS) + Tailwind CSS v4**, animated with **anime.js**, and deployed to **Vercel** through GitHub Actions.
+Personal presentation site: a one-page portfolio with anchored section routes under `/portfolio` (`/portfolio/about`, `/portfolio/stack`, `/portfolio/experience`, `/portfolio/projects`, `/portfolio/contact`; the old `/about`-style URLs redirect there with a 308), built with **Next.js (App Router) + React (JS) + Tailwind CSS v4**, animated with **anime.js**, and deployed to **Vercel** through GitHub Actions.
 
 > Working material (work plan, reference design, screenshots) lives outside version control, in the local `docs/` and `reference/` folders.
 
@@ -66,10 +66,10 @@ Required repository secrets: `VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID
 
 ```
 src/
-├── app/            # App Router: root layout, catch-all section route, global styles (tokens)
+├── app/            # App Router: root layout, home page, /portfolio catch-all section route, global styles (tokens)
 ├── components/     # OnePage, sections, layout, domain cards and UI atoms
 ├── data/           # portfolio.json — all site content
-└── lib/            # Data access, icon registry, helpers
+└── lib/            # Data access, route map, site URL, icon registry, helpers
 ```
 
 Convention: files containing JSX use the `.jsx` extension.
