@@ -1,10 +1,9 @@
-import { GoogleTagManager } from '@next/third-parties/google';
 import { IBM_Plex_Mono, IBM_Plex_Sans, Space_Grotesk } from 'next/font/google';
 
+import { Analytics } from '@/components/consent/Analytics';
+import { CookieBanner } from '@/components/consent/CookieBanner';
 import { getSiteUrl } from '@/lib/site';
 import './globals.css';
-
-const GTM_ID = 'GTM-KBCX8VQ2';
 
 const spaceGrotesk = Space_Grotesk({
   variable: '--font-space-grotesk',
@@ -37,18 +36,12 @@ const RootLayout = ({ children }) => {
       lang="en"
       className={`${spaceGrotesk.variable} ${plexSans.variable} ${plexMono.variable} h-full antialiased`}
     >
-      <GoogleTagManager gtmId={GTM_ID} />
       <body className="flex min-h-full flex-col">
-        <noscript>
-          <iframe
-            src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
-            height="0"
-            width="0"
-            style={{ display: 'none', visibility: 'hidden' }}
-            title="Google Tag Manager"
-          />
-        </noscript>
+        {/* First in the tab order so keyboard users can decide right away. */}
+        <CookieBanner />
         {children}
+        {/* Google Tag Manager (with GA4) only loads after analytics consent. */}
+        <Analytics />
       </body>
     </html>
   );

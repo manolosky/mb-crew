@@ -1,3 +1,5 @@
+import { withBotId } from 'botid/next/config';
+
 const isDev = 'development' === process.env.NODE_ENV;
 
 // Content Security Policy: first-party everything, with the Google tag stack
@@ -51,4 +53,6 @@ const nextConfig = {
   ],
 };
 
-export default nextConfig;
+// BotID adds same-origin rewrites for its challenge script plus a header rule
+// for that path; being last, its framing headers win there over the global ones.
+export default withBotId(nextConfig);

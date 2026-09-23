@@ -62,14 +62,32 @@ Deployments are handled exclusively by GitHub Actions — Vercel's own git integ
 
 Required repository secrets: `VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`.
 
+## Environment variables
+
+Configured per environment in Vercel (never committed). Flags are plain values because the static pages read them at build time; secrets are only read at runtime, since Vercel "Sensitive" variables reach CI builds as the literal `[SENSITIVE]`.
+
+| Variable                                                                                         | Kind       | Purpose                                                                                                                                               |
+| ------------------------------------------------------------------------------------------------ | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `NEXT_PUBLIC_SITE_URL`                                                                           | Plain      | Public origin for metadata, sitemap and robots (defaults to `https://manuelbolanos.dev`)                                                              |
+| `CONTACT_FORM_MODE`                                                                              | Plain flag | `off` (default in production), `dry-run` (default in development; accepts messages without delivering them) or `live` (sends leads to ActiveCampaign) |
+| `ACTIVECAMPAIGN_API_URL`, `ACTIVECAMPAIGN_API_KEY`                                               | Secret     | Lead delivery in `live` mode; the field and list ids live in `src/lib/contact/activecampaign.config.js`                                               |
+| `KV_REST_API_URL`, `KV_REST_API_TOKEN` (or `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN`) | Secret     | Upstash Redis for rate limiting; without them rate limiting is skipped                                                                                |
+| `RATE_LIMIT_SALT`                                                                                | Secret     | Keys the IP hash used by the rate limiter, so raw IPs are never stored                                                                                |
+
+## Privacy and analytics
+
+Google Tag Manager (and the GA4 tag inside it) only loads after the visitor accepts analytics cookies in the consent banner; the decision can be changed from "Cookie settings" in the footer. The contact form is protected by a honeypot, a minimum fill time, Vercel BotID and a per-visitor rate limit. The public notice lives at `/privacy`.
+
 ## Project structure
 
 ```
 src/
-├── app/            # App Router: root layout, home page, /portfolio catch-all section route, global styles (tokens)
-├── components/     # OnePage, sections, layout, domain cards and UI atoms
+├── app/            # App Router: root layout, home page, /portfolio catch-all section route, /privacy, global styles (tokens)
+├── components/     # OnePage, sections, layout, contact form, consent banner, domain cards and UI atoms
 ├── data/           # portfolio.json — all site content
-└── lib/            # Data access, route map, site URL, icon registry, helpers
+└── lib/            # Data access, route map, site URL, contact form (schema, Server Action, CRM adapter), consent and analytics, server utilities
 ```
+
+`src/instrumentation-client.js` starts Vercel BotID and remembers landing-page UTM tags before the app hydrates.
 
 Convention: files containing JSX use the `.jsx` extension.

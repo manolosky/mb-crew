@@ -19,6 +19,10 @@ describe('sitemap', () => {
     });
   });
 
+  it('lists the privacy notice', () => {
+    expect(urls).toContain(`${baseUrl}/privacy`);
+  });
+
   it('leaves out the bare /portfolio path and the old section URLs', () => {
     expect(urls).not.toContain(`${baseUrl}/portfolio`);
     SECTION_IDS.forEach((section) => {
