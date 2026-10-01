@@ -1,6 +1,7 @@
 import {
   FaArrowUpRightFromSquare,
   FaCartShopping,
+  FaCircleCheck,
   FaCode,
   FaCube,
   FaDownload,
@@ -18,6 +19,7 @@ import {
   FaRobot,
   FaScrewdriverWrench,
   FaServer,
+  FaTriangleExclamation,
   FaWindowMaximize,
 } from 'react-icons/fa6';
 
@@ -26,6 +28,7 @@ import {
 const ICONS = {
   'fa-solid fa-arrow-up-right-from-square': FaArrowUpRightFromSquare,
   'fa-solid fa-cart-shopping': FaCartShopping,
+  'fa-solid fa-circle-check': FaCircleCheck,
   'fa-solid fa-code': FaCode,
   'fa-solid fa-cube': FaCube,
   'fa-solid fa-download': FaDownload,
@@ -43,6 +46,7 @@ const ICONS = {
   'fa-solid fa-robot': FaRobot,
   'fa-solid fa-screwdriver-wrench': FaScrewdriverWrench,
   'fa-solid fa-server': FaServer,
+  'fa-solid fa-triangle-exclamation': FaTriangleExclamation,
   'fa-solid fa-window-maximize': FaWindowMaximize,
 };
 
