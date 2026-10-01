@@ -6,6 +6,9 @@ import { vi } from 'vitest';
 vi.mock('next/navigation', () => ({
   usePathname: vi.fn(() => '/'),
   useRouter: () => ({ push: vi.fn(), replace: vi.fn(), prefetch: vi.fn() }),
+  notFound: vi.fn(() => {
+    throw new Error('NEXT_NOT_FOUND');
+  }),
 }));
 
 // next/font requires the Next.js compiler; return plain class names in tests.
