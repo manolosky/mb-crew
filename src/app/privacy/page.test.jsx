@@ -30,9 +30,15 @@ describe('privacy page', () => {
   it('names every provider that processes data', () => {
     render(<PrivacyPage />);
 
-    ['Vercel Inc.', 'Upstash, Inc.', 'ActiveCampaign, LLC', /Google Ireland/].forEach((name) => {
+    ['Vercel Inc.', /Google Ireland/].forEach((name) => {
       expect(screen.getByText(name)).toBeInTheDocument();
     });
+  });
+
+  it('no longer mentions the parked contact form providers', () => {
+    render(<PrivacyPage />);
+
+    expect(screen.queryByText(/ActiveCampaign|Upstash|contact form/i)).not.toBeInTheDocument();
   });
 
   it('lets visitors reopen the cookie settings', () => {

@@ -52,12 +52,3 @@ export const revokeAnalytics = () => {
 
   clearAnalyticsCookies();
 };
-
-// Custom event for GTM; a no-op until the visitor has accepted analytics.
-export const trackEvent = (event, params = {}) => {
-  if (!loaded) {
-    return;
-  }
-
-  window.dataLayer.push({ event, ...params });
-};

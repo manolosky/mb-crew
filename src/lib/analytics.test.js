@@ -31,17 +31,6 @@ describe('analytics', () => {
     expect(gtmStart).toMatchObject({ event: 'gtm.js' });
   });
 
-  it('ignores custom events until analytics were accepted', async () => {
-    const { loadGoogleTagManager, trackEvent } = await loadAnalytics();
-
-    trackEvent('contact_submit', { source: 'portfolio' });
-    expect(window.dataLayer).toBeUndefined();
-
-    loadGoogleTagManager();
-    trackEvent('contact_submit', { source: 'portfolio' });
-    expect(window.dataLayer.at(-1)).toEqual({ event: 'contact_submit', source: 'portfolio' });
-  });
-
   it('withdraws consent and removes Google Analytics cookies', async () => {
     const { loadGoogleTagManager, revokeAnalytics } = await loadAnalytics();
     document.cookie = '_ga=GA1.1.123; path=/';

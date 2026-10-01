@@ -1,20 +1,14 @@
 import Image from 'next/image';
 
 import { ContactMethod } from '@/components/cards/ContactMethod';
-import { ContactForm } from '@/components/contact/ContactForm';
 import { Section } from '@/components/layout/Section';
 import { BackgroundVideo } from '@/components/ui/BackgroundVideo';
 import { Button } from '@/components/ui/Button';
 import { Reveal } from '@/components/ui/Reveal';
 import { SectionHeading } from '@/components/ui/SectionHeading';
-import { getContactFormMode } from '@/lib/contact/mode';
 import { Icon } from '@/lib/icons';
 
-// Contact card with the direct channels, followed by the contact form in its
-// own full-width block once the contact form mode allows it.
 export const Contact = ({ profile }) => {
-  const showForm = 'off' !== getContactFormMode();
-
   return (
     <Section id="contact">
       <Reveal
@@ -73,12 +67,6 @@ export const Contact = ({ profile }) => {
           </div>
         </div>
       </Reveal>
-
-      {showForm ? (
-        <Reveal className="mt-[clamp(24px,4vw,40px)]">
-          <ContactForm source="portfolio" email={profile.email} />
-        </Reveal>
-      ) : null}
     </Section>
   );
 };

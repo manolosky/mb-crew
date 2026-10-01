@@ -1,17 +1,18 @@
 import { CookieSettingsButton } from '@/components/consent/CookieSettingsButton';
 import { Footer } from '@/components/layout/Footer';
 import { Navbar } from '@/components/layout/Navbar';
-import { PRIVACY_NOTICE_VERSION } from '@/lib/contact/constants';
 import { getProfile } from '@/lib/portfolio';
 
 export const metadata = {
   title: 'Privacy & cookies — Manuel Bolaños',
   description:
-    'How manuelbolanos.dev handles contact messages, analytics cookies and your data protection rights.',
+    'How manuelbolanos.dev handles analytics cookies, the emails you send me and your data protection rights.',
   alternates: { canonical: '/privacy' },
 };
 
-const LAST_UPDATED = '23 September 2026';
+// Bump both whenever the site changes how it handles personal data.
+const NOTICE_VERSION = '2026-10-01';
+const LAST_UPDATED = '1 October 2026';
 
 const COOKIES = [
   {
@@ -35,9 +36,7 @@ const COOKIES = [
 ];
 
 const PROCESSORS = [
-  ['Vercel Inc.', 'hosting, delivery and bot protection (USA)'],
-  ['Upstash, Inc.', 'rate limiting against spam'],
-  ['ActiveCampaign, LLC', 'contact management and email (USA)'],
+  ['Vercel Inc.', 'hosting and delivery of the site (USA)'],
   ['Google Ireland Ltd. / Google LLC', 'analytics, only with your consent'],
 ];
 
@@ -84,7 +83,7 @@ const PrivacyPage = () => {
         <p className="text-body-soft mt-4 text-[clamp(16px,1.8vw,18px)] leading-[1.6]">
           This is my personal portfolio. This notice explains what personal data the site handles,
           why, and the choices you have. In short: nothing tracks you unless you accept analytics
-          cookies, and what you send me through the contact form is only used to reply to you.
+          cookies, and if you email me, your message is only used to reply to you.
         </p>
 
         <LegalSection id="controller" title="Who is responsible">
@@ -96,20 +95,6 @@ const PrivacyPage = () => {
 
         <LegalSection id="data" title="What I collect and why">
           <p>
-            <strong className="text-ink">Contact form.</strong> Your name, email address, company
-            (if you add one) and your message, plus the date and the version of this notice you
-            accepted, the page you wrote from and, if you arrived through a campaign link, its UTM
-            tags. I use them to read and answer your message and to follow up on any opportunity it
-            starts. Legal basis: your consent (Art. 6(1)(a) GDPR) and steps you ask me to take
-            before a possible agreement (Art. 6(1)(b) GDPR).
-          </p>
-          <p>
-            <strong className="text-ink">Occasional updates (optional).</strong> Only if you tick
-            the box: your name and email address, to send you occasional news about new projects.
-            Legal basis: your consent. Every email includes an unsubscribe link, and you can also
-            write to me.
-          </p>
-          <p>
             <strong className="text-ink">Analytics (only if you accept).</strong> Google Analytics
             4, loaded through Google Tag Manager, measures the pages you visit, your approximate
             location (city level), your device and browser, and how you reached the site. Legal
@@ -117,11 +102,10 @@ const PrivacyPage = () => {
             consent, neither Google Tag Manager nor Google Analytics is loaded.
           </p>
           <p>
-            <strong className="text-ink">Security and abuse prevention.</strong> To protect the
-            contact form from spam, I keep a keyed hash of your IP address (never the address
-            itself) for up to 24 hours, and Vercel BotID checks that requests come from a real
-            browser. Legal basis: my legitimate interest in keeping the site secure (Art. 6(1)(f)
-            GDPR).
+            <strong className="text-ink">Emails you send me.</strong> If you write to me, I use your
+            email address and your message only to reply and to follow up on any opportunity it
+            starts. Legal basis: my legitimate interest in answering you (Art. 6(1)(f) GDPR) and
+            steps you ask me to take before a possible agreement (Art. 6(1)(b) GDPR).
           </p>
           <p>
             <strong className="text-ink">Hosting.</strong> Vercel, the hosting provider, processes
@@ -176,7 +160,7 @@ const PrivacyPage = () => {
         </LegalSection>
 
         <LegalSection id="recipients" title="Who receives the data">
-          <p>These providers process data on my behalf, under data processing agreements:</p>
+          <p>These providers process data on my behalf:</p>
           <ul className="list-disc space-y-1.5 pl-6">
             {PROCESSORS.map(([name, role]) => (
               <li key={name}>
@@ -194,11 +178,9 @@ const PrivacyPage = () => {
         <LegalSection id="retention" title="How long I keep it">
           <ul className="list-disc space-y-1.5 pl-6">
             <li>
-              Contact messages: while I handle your request, and at most two years after our last
-              exchange unless we start working together.
+              Emails: while I handle your request, and at most two years after our last exchange
+              unless we start working together.
             </li>
-            <li>Occasional updates: until you unsubscribe.</li>
-            <li>Rate-limiting hashes: up to 24 hours.</li>
             <li>Analytics data: up to 14 months, per the Google Analytics retention setting.</li>
           </ul>
         </LegalSection>
@@ -222,7 +204,7 @@ const PrivacyPage = () => {
         <LegalSection id="changes" title="Changes to this notice">
           <p>
             I update this notice whenever the site changes how it handles personal data. Version{' '}
-            {PRIVACY_NOTICE_VERSION}, last updated {LAST_UPDATED}.
+            {NOTICE_VERSION}, last updated {LAST_UPDATED}.
           </p>
         </LegalSection>
       </main>

@@ -8,13 +8,6 @@ vi.mock('next/navigation', () => ({
   useRouter: () => ({ push: vi.fn(), replace: vi.fn(), prefetch: vi.fn() }),
 }));
 
-// `server-only` throws outside the React Server runtime, and BotID's check
-// needs a Vercel request context: neutral stand-ins for tests.
-vi.mock('server-only', () => ({}));
-vi.mock('botid/server', () => ({
-  checkBotId: vi.fn(async () => ({ isBot: false })),
-}));
-
 // next/font requires the Next.js compiler; return plain class names in tests.
 vi.mock('next/font/google', () => {
   return new Proxy(
