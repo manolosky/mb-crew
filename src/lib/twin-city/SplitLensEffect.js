@@ -3,14 +3,12 @@ import { Uniform } from 'three';
 
 // One full-screen pass decides the "lens" per pixel: the digital twin keeps
 // the rendered colours on one side of the seam; the classic side becomes an ink
-// drawing (Sobel edges on depth + luminance, hatching and paper grain).
+// drawing on dark paper (Sobel edges on depth + luminance, hatching, grain).
 // `uAxis` 0 = vertical seam (landscape), 1 = horizontal seam (portrait, AI on top).
 const fragmentShader = /* glsl */ `
 uniform float uSplit;
 uniform float uAxis;
-uniform float uInkLight;
 uniform float uFocus;
-uniform float uReveal;
 
 float luma(const in vec3 color) {
   return dot(color, vec3(0.299, 0.587, 0.114));
@@ -67,11 +65,8 @@ void mainImage(const in vec4 inputColor, const in vec2 uv, const in float depth,
   float tone = clamp(luma(inputColor.rgb) * 1.6, 0.0, 1.0);
   float hatchMask = step(0.62, fract((pixel.x + pixel.y) / 6.0));
   float grain = hash(floor(pixel) + floor(time * 12.0)) * 0.045;
-  vec3 darkInk = vec3(0.03) + vec3(tone * 0.22) + hatchMask * tone * 0.08 + grain;
-  darkInk = mix(darkInk, vec3(0.88, 0.86, 0.82), lines);
-  vec3 paper = vec3(0.93, 0.91, 0.86) - grain - hatchMask * (1.0 - tone) * 0.12;
-  vec3 lightInk = mix(paper, vec3(0.07, 0.06, 0.05), lines);
-  vec3 classic = mix(darkInk, lightInk, uInkLight);
+  vec3 classic = vec3(0.03) + vec3(tone * 0.22) + hatchMask * tone * 0.08 + grain;
+  classic = mix(classic, vec3(0.88, 0.86, 0.82), lines);
 
   // AI lens: the rendered scene with holographic cyan outlines (the same
   // silhouettes), a touch brighter when hovered, plus faint scanlines.
@@ -86,9 +81,6 @@ void mainImage(const in vec4 inputColor, const in vec2 uv, const in float depth,
   float glow = exp(-abs(seamDistance) / 5.0) + 0.35 * exp(-abs(seamDistance) / 40.0);
   color += vec3(1.0, 0.42, 0.1) * glow * 0.8;
 
-  // Intro: the city fades in from the site background.
-  color = mix(vec3(0.043, 0.039, 0.035), color, uReveal);
-
   outputColor = vec4(color, inputColor.a);
 }
 `;
@@ -101,18 +93,14 @@ export class SplitLensEffect extends Effect {
       uniforms: new Map([
         ['uSplit', new Uniform(0.5)],
         ['uAxis', new Uniform(0)],
-        ['uInkLight', new Uniform(0)],
         ['uFocus', new Uniform(0)],
-        ['uReveal', new Uniform(0)],
       ]),
     });
   }
 
-  setLens({ split, axis, inkLight, focus, reveal }) {
+  setLens({ split, axis, focus }) {
     this.uniforms.get('uSplit').value = split;
     this.uniforms.get('uAxis').value = axis;
-    this.uniforms.get('uInkLight').value = inkLight;
     this.uniforms.get('uFocus').value = focus;
-    this.uniforms.get('uReveal').value = reveal;
   }
 }

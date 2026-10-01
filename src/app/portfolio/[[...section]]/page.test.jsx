@@ -49,11 +49,12 @@ describe('portfolio route', () => {
     expect(metadata.alternates.canonical).toBe('/portfolio/about');
   });
 
-  it('keeps the bare path out of the index while `/` mirrors it', async () => {
+  it('gives the bare /portfolio path its own title and canonical URL', async () => {
     const metadata = await generateMetadata({ params: Promise.resolve({ section: undefined }) });
 
-    expect(metadata.alternates.canonical).toBe('/');
-    expect(metadata.robots).toEqual({ index: false, follow: true });
+    expect(metadata.title).toBe('Portfolio — Manuel Bolaños');
+    expect(metadata.alternates.canonical).toBe('/portfolio');
+    expect(metadata.robots).toBeUndefined();
   });
 
   it('scrolls to the requested section', async () => {

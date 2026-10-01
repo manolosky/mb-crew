@@ -11,6 +11,9 @@ const DEFAULTS = {
   forestDepth: 12,
 };
 
+// Buildings below this height get a pitched roof most of the time.
+const PITCHED_MAX_HEIGHT = 9;
+
 export const generateCity = (options = {}) => {
   const { seed, blocks, blockSize, streetWidth, forestDepth } = { ...DEFAULTS, ...options };
   const random = createRandom(seed);
@@ -68,6 +71,46 @@ export const generateCity = (options = {}) => {
       radius: height * random.range(0.28, 0.4),
     });
   }
+
+  // Roofs: pitched (gable or hip) on low and mid-rise buildings, flat with a
+  // small rooftop unit on towers. Each one gets a slight tone shift (hue,
+  // saturation and lightness offsets in [-1, 1]) so they don't look stamped
+  // out. A separate seeded sequence keeps the city layout above unchanged.
+  const roofRandom = createRandom(seed + 1);
+
+  buildings.forEach((building) => {
+    const tone = {
+      hue: roofRandom.range(-1, 1),
+      saturation: roofRandom.range(-1, 1),
+      lightness: roofRandom.range(-1, 1),
+    };
+
+    if (building.height < PITCHED_MAX_HEIGHT && roofRandom.chance(0.8)) {
+      building.roof = {
+        type: roofRandom.chance(0.55) ? 'gable' : 'hip',
+        height: Math.min(
+          Math.min(building.width, building.depth) * roofRandom.range(0.3, 0.55),
+          building.height * 0.6,
+        ),
+        tone,
+      };
+      return;
+    }
+
+    building.roof = {
+      type: 'flat',
+      tone,
+      unit: roofRandom.chance(0.7)
+        ? {
+            width: building.width * roofRandom.range(0.2, 0.4),
+            depth: building.depth * roofRandom.range(0.2, 0.4),
+            height: roofRandom.range(0.4, 1.1),
+            offsetX: building.width * roofRandom.range(-0.2, 0.2),
+            offsetZ: building.depth * roofRandom.range(-0.2, 0.2),
+          }
+        : null,
+    };
+  });
 
   return { buildings, trees, streets, bounds: { half, forestEnd: forestStart + forestDepth } };
 };

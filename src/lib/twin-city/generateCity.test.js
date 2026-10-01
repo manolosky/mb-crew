@@ -22,6 +22,21 @@ describe('generateCity', () => {
     });
   });
 
+  it('mixes pitched and flat roofs, keeping pitched ones off the towers', () => {
+    const { buildings } = generateCity();
+    const types = new Set(buildings.map(({ roof }) => roof.type));
+
+    expect(types).toEqual(new Set(['gable', 'hip', 'flat']));
+    buildings.forEach(({ height, roof }) => {
+      Object.values(roof.tone).forEach((offset) => expect(Math.abs(offset)).toBeLessThanOrEqual(1));
+
+      if ('flat' !== roof.type) {
+        expect(height).toBeLessThan(9);
+        expect(roof.height).toBeGreaterThan(0);
+      }
+    });
+  });
+
   it('puts the forest belt beyond the blocks and lays out the streets', () => {
     const { trees, streets, bounds } = generateCity({ blocks: 5 });
 

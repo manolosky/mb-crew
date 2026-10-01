@@ -1,4 +1,5 @@
-import { OnePageRoute } from '@/components/OnePageRoute';
+import { OnePage } from '@/components/OnePage';
+import { ScrollToSection } from '@/components/ScrollToSection';
 import { portfolioHref, SECTION_IDS, SECTIONS } from '@/lib/routes';
 
 // Only the paths returned here are served; anything else is a 404.
@@ -13,12 +14,10 @@ export const generateMetadata = async ({ params }) => {
   const { section } = await params;
   const id = section?.[0];
 
-  // Until the new homepage launches, `/` serves this same page and remains the
-  // canonical URL, so the bare /portfolio path stays out of the index.
   if (undefined === id) {
     return {
-      alternates: { canonical: '/' },
-      robots: { index: false, follow: true },
+      title: 'Portfolio — Manuel Bolaños',
+      alternates: { canonical: portfolioHref() },
     };
   }
 
@@ -37,7 +36,12 @@ export const generateMetadata = async ({ params }) => {
 const Page = async ({ params }) => {
   const { section } = await params;
 
-  return <OnePageRoute section={section?.[0]} />;
+  return (
+    <>
+      <ScrollToSection section={section?.[0]} />
+      <OnePage />
+    </>
+  );
 };
 
 export default Page;

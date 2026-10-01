@@ -30,6 +30,7 @@ import {
 
 import { areAnimationsPaused, onAnimationsChange, prefersReducedMotion } from '@/lib/motion';
 import { createRandom } from '@/lib/random';
+import { createRoofs } from '@/lib/twin-city/createRoofs';
 import { generateCity } from '@/lib/twin-city/generateCity';
 import { SplitLensEffect } from '@/lib/twin-city/SplitLensEffect';
 import { createWindowsTexture } from '@/lib/twin-city/windowsTexture';
@@ -37,14 +38,12 @@ import { createWindowsTexture } from '@/lib/twin-city/windowsTexture';
 const BACKGROUND = '#0b0a09';
 const SPLIT_RANGE = 0.15; // the seam moves up to 15% towards the hovered side
 const DAMPING = 4; // easing speed (per second)
-const INTRO_SECONDS = 1.8;
 const CURSOR_RADIUS = 9;
 const CURSOR_GROWTH = 0.65;
 const FLOW_COUNT = 240;
 const FIREFLY_COUNT = 90;
 
 const clamp01 = (value) => Math.min(1, Math.max(0, value));
-const easeOutCubic = (t) => 1 - (1 - t) ** 3;
 const damp = (current, target, delta) =>
   current + (target - current) * (1 - Math.exp(-DAMPING * delta));
 
@@ -133,8 +132,9 @@ const createFireflies = (bounds, random) => {
 // Mounts the "Twin City" in `host`: a procedural city whose left (or top) half
 // is its colourful digital twin and whose other half is an ink drawing. The
 // seam follows the pointer and writes `--split` on `cssTarget` so the page's
-// columns move with it. Throws when WebGL is unavailable.
-export const createTwinCity = (host, { cssTarget = host, onStats, onContextLost } = {}) => {
+// columns move with it. `onReady` fires after the first frame (to fade the
+// canvas in over the poster). Throws when WebGL is unavailable.
+export const createTwinCity = (host, { cssTarget = host, onReady, onContextLost } = {}) => {
   const coarsePointer = window.matchMedia('(pointer: coarse)').matches;
   const renderer = new WebGLRenderer({
     powerPreference: 'high-performance',
@@ -173,6 +173,7 @@ export const createTwinCity = (host, { cssTarget = host, onStats, onContextLost 
     city.buildings.length,
   );
   const growth = new Float32Array(city.buildings.length).fill(1);
+  const roofs = createRoofs(city.buildings);
   const placeholder = new Object3D();
 
   const treeGeometry = new ConeGeometry(1, 1, 6).translate(0, 0.5, 0);
@@ -207,6 +208,7 @@ export const createTwinCity = (host, { cssTarget = host, onStats, onContextLost 
     ground,
     grid,
     buildings,
+    ...roofs.meshes,
     trees,
     flows.points,
     fireflies.points,
@@ -238,11 +240,13 @@ export const createTwinCity = (host, { cssTarget = host, onStats, onContextLost 
 
   // Interaction state.
   const pointer = { x: 0.5, y: 0.5, active: false };
-  const state = { split: 0.5, focus: 0, intro: 0, inkLight: 0, hoverSide: null };
+  const state = { split: 0.5, focus: 0, hoverSide: null };
   const raycaster = new Raycaster();
   const groundPlane = new Plane(new Vector3(0, 1, 0), 0);
   const cursor = new Vector3();
   const ndc = new Vector2();
+
+  let ready = false;
 
   const isPortrait = () => host.clientWidth <= host.clientHeight;
 
@@ -260,12 +264,7 @@ export const createTwinCity = (host, { cssTarget = host, onStats, onContextLost 
   };
 
   const updateBuildings = (delta, cursorActive) => {
-    const rise = state.intro;
-
     city.buildings.forEach((building, index) => {
-      const distanceFromCentre = Math.hypot(building.x, building.z) / city.bounds.half;
-      const delay = Math.min(1, distanceFromCentre) * 0.45;
-      const grown = easeOutCubic(clamp01((rise - delay) / 0.55));
       const target = cursorActive
         ? 1 +
           CURSOR_GROWTH *
@@ -277,15 +276,12 @@ export const createTwinCity = (host, { cssTarget = host, onStats, onContextLost 
 
       growth[index] = damp(growth[index], target, delta);
       placeholder.position.set(building.x, 0, building.z);
-      placeholder.scale.set(
-        building.width,
-        Math.max(0.001, building.height * growth[index] * grown),
-        building.depth,
-      );
+      placeholder.scale.set(building.width, building.height * growth[index], building.depth);
       placeholder.updateMatrix();
       buildings.setMatrixAt(index, placeholder.matrix);
     });
     buildings.instanceMatrix.needsUpdate = true;
+    roofs.update(growth);
   };
 
   const update = (delta, time) => {
@@ -301,7 +297,6 @@ export const createTwinCity = (host, { cssTarget = host, onStats, onContextLost 
 
     state.split = damp(state.split, targetSplit, delta);
     state.focus = (state.split - 0.5) / SPLIT_RANGE;
-    state.intro = Math.min(1, state.intro + delta / INTRO_SECONDS);
 
     // The cursor only "pays attention" on the digital twin side.
     let cursorActive = false;
@@ -319,20 +314,21 @@ export const createTwinCity = (host, { cssTarget = host, onStats, onContextLost 
     lens.setLens({
       split: state.split,
       axis: portrait ? 1 : 0,
-      inkLight: state.inkLight,
       focus: state.focus,
-      reveal: easeOutCubic(Math.min(1, state.intro * 1.6)),
     });
     cssTarget.style.setProperty('--split', state.split.toFixed(4));
     composer.render(delta);
+
+    if (!ready) {
+      ready = true;
+      onReady?.();
+    }
   };
 
   // Render loop: runs only while visible and while animations are allowed.
   let frame = null;
   let last = 0;
   let elapsed = 0;
-  let frames = 0;
-  let statsSince = 0;
 
   const motionAllowed = () => !prefersReducedMotion() && !areAnimationsPaused();
 
@@ -341,14 +337,6 @@ export const createTwinCity = (host, { cssTarget = host, onStats, onContextLost 
     last = now;
     elapsed += delta;
     update(delta, elapsed);
-
-    frames += 1;
-    if (now - statsSince >= 500) {
-      onStats?.({ fps: Math.round((frames * 1000) / (now - statsSince)) });
-      frames = 0;
-      statsSince = now;
-    }
-
     frame = requestAnimationFrame(tick);
   };
 
@@ -358,7 +346,6 @@ export const createTwinCity = (host, { cssTarget = host, onStats, onContextLost 
     }
 
     last = performance.now();
-    statsSince = last;
     frame = requestAnimationFrame(tick);
   };
 
@@ -369,9 +356,8 @@ export const createTwinCity = (host, { cssTarget = host, onStats, onContextLost 
     }
   };
 
-  // Reduced motion or paused animations: one finished, still frame.
+  // Reduced motion or paused animations: a single still frame.
   const renderStill = () => {
-    state.intro = 1;
     update(0, elapsed);
   };
 
@@ -430,12 +416,6 @@ export const createTwinCity = (host, { cssTarget = host, onStats, onContextLost 
   syncMotion();
 
   return {
-    setInkLight: (light) => {
-      state.inkLight = light ? 1 : 0;
-      if (null === frame) {
-        renderStill();
-      }
-    },
     // Keyboard focus on a column behaves like hovering it.
     setHoverSide: (side) => {
       state.hoverSide = side;
@@ -468,6 +448,7 @@ export const createTwinCity = (host, { cssTarget = host, onStats, onContextLost 
         flows.points.material,
         fireflies.points.material,
       ].forEach((material) => material.dispose());
+      roofs.dispose();
       windows.dispose();
       renderer.dispose();
       renderer.domElement.remove();

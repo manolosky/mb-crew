@@ -13,7 +13,8 @@ describe('sitemap', () => {
     expect(urls[0]).toBe(baseUrl);
   });
 
-  it('lists every portfolio section under /portfolio', () => {
+  it('lists the portfolio and every section under /portfolio', () => {
+    expect(urls).toContain(`${baseUrl}/portfolio`);
     SECTION_IDS.forEach((section) => {
       expect(urls).toContain(`${baseUrl}/portfolio/${section}`);
     });
@@ -23,8 +24,7 @@ describe('sitemap', () => {
     expect(urls).toContain(`${baseUrl}/privacy`);
   });
 
-  it('leaves out the bare /portfolio path and the old section URLs', () => {
-    expect(urls).not.toContain(`${baseUrl}/portfolio`);
+  it('leaves out the old section URLs, which redirect', () => {
     SECTION_IDS.forEach((section) => {
       expect(urls).not.toContain(`${baseUrl}/${section}`);
     });
