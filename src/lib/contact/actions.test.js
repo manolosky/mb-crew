@@ -24,7 +24,6 @@ const buildForm = (overrides = {}) => {
   const fields = {
     name: 'Ada Lovelace',
     email: 'ada@example.com',
-    reason: 'job',
     message: 'I have an interesting role I would like to discuss.',
     consent: 'on',
     source: 'portfolio',
@@ -47,10 +46,9 @@ describe('submitContact', () => {
   it('delivers a valid lead', async () => {
     await expect(submitContact(undefined, buildForm())).resolves.toEqual({
       status: 'success',
-      reason: 'job',
     });
     expect(submitLead).toHaveBeenCalledWith(
-      expect.objectContaining({ email: 'ada@example.com', reason: 'job' }),
+      expect.objectContaining({ email: 'ada@example.com', company: '' }),
       'dry-run',
     );
   });

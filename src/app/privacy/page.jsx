@@ -97,11 +97,11 @@ const PrivacyPage = () => {
         <LegalSection id="data" title="What I collect and why">
           <p>
             <strong className="text-ink">Contact form.</strong> Your name, email address, company
-            (if you add one), what your message is about and the message itself, plus the date and
-            the version of this notice you accepted, the page you wrote from and, if you arrived
-            through a campaign link, its UTM tags. I use them to read and answer your message and to
-            follow up on any opportunity it starts. Legal basis: your consent (Art. 6(1)(a) GDPR)
-            and steps you ask me to take before a possible agreement (Art. 6(1)(b) GDPR).
+            (if you add one) and your message, plus the date and the version of this notice you
+            accepted, the page you wrote from and, if you arrived through a campaign link, its UTM
+            tags. I use them to read and answer your message and to follow up on any opportunity it
+            starts. Legal basis: your consent (Art. 6(1)(a) GDPR) and steps you ask me to take
+            before a possible agreement (Art. 6(1)(b) GDPR).
           </p>
           <p>
             <strong className="text-ink">Occasional updates (optional).</strong> Only if you tick

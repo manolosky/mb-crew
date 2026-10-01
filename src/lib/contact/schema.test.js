@@ -8,7 +8,6 @@ const buildForm = (overrides = {}) => {
     name: '  Ada Lovelace ',
     email: ' ada@example.com ',
     company: 'Analytical Engines',
-    reason: 'freelance',
     message: 'I would love to talk about a new project with you.',
     consent: 'on',
     source: 'portfolio',
@@ -35,7 +34,6 @@ describe('parseContactForm', () => {
     expect(result.data).toMatchObject({
       name: 'Ada Lovelace',
       email: 'ada@example.com',
-      reason: 'freelance',
       consent: 'on',
       newsletter: true,
       source: 'portfolio',
@@ -49,7 +47,6 @@ describe('parseContactForm', () => {
       buildForm({
         name: 'A',
         email: 'not-an-email',
-        reason: 'spam',
         message: 'Too short',
         consent: null,
       }),
@@ -57,7 +54,7 @@ describe('parseContactForm', () => {
 
     expect(result.success).toBe(false);
     expect(Object.keys(result.fieldErrors).sort()).toEqual(
-      ['consent', 'email', 'message', 'name', 'reason'].sort(),
+      ['consent', 'email', 'message', 'name'].sort(),
     );
     expect(result.values).toMatchObject({ name: 'A', email: 'not-an-email', consent: false });
   });

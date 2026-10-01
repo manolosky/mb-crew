@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { CONTACT_LIMITS, CONTACT_REASONS, CONTACT_SOURCES } from '@/lib/contact/constants';
+import { CONTACT_LIMITS, CONTACT_SOURCES } from '@/lib/contact/constants';
 
 const { name, email, company, message } = CONTACT_LIMITS;
 
@@ -19,10 +19,6 @@ export const contactSchema = z.object({
     .max(email.max, 'That email address is too long.')
     .pipe(z.email('Please enter a valid email address.')),
   company: z.string().trim().max(company.max, `Please keep this under ${company.max} characters.`),
-  reason: z.enum(
-    CONTACT_REASONS.map((reason) => reason.value),
-    { error: 'Please choose what your message is about.' },
-  ),
   message: z
     .string()
     .trim()
@@ -52,7 +48,6 @@ export const parseContactForm = (formData) => {
     name: readText(formData, 'name'),
     email: readText(formData, 'email'),
     company: readText(formData, 'company'),
-    reason: readText(formData, 'reason'),
     message: readText(formData, 'message'),
     consent: 'on' === readText(formData, 'consent'),
     newsletter: 'on' === readText(formData, 'newsletter'),

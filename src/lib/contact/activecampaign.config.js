@@ -5,7 +5,6 @@ export const ACTIVECAMPAIGN_IDS = {
   fields: {
     message: null,
     company: null,
-    reason: null,
     source: null,
     privacyConsent: null,
   },

@@ -9,7 +9,6 @@ import { readEnv } from '@/lib/server/env';
 export const submitLead = async (lead, mode) => {
   if ('dry-run' === mode) {
     console.info('[contact] dry-run lead', {
-      reason: lead.reason,
       source: lead.source,
       newsletter: lead.newsletter,
       messageLength: lead.message.length,

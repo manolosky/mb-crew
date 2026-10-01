@@ -23,8 +23,7 @@ describe('ContactForm', () => {
     ['Name', 'Email', /company or organization/i, 'Message'].forEach((label) => {
       expect(screen.getByLabelText(label)).toBeInTheDocument();
     });
-    expect(screen.getByRole('group', { name: /what's this about/i })).toBeInTheDocument();
-    expect(screen.getByRole('radio', { name: 'Job opportunity' })).toBeInTheDocument();
+    expect(screen.queryByRole('radio')).not.toBeInTheDocument();
     expect(screen.getByRole('checkbox', { name: /privacy notice/i })).toBeInTheDocument();
     expect(screen.getByRole('checkbox', { name: /occasional updates/i })).not.toBeChecked();
   });
@@ -33,7 +32,7 @@ describe('ContactForm', () => {
     vi.mocked(submitContact).mockResolvedValue({
       status: 'invalid',
       fieldErrors: { email: ['Please enter a valid email address.'] },
-      values: { name: 'Ada', email: 'nope', message: 'Short', reason: 'job', consent: false },
+      values: { name: 'Ada', email: 'nope', message: 'Short', consent: false },
     });
     const user = userEvent.setup();
     renderForm();
@@ -45,7 +44,7 @@ describe('ContactForm', () => {
     expect(emailField).toHaveValue('nope');
     expect(emailField).toHaveAccessibleDescription('Please enter a valid email address.');
     expect(screen.getByLabelText('Name')).toHaveValue('Ada');
-    expect(screen.getByRole('radio', { name: 'Job opportunity' })).toBeChecked();
+    expect(screen.getByLabelText('Message')).toHaveValue('Short');
     expect(screen.getByRole('link', { name: 'Please enter a valid email address.' })).toBeVisible();
     expect(document.activeElement).toHaveTextContent(/please check these fields/i);
   });
@@ -62,7 +61,7 @@ describe('ContactForm', () => {
   });
 
   it('replaces the form with a confirmation on success', async () => {
-    vi.mocked(submitContact).mockResolvedValue({ status: 'success', reason: 'job' });
+    vi.mocked(submitContact).mockResolvedValue({ status: 'success' });
     const user = userEvent.setup();
     renderForm();
 

@@ -57,5 +57,5 @@ export const submitContact = async (previousState, formData) => {
     return { status: 'error', code: 'delivery_failed', values: parsed.values };
   }
 
-  return { status: 'success', reason: parsed.data.reason };
+  return { status: 'success' };
 };

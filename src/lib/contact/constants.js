@@ -1,11 +1,4 @@
 // Shared by the contact form (client) and its Server Action.
-export const CONTACT_REASONS = [
-  { value: 'job', label: 'Job opportunity' },
-  { value: 'freelance', label: 'Freelance project' },
-  { value: 'collaboration', label: 'Collaboration' },
-  { value: 'hello', label: 'Just saying hi' },
-];
-
 export const CONTACT_SOURCES = ['portfolio', 'agent'];
 
 export const CONTACT_LIMITS = {

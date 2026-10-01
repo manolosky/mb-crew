@@ -5,15 +5,15 @@ import { useActionState, useEffect, useId, useRef } from 'react';
 
 import {
   ERROR_STYLES,
+  FEEDBACK_STYLES,
   HINT_STYLES,
   INPUT_STYLES,
   LABEL_STYLES,
 } from '@/components/contact/fieldStyles';
-import { ReasonField, reasonInputId } from '@/components/contact/ReasonField';
 import { Button } from '@/components/ui/Button';
 import { trackEvent } from '@/lib/analytics';
 import { submitContact } from '@/lib/contact/actions';
-import { CONTACT_LIMITS, CONTACT_REASONS } from '@/lib/contact/constants';
+import { CONTACT_LIMITS } from '@/lib/contact/constants';
 import { Icon } from '@/lib/icons';
 import { getCampaignParams, UTM_KEYS } from '@/lib/utm';
 
@@ -26,12 +26,11 @@ const ERROR_MESSAGES = {
   delivery_failed: 'Something went wrong while sending your message.',
 };
 
-const FIELD_ORDER = ['name', 'email', 'company', 'reason', 'message', 'consent'];
+const FIELD_ORDER = ['name', 'email', 'company', 'message', 'consent'];
 
-// Mobile: sits straight on the contact card (a nested card would squeeze the
-// fields); desktop: its own frosted card next to the contact details.
-const CARD_STYLES =
-  'nav:rounded-[20px] nav:border nav:bg-[rgba(11,10,9,.55)] nav:p-[clamp(20px,3vw,32px)] nav:backdrop-blur-md border-t border-white/15 pt-8 text-white';
+const CARD_STYLES = 'border-line bg-surface rounded-[26px] border p-[clamp(24px,5vw,56px)]';
+
+const CHECKBOX_STYLES = 'accent-brand-start mt-1 h-4 w-4 shrink-0';
 
 const FieldError = ({ id, messages }) => {
   if (undefined === messages || 0 === messages.length) {
@@ -59,8 +58,6 @@ export const ContactForm = ({ source, email, defaultValues = {} }) => {
   const errorId = (name) => `${id}-${name}-error`;
   const hasError = (name) => undefined !== errors[name];
   const describedBy = (...ids) => ids.filter(Boolean).join(' ') || undefined;
-  const focusTarget = (name) =>
-    'reason' === name ? reasonInputId(fieldId('reason'), CONTACT_REASONS[0].value) : fieldId(name);
 
   // Metadata the server can't know. Written as default values so React's
   // automatic form reset after each submission keeps them.
@@ -83,8 +80,8 @@ export const ContactForm = ({ source, email, defaultValues = {} }) => {
 
     feedbackRef.current?.focus();
 
-    if ('success' === state.status && undefined !== state.reason) {
-      trackEvent('contact_submit', { source, reason: state.reason });
+    if ('success' === state.status) {
+      trackEvent('contact_submit', { source });
     }
   }, [state, source]);
 
@@ -92,8 +89,8 @@ export const ContactForm = ({ source, email, defaultValues = {} }) => {
     return (
       <div ref={feedbackRef} tabIndex={-1} role="status" className={CARD_STYLES}>
         <Icon name="fa-solid fa-circle-check" className="text-mint mb-3 text-2xl" />
-        <p className="font-heading text-xl font-bold">Message received!</p>
-        <p className="mt-2 text-[15px] leading-[1.55] text-white/80">
+        <p className="font-heading text-ink text-xl font-bold">Message received!</p>
+        <p className="text-body mt-2 text-[15px] leading-[1.55]">
           Thanks for reaching out — I&apos;ll get back to you by email soon.
         </p>
       </div>
@@ -111,30 +108,30 @@ export const ContactForm = ({ source, email, defaultValues = {} }) => {
       aria-labelledby={fieldId('title')}
       className={CARD_STYLES}
     >
-      <h3 id={fieldId('title')} className="font-heading text-xl font-bold">
+      <h3
+        id={fieldId('title')}
+        className="font-heading text-ink text-[clamp(22px,3vw,28px)] font-bold tracking-[-0.01em]"
+      >
         Send me a message
       </h3>
-      <p className="mt-1.5 mb-6 text-[14px] leading-[1.5] text-white/75">
+      <p className="text-body-soft mt-1.5 mb-8 text-[15px] leading-[1.5]">
         I read every message myself and reply by email.
       </p>
 
       {'invalid' === state.status ? (
-        <div
-          ref={feedbackRef}
-          tabIndex={-1}
-          className="mb-6 rounded-[12px] border border-[#ffb49c]/60 bg-[#ffb49c]/10 p-4 text-[14px]"
-        >
+        <div ref={feedbackRef} tabIndex={-1} className={FEEDBACK_STYLES}>
           <p className="flex items-center gap-2 font-semibold">
-            <Icon name="fa-solid fa-triangle-exclamation" /> Please check these fields:
+            <Icon name="fa-solid fa-triangle-exclamation" className="text-[#ffb49c]" /> Please check
+            these fields:
           </p>
           <ul className="mt-2 list-disc space-y-1 pl-6">
             {invalidFields.map((name) => (
               <li key={name}>
                 <a
-                  href={`#${focusTarget(name)}`}
+                  href={`#${fieldId(name)}`}
                   onClick={(event) => {
                     event.preventDefault();
-                    document.getElementById(focusTarget(name))?.focus();
+                    document.getElementById(fieldId(name))?.focus();
                   }}
                   className="underline underline-offset-2"
                 >
@@ -147,18 +144,17 @@ export const ContactForm = ({ source, email, defaultValues = {} }) => {
       ) : null}
 
       {'error' === state.status ? (
-        <div
-          ref={feedbackRef}
-          tabIndex={-1}
-          className="mb-6 rounded-[12px] border border-[#ffb49c]/60 bg-[#ffb49c]/10 p-4 text-[14px] leading-[1.5]"
-        >
+        <div ref={feedbackRef} tabIndex={-1} className={FEEDBACK_STYLES}>
           <p className="flex items-center gap-2 font-semibold">
-            <Icon name="fa-solid fa-triangle-exclamation" />
+            <Icon name="fa-solid fa-triangle-exclamation" className="text-[#ffb49c]" />
             {ERROR_MESSAGES[state.code] ?? ERROR_MESSAGES.delivery_failed}
           </p>
           <p className="mt-1">
             You can also email me at{' '}
-            <a href={`mailto:${email}`} className="font-semibold underline underline-offset-2">
+            <a
+              href={`mailto:${email}`}
+              className="text-brand-start font-semibold underline underline-offset-2"
+            >
               {email}
             </a>
             .
@@ -166,45 +162,42 @@ export const ContactForm = ({ source, email, defaultValues = {} }) => {
         </div>
       ) : null}
 
-      <div className="flex flex-col gap-5">
-        <div className="nav:grid-cols-2 grid gap-5">
-          <div>
-            <label htmlFor={fieldId('name')} className={LABEL_STYLES}>
-              Name
-            </label>
-            <input
-              id={fieldId('name')}
-              name="name"
-              type="text"
-              autoComplete="name"
-              maxLength={CONTACT_LIMITS.name.max}
-              defaultValue={values.name}
-              aria-invalid={hasError('name') ? true : undefined}
-              aria-describedby={describedBy(hasError('name') && errorId('name'))}
-              className={INPUT_STYLES}
-            />
-            <FieldError id={errorId('name')} messages={errors.name} />
-          </div>
-          <div>
-            <label htmlFor={fieldId('email')} className={LABEL_STYLES}>
-              Email
-            </label>
-            <input
-              id={fieldId('email')}
-              name="email"
-              type="email"
-              inputMode="email"
-              autoComplete="email"
-              maxLength={CONTACT_LIMITS.email.max}
-              defaultValue={values.email}
-              aria-invalid={hasError('email') ? true : undefined}
-              aria-describedby={describedBy(hasError('email') && errorId('email'))}
-              className={INPUT_STYLES}
-            />
-            <FieldError id={errorId('email')} messages={errors.email} />
-          </div>
+      <div className="nav:grid-cols-3 grid gap-5">
+        <div>
+          <label htmlFor={fieldId('name')} className={LABEL_STYLES}>
+            Name
+          </label>
+          <input
+            id={fieldId('name')}
+            name="name"
+            type="text"
+            autoComplete="name"
+            maxLength={CONTACT_LIMITS.name.max}
+            defaultValue={values.name}
+            aria-invalid={hasError('name') ? true : undefined}
+            aria-describedby={describedBy(hasError('name') && errorId('name'))}
+            className={INPUT_STYLES}
+          />
+          <FieldError id={errorId('name')} messages={errors.name} />
         </div>
-
+        <div>
+          <label htmlFor={fieldId('email')} className={LABEL_STYLES}>
+            Email
+          </label>
+          <input
+            id={fieldId('email')}
+            name="email"
+            type="email"
+            inputMode="email"
+            autoComplete="email"
+            maxLength={CONTACT_LIMITS.email.max}
+            defaultValue={values.email}
+            aria-invalid={hasError('email') ? true : undefined}
+            aria-describedby={describedBy(hasError('email') && errorId('email'))}
+            className={INPUT_STYLES}
+          />
+          <FieldError id={errorId('email')} messages={errors.email} />
+        </div>
         <div>
           <label htmlFor={fieldId('company')} className={LABEL_STYLES}>
             Company or organization <span className="normal-case">(optional)</span>
@@ -222,107 +215,102 @@ export const ContactForm = ({ source, email, defaultValues = {} }) => {
           />
           <FieldError id={errorId('company')} messages={errors.company} />
         </div>
+      </div>
 
-        <ReasonField
-          idPrefix={fieldId('reason')}
-          defaultValue={values.reason}
-          error={errors.reason?.[0]}
-          errorId={errorId('reason')}
+      <div className="mt-5">
+        <label htmlFor={fieldId('message')} className={LABEL_STYLES}>
+          Message
+        </label>
+        <textarea
+          id={fieldId('message')}
+          name="message"
+          rows={6}
+          maxLength={CONTACT_LIMITS.message.max}
+          defaultValue={values.message}
+          aria-invalid={hasError('message') ? true : undefined}
+          aria-describedby={describedBy(
+            fieldId('message-hint'),
+            hasError('message') && errorId('message'),
+          )}
+          className={`${INPUT_STYLES} resize-y`}
         />
+        <p id={fieldId('message-hint')} className={HINT_STYLES}>
+          Between {CONTACT_LIMITS.message.min} and{' '}
+          {CONTACT_LIMITS.message.max.toLocaleString('en-US')} characters.
+        </p>
+        <FieldError id={errorId('message')} messages={errors.message} />
+      </div>
 
-        <div>
-          <label htmlFor={fieldId('message')} className={LABEL_STYLES}>
-            Message
-          </label>
-          <textarea
-            id={fieldId('message')}
-            name="message"
-            rows={5}
-            maxLength={CONTACT_LIMITS.message.max}
-            defaultValue={values.message}
-            aria-invalid={hasError('message') ? true : undefined}
-            aria-describedby={describedBy(
-              fieldId('message-hint'),
-              hasError('message') && errorId('message'),
-            )}
-            className={`${INPUT_STYLES} resize-y`}
-          />
-          <p id={fieldId('message-hint')} className={HINT_STYLES}>
-            Between {CONTACT_LIMITS.message.min} and{' '}
-            {CONTACT_LIMITS.message.max.toLocaleString('en-US')} characters.
-          </p>
-          <FieldError id={errorId('message')} messages={errors.message} />
-        </div>
-
-        <div>
+      <div className="nav:flex-row nav:items-end nav:justify-between mt-7 flex flex-col gap-6">
+        <div className="flex max-w-[640px] flex-col gap-3">
+          <div>
+            <div className="flex items-start gap-3">
+              <input
+                id={fieldId('consent')}
+                name="consent"
+                type="checkbox"
+                defaultChecked={values.consent}
+                aria-invalid={hasError('consent') ? true : undefined}
+                aria-describedby={describedBy(hasError('consent') && errorId('consent'))}
+                className={CHECKBOX_STYLES}
+              />
+              <label htmlFor={fieldId('consent')} className="text-body text-[14px] leading-[1.5]">
+                I agree to the processing of these details to reply to my message, as described in
+                the{' '}
+                <Link
+                  href="/privacy"
+                  className="text-brand-start font-semibold underline underline-offset-2"
+                >
+                  privacy notice
+                </Link>
+                .
+              </label>
+            </div>
+            <FieldError id={errorId('consent')} messages={errors.consent} />
+          </div>
           <div className="flex items-start gap-3">
             <input
-              id={fieldId('consent')}
-              name="consent"
+              id={fieldId('newsletter')}
+              name="newsletter"
               type="checkbox"
-              defaultChecked={values.consent}
-              aria-invalid={hasError('consent') ? true : undefined}
-              aria-describedby={describedBy(hasError('consent') && errorId('consent'))}
-              className="accent-brand-start mt-1 h-4 w-4 shrink-0"
+              defaultChecked={values.newsletter}
+              className={CHECKBOX_STYLES}
             />
-            <label htmlFor={fieldId('consent')} className="text-[14px] leading-[1.5] text-white/85">
-              I agree to the processing of these details to reply to my message, as described in the{' '}
-              <Link href="/privacy" className="font-semibold underline underline-offset-2">
-                privacy notice
-              </Link>
-              .
+            <label htmlFor={fieldId('newsletter')} className="text-body text-[14px] leading-[1.5]">
+              Also send me occasional updates about new projects (optional — unsubscribe anytime).
             </label>
           </div>
-          <FieldError id={errorId('consent')} messages={errors.consent} />
         </div>
 
-        <div className="flex items-start gap-3">
-          <input
-            id={fieldId('newsletter')}
-            name="newsletter"
-            type="checkbox"
-            defaultChecked={values.newsletter}
-            className="accent-brand-start mt-1 h-4 w-4 shrink-0"
-          />
-          <label
-            htmlFor={fieldId('newsletter')}
-            className="text-[14px] leading-[1.5] text-white/85"
-          >
-            Also send me occasional updates about new projects (optional — unsubscribe anytime).
-          </label>
-        </div>
-
-        {/* Honeypot: invisible to people, tempting for bots. */}
-        <div
-          aria-hidden="true"
-          className="absolute top-auto left-[-10000px] h-px w-px overflow-hidden"
+        <Button
+          type="submit"
+          disabled={pending}
+          className="nav:self-end shrink-0 self-start disabled:cursor-wait disabled:opacity-70"
         >
-          <label htmlFor={fieldId('website')}>Leave this field empty</label>
-          <input
-            id={fieldId('website')}
-            name="website"
-            type="text"
-            tabIndex={-1}
-            autoComplete="off"
-          />
-        </div>
-        <input type="hidden" name="startedAt" />
-        <input type="hidden" name="page" />
-        <input type="hidden" name="source" value={source} />
-        {UTM_KEYS.map((key) => (
-          <input key={key} type="hidden" name={key} />
-        ))}
-
-        <div>
-          <Button
-            type="submit"
-            disabled={pending}
-            className="disabled:cursor-wait disabled:opacity-70"
-          >
-            <Icon name="fa-solid fa-paper-plane" /> {pending ? 'Sending…' : 'Send message'}
-          </Button>
-        </div>
+          <Icon name="fa-solid fa-paper-plane" /> {pending ? 'Sending…' : 'Send message'}
+        </Button>
       </div>
+
+      {/* Honeypot: invisible to people, tempting for bots. */}
+      <div
+        aria-hidden="true"
+        className="absolute top-auto left-[-10000px] h-px w-px overflow-hidden"
+      >
+        <label htmlFor={fieldId('website')}>Leave this field empty</label>
+        <input
+          id={fieldId('website')}
+          name="website"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
+      <input type="hidden" name="startedAt" />
+      <input type="hidden" name="page" />
+      <input type="hidden" name="source" value={source} />
+      {UTM_KEYS.map((key) => (
+        <input key={key} type="hidden" name={key} />
+      ))}
     </form>
   );
 };

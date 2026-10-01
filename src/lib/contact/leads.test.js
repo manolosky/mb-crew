@@ -14,7 +14,6 @@ const LEAD = {
   name: 'Ada Lovelace',
   email: 'ada@example.com',
   company: '',
-  reason: 'job',
   message: 'Hello there, I have a role for you.',
   newsletter: false,
   source: 'portfolio',

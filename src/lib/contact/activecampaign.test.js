@@ -6,7 +6,7 @@ import { PRIVACY_NOTICE_VERSION } from '@/lib/contact/constants';
 import { buildContactSyncPayload, syncContact } from './activecampaign';
 
 const IDS = {
-  fields: { message: 1, company: 2, reason: 3, source: 4, privacyConsent: 5 },
+  fields: { message: 1, company: 2, source: 3, privacyConsent: 4 },
   newsletterListId: 7,
 };
 
@@ -14,7 +14,6 @@ const LEAD = {
   name: 'Ada King Lovelace',
   email: 'ada@example.com',
   company: '',
-  reason: 'job',
   message: 'Hello there, I have a role for you.',
   newsletter: false,
   source: 'portfolio',
@@ -30,13 +29,12 @@ describe('buildContactSyncPayload', () => {
       email: 'ada@example.com',
       firstName: 'Ada',
       lastName: 'King Lovelace',
-      tags: ['src:portfolio', 'reason:job'],
+      tags: ['src:portfolio'],
     });
     expect(contact.fieldValues).toEqual([
       { field: '1', value: 'Hello there, I have a role for you.' },
-      { field: '3', value: 'job' },
-      { field: '4', value: 'portfolio' },
-      { field: '5', value: `${PRIVACY_NOTICE_VERSION} (2026-09-23T10:00:00.000Z)` },
+      { field: '3', value: 'portfolio' },
+      { field: '4', value: `${PRIVACY_NOTICE_VERSION} (2026-09-23T10:00:00.000Z)` },
     ]);
     expect(contact.lists).toBeUndefined();
   });

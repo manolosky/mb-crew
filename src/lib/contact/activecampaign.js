@@ -12,8 +12,8 @@ const splitName = (fullName) => {
   return { firstName, lastName: rest.join(' ') };
 };
 
-// Builds the body for POST /api/3/contact/sync (upsert by email). Tags and
-// custom fields tell where the lead came from and what it is about.
+// Builds the body for POST /api/3/contact/sync (upsert by email). A tag and a
+// custom field record where the lead came from.
 export const buildContactSyncPayload = (lead, ids = ACTIVECAMPAIGN_IDS, now = new Date()) => {
   const missing = REQUIRED_FIELDS.filter((key) => null === ids.fields[key]);
 
@@ -24,7 +24,6 @@ export const buildContactSyncPayload = (lead, ids = ACTIVECAMPAIGN_IDS, now = ne
   const values = {
     message: lead.message,
     company: lead.company,
-    reason: lead.reason,
     source: lead.source,
     privacyConsent: `${PRIVACY_NOTICE_VERSION} (${now.toISOString()})`,
   };
@@ -35,7 +34,7 @@ export const buildContactSyncPayload = (lead, ids = ACTIVECAMPAIGN_IDS, now = ne
     fieldValues: Object.entries(values)
       .filter(([key, value]) => null !== ids.fields[key] && '' !== value)
       .map(([key, value]) => ({ field: String(ids.fields[key]), value })),
-    tags: [`src:${lead.source}`, `reason:${lead.reason}`],
+    tags: [`src:${lead.source}`],
   };
 
   // Only visitors who ticked the optional box join the newsletter list.
