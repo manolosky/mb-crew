@@ -56,7 +56,7 @@ export const Navbar = () => {
               href={link.href}
               aria-current={pathname === link.href ? 'page' : undefined}
               className={cn(
-                'text-slate hover:text-ink hover:bg-line-strong rounded-[9px] px-3 py-2 text-[14.5px] font-medium transition',
+                'text-slate hover:text-ink hover:bg-line-strong px-3 py-2 text-[14.5px] font-medium transition',
                 pathname === link.href && 'text-brand-start bg-line-strong',
               )}
             >
@@ -65,7 +65,7 @@ export const Navbar = () => {
           ))}
           <Link
             href={CONTACT_HREF}
-            className="bg-brand-gradient-soft shadow-nav-cta text-ink-on-brand ml-1.5 inline-flex items-center gap-2 rounded-[10px] px-[18px] py-[9px] text-[14.5px] font-semibold transition hover:brightness-[1.06]"
+            className="bg-brand-gradient-soft shadow-nav-cta text-ink-on-brand border-brand-end ml-1.5 inline-flex items-center gap-2 border-b-2 px-[18px] py-[9px] text-[14.5px] font-semibold transition hover:brightness-[1.06]"
           >
             <Icon name="fa-solid fa-paper-plane" className="text-xs" /> Contact
           </Link>
@@ -82,7 +82,7 @@ export const Navbar = () => {
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
             onClick={() => setMenuOpen((open) => !open)}
-            className="border-line bg-surface flex cursor-pointer flex-col gap-[5px] rounded-[10px] border p-2.5"
+            className="border-line bg-surface flex cursor-pointer flex-col gap-[5px] border p-2.5"
           >
             <span className="bg-ink block h-0.5 w-5 rounded-sm" />
             <span className="bg-ink block h-0.5 w-5 rounded-sm" />
@@ -116,7 +116,7 @@ export const Navbar = () => {
           <Link
             href={CONTACT_HREF}
             onClick={closeMenu}
-            className="bg-brand-gradient-soft text-ink-on-brand mt-2 rounded-[11px] p-3 text-center text-base font-bold"
+            className="bg-brand-gradient-soft text-ink-on-brand border-brand-end mt-2 border-b-2 p-3 text-center text-base font-bold"
           >
             Contact
           </Link>

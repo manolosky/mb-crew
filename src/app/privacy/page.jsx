@@ -115,7 +115,7 @@ const PrivacyPage = () => {
         </LegalSection>
 
         <LegalSection id="cookies" title="Cookies and local storage">
-          <div className="border-line overflow-x-auto rounded-[14px] border">
+          <div className="border-line overflow-x-auto border">
             <table className="w-full min-w-[560px] border-collapse text-left text-[14.5px]">
               <caption className="sr-only">Cookies and local storage used by this site</caption>
               <thead className="bg-surface text-ink">

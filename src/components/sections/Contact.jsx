@@ -13,7 +13,7 @@ export const Contact = ({ profile }) => {
     <Section id="contact">
       <Reveal
         direction="fade"
-        className="bg-hero relative overflow-hidden rounded-[26px] p-[clamp(32px,6vw,72px)] text-white"
+        className="bg-hero border-brand relative overflow-hidden border-b-[3px] p-[clamp(32px,6vw,72px)] text-white"
       >
         <Image
           src="/images/contact-poster.webp"

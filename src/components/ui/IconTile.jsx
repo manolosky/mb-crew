@@ -1,8 +1,8 @@
 import { cn } from '@/lib/cn';
 
 const SIZE_STYLES = {
-  md: 'h-10 w-10 rounded-[11px] text-base',
-  sm: 'h-[34px] w-[34px] rounded-[10px] text-sm',
+  md: 'h-10 w-10 text-base',
+  sm: 'h-[34px] w-[34px] text-sm',
 };
 
 // Gradient square holding a single icon.

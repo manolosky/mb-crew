@@ -9,7 +9,7 @@ export const AboutPortrait = () => {
   const [photoFailed, setPhotoFailed] = useState(false);
 
   return (
-    <div className="border-line relative flex aspect-4/5 items-center justify-center overflow-hidden rounded-[20px] border bg-[repeating-linear-gradient(135deg,#1b1916_0_12px,#211e1a_12px_24px)]">
+    <div className="border-line border-b-brand-line relative flex aspect-4/5 items-center justify-center overflow-hidden border border-b-2 bg-[repeating-linear-gradient(135deg,#1b1916_0_12px,#211e1a_12px_24px)]">
       {photoFailed ? (
         <Image
           src="/images/logo-mb-about.png"
