@@ -29,6 +29,12 @@ describe('Navbar', () => {
     );
   });
 
+  it('links the house icon back to the homepage', () => {
+    render(<Navbar />);
+
+    expect(screen.getAllByRole('link', { name: 'Home' })[0]).toHaveAttribute('href', '/');
+  });
+
   it('marks the link of the current section', () => {
     vi.mocked(usePathname).mockReturnValue('/portfolio/experience');
     render(<Navbar />);
