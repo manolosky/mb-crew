@@ -19,7 +19,17 @@ const SIZE_STYLES = {
   sm: 'gap-2 px-[18px] py-[9px] text-[14.5px]',
 };
 
-// Renders a Next.js link when `href` is given, a native button otherwise.
+// A file such as /cv/resume.pdf (optionally followed by a query or a hash).
+const FILE_PATH = /\.[a-z0-9]+(?:[?#].*)?$/i;
+
+// Client-side navigation (and its prefetch) only makes sense for pages of this
+// site opened in the same tab. Files, new tabs and external or mailto: links
+// get a plain anchor; prefetching a PDF as a route answers 404.
+const isSitePage = (href, target) =>
+  undefined === target && href.startsWith('/') && !FILE_PATH.test(href);
+
+// Renders a link when `href` is given (a Next.js link for site pages), a
+// native button otherwise.
 export const Button = ({
   variant = 'gradient',
   size = 'md',
@@ -31,10 +41,12 @@ export const Button = ({
   const classes = cn(BASE_STYLES, VARIANT_STYLES[variant], SIZE_STYLES[size], className);
 
   if (undefined !== href) {
+    const Anchor = isSitePage(href, props.target) ? Link : 'a';
+
     return (
-      <Link href={href} className={classes} {...props}>
+      <Anchor href={href} className={classes} {...props}>
         {children}
-      </Link>
+      </Anchor>
     );
   }
 
