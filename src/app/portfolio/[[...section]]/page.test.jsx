@@ -76,6 +76,15 @@ describe('portfolio route', () => {
     );
   });
 
+  it('offers the CV download in the hero and again in the contact section', async () => {
+    await renderPage(undefined);
+
+    const cvLinks = screen.getAllByRole('link', { name: /download cv/i });
+    expect(cvLinks).toHaveLength(2);
+    cvLinks.forEach((link) => expect(link).toHaveAttribute('href', portfolio.profile.cvHref));
+    expect(document.querySelector('#contact').contains(cvLinks[1])).toBe(true);
+  });
+
   it('slots the client-work summary in among the projects at its position', async () => {
     await renderPage(undefined);
 

@@ -61,9 +61,21 @@ export const Contact = ({ profile }) => {
                 className="max-w-full [overflow-wrap:anywhere]"
               >
                 <Icon name={social.icon} className="text-[15px]" />
-                {social.label} <span className="font-mono text-xs">{social.handle}</span>
+                {/* Only the long handle may wrap, never the label. */}
+                <span className="shrink-0">{social.label}</span>{' '}
+                <span className="font-mono text-xs">{social.handle}</span>
               </Button>
             ))}
+            <Button
+              variant="glass"
+              size="sm"
+              href={profile.cvHref}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Icon name="fa-solid fa-download" className="text-[15px]" /> Download CV
+              <span className="sr-only">(opens in new tab)</span>
+            </Button>
           </div>
         </div>
       </Reveal>
