@@ -59,8 +59,11 @@ export const HomePage = () => {
         <h1 className="font-heading leading-tight font-bold tracking-[-0.015em]">
           <span className="block text-[clamp(21px,2.3vw,30px)]">Manuel Bolaños</span>
           <span className="sr-only"> — </span>
+          {/* Narrow screens: one phrase per line instead of an awkward wrap. */}
           <span className="mt-0.5 block text-[clamp(14px,1.4vw,18px)] font-medium text-white/80">
-            Full-Stack · AI · IoT/Embedded
+            <span className="block min-[480px]:inline">Full-Stack Developer</span>
+            <span className="sr-only min-[480px]:not-sr-only"> · </span>
+            <span className="block min-[480px]:inline">Integrations &amp; Applied AI</span>
           </span>
         </h1>
         <p className="mt-1.5 font-mono text-[13px] text-white/70">

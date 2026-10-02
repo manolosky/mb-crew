@@ -4,7 +4,7 @@ import { getSiteUrl } from '@/lib/site';
 
 export const metadata = {
   description:
-    'Full-Stack, AI and IoT/Embedded developer. Explore the classic portfolio — and soon, talk to MB-01, my AI twin.',
+    'Full-stack developer focused on integrations and applied AI. Explore the classic portfolio — and soon, talk to MB-01, my AI twin.',
   alternates: { canonical: '/' },
 };
 
