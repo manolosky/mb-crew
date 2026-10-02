@@ -26,7 +26,7 @@ const plexMono = IBM_Plex_Mono({
 
 export const metadata = {
   metadataBase: new URL(getSiteUrl()),
-  title: 'Manuel Bolaños — Full-Stack, AI & IoT/Embedded',
+  title: 'Manuel Bolaños — Full-Stack Developer · Integrations & Applied AI',
   description: portfolio.profile.tagline,
 };
 
