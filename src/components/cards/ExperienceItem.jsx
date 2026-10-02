@@ -15,7 +15,7 @@ export const ExperienceItem = ({ job }) => {
       </div>
       <Card
         hover
-        className="rounded-[18px] p-[clamp(20px,3vw,28px)] hover:translate-y-0 hover:shadow-[0_16px_36px_rgba(242,92,5,.12)]"
+        className="p-[clamp(20px,3vw,28px)] hover:translate-y-0 hover:shadow-[0_16px_36px_rgba(242,92,5,.12)]"
       >
         <div className="flex flex-wrap items-baseline justify-between gap-2">
           <h3 className="font-heading min-w-0 text-[clamp(18px,2.4vw,22px)] font-bold">

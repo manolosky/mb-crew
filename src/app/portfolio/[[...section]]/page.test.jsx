@@ -49,11 +49,12 @@ describe('portfolio route', () => {
     expect(metadata.alternates.canonical).toBe('/portfolio/about');
   });
 
-  it('keeps the bare path out of the index while `/` mirrors it', async () => {
+  it('gives the bare /portfolio path its own title and canonical URL', async () => {
     const metadata = await generateMetadata({ params: Promise.resolve({ section: undefined }) });
 
-    expect(metadata.alternates.canonical).toBe('/');
-    expect(metadata.robots).toEqual({ index: false, follow: true });
+    expect(metadata.title).toBe('Portfolio — Manuel Bolaños');
+    expect(metadata.alternates.canonical).toBe('/portfolio');
+    expect(metadata.robots).toBeUndefined();
   });
 
   it('scrolls to the requested section', async () => {
@@ -73,6 +74,19 @@ describe('portfolio route', () => {
       'href',
       '/portfolio/contact',
     );
+  });
+
+  it('slots the client-work summary in among the projects at its position', async () => {
+    await renderPage(undefined);
+
+    const titles = Array.from(
+      document.querySelectorAll('#projects h3'),
+      (heading) => heading.textContent,
+    );
+
+    expect(titles).toHaveLength(portfolio.projects.length + 1);
+    expect(titles[portfolio.clientWork.position - 1]).toMatch(/Content Pilot/);
+    expect(titles[0]).toBe(portfolio.projects[0].title);
   });
 
   it('summarizes confidential client work instead of listing client sites', async () => {

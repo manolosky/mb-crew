@@ -29,7 +29,7 @@ export const AnimationToggle = () => {
       aria-pressed={paused}
       aria-label={paused ? 'Resume decorative animations' : 'Pause decorative animations'}
       onClick={() => setAnimationsPaused(!paused)}
-      className="border-line bg-surface text-slate hover:text-ink flex h-10 w-10 cursor-pointer items-center justify-center rounded-[10px] border transition"
+      className="border-line bg-surface text-slate hover:text-ink flex h-10 w-10 cursor-pointer items-center justify-center border transition"
     >
       <Icon name={paused ? 'fa-solid fa-play' : 'fa-solid fa-pause'} className="text-xs" />
     </button>

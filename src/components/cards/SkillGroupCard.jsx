@@ -5,7 +5,7 @@ import { Icon } from '@/lib/icons';
 
 export const SkillGroupCard = ({ group }) => {
   return (
-    <Card className="bg-surface border-line-soft rounded-[18px] p-[22px]">
+    <Card className="p-[22px]">
       <h3 className="font-heading mb-3.5 flex items-center gap-[11px] text-base font-semibold">
         <IconTile size="sm">
           <Icon name={group.icon} />

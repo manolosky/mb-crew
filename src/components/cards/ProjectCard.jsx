@@ -2,28 +2,51 @@ import Image from 'next/image';
 
 import { ProjectFrame } from '@/components/cards/ProjectFrame';
 import { Chip } from '@/components/ui/Chip';
+import { IconTile } from '@/components/ui/IconTile';
 import { Icon } from '@/lib/icons';
+
+// Decorative header for projects without an image: the systems they connect,
+// as icon tiles on a shared line. Every step is the same width, so the line
+// runs from the centre of the first tile to the centre of the last.
+const FlowHeader = ({ steps }) => {
+  return (
+    <div aria-hidden="true" className="relative flex gap-[clamp(10px,2.5vw,28px)]">
+      <span className="bg-brand-line absolute inset-x-9 top-5 h-px" />
+      {steps.map((step) => (
+        <span key={step.label} className="relative flex w-[72px] flex-col items-center gap-2">
+          <IconTile>
+            <Icon name={step.icon} />
+          </IconTile>
+          <span className="text-muted font-mono text-[11px]">{step.label}</span>
+        </span>
+      ))}
+    </div>
+  );
+};
+
+const ProjectHeader = ({ project }) => {
+  if (undefined !== project.image) {
+    return (
+      <Image
+        src={project.image}
+        alt={project.imageAlt ?? project.title}
+        fill
+        sizes="(max-width: 820px) 100vw, 540px"
+        className="object-cover"
+      />
+    );
+  }
+
+  if (undefined !== project.flow) {
+    return <FlowHeader steps={project.flow} />;
+  }
+
+  return null;
+};
 
 export const ProjectCard = ({ project }) => {
   return (
-    <ProjectFrame
-      badge={project.kind}
-      header={
-        undefined !== project.image ? (
-          <Image
-            src={project.image}
-            alt={project.imageAlt ?? project.title}
-            fill
-            sizes="(max-width: 820px) 100vw, 540px"
-            className="object-cover"
-          />
-        ) : (
-          <span className="text-muted rounded-lg bg-black/45 px-3.5 py-2 font-mono text-[12.5px]">
-            project image
-          </span>
-        )
-      }
-    >
+    <ProjectFrame badge={project.kind} header={<ProjectHeader project={project} />}>
       <div className="text-brand mb-2 font-mono text-xs">{project.tag}</div>
       <h3 className="font-heading mb-2.5 text-xl leading-[1.2] font-bold">
         {project.url ? (
@@ -41,14 +64,16 @@ export const ProjectCard = ({ project }) => {
           project.title
         )}
       </h3>
-      <p className="text-body-soft mb-4 text-[14.5px] leading-[1.55]">{project.blurb}</p>
-      <ul className="mb-[18px] flex list-disc flex-col gap-1.5 pl-[17px]">
-        {project.points.map((point) => (
-          <li key={point} className="text-slate text-[13.5px] leading-[1.5]">
-            {point}
-          </li>
-        ))}
-      </ul>
+      <p className="text-body-soft mb-[18px] text-[14.5px] leading-[1.55]">{project.blurb}</p>
+      {project.points?.length ? (
+        <ul className="-mt-0.5 mb-[18px] flex list-disc flex-col gap-1.5 pl-[17px]">
+          {project.points.map((point) => (
+            <li key={point} className="text-slate text-[13.5px] leading-[1.5]">
+              {point}
+            </li>
+          ))}
+        </ul>
+      ) : null}
       <div className="mt-auto flex flex-wrap gap-[7px]">
         {project.tech.map((tech) => (
           <Chip key={tech} size="sm">

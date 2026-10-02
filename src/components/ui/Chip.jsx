@@ -1,8 +1,8 @@
 import { cn } from '@/lib/cn';
 
 const SIZE_STYLES = {
-  md: 'rounded-lg px-[11px] py-1.5 text-[12.5px]',
-  sm: 'rounded-[7px] px-[9px] py-[5px] text-[11.5px]',
+  md: 'px-[11px] py-1.5 text-[12.5px]',
+  sm: 'px-[9px] py-[5px] text-[11.5px]',
 };
 
 // Small mono label for skills and tech stacks.

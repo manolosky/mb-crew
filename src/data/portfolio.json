@@ -3,27 +3,26 @@
     "name": "Manuel Bolaños",
     "roles": [
       {
-        "label": "Full-Stack Web Developer",
+        "label": "Full-Stack Developer",
         "icon": "fa-solid fa-code"
       },
       {
-        "label": "AI Integration",
+        "label": "Integrations & Applied AI",
         "icon": "fa-solid fa-robot"
-      },
-      {
-        "label": "Embedded Systems & IoT",
-        "icon": "fa-solid fa-microchip"
       }
     ],
     "location": "Spain",
+    "status": "Open to senior full-stack, integration and AI engineering roles · Spain, remote or hybrid",
     "email": "manuelb.diseno@gmail.com",
     "phone": "+34 675 989 629",
-    "tagline": "A decade shipping the web stack — now wiring LLMs and microcontrollers into the loop.",
-    "summary": "Full-stack web developer with over a decade of experience and 200+ delivered projects, with a growing side interest in embedded systems and IoT. My core is the web stack — PHP, Laravel, WordPress, React and JavaScript — with deep experience in CRM-driven enterprise development: custom solutions on SugarCRM, custom-endpoint integrations connecting the CRM to e-commerce platforms and third-party systems, and marketing automation on ActiveCampaign. I have delivered large-scale billing, ticketing, scheduling and queue-management systems for the automotive, security and healthcare sectors, and I currently work on WordPress platforms for U.S. law firms in the legal marketing space. Along the way I have led teams as Scrum Master and Technical Lead under agile methodologies, and I actively integrate AI agents and LLMs into real products.",
-    "hybrid": "Equally comfortable architecting a Laravel application, shipping a professional website, or wiring an LLM into an existing workflow.",
+    "tagline": "Fifteen years building web platforms end to end. I'm at my best where systems have to talk to each other, and lately that includes putting LLMs into the loop.",
+    "about": [
+      "I build web platforms end to end, and I'm strongest where systems have to talk to each other: CRMs, storefronts, payment providers, third-party APIs. Fifteen years in, that has taken me from enterprise billing, ticketing and scheduling software to WordPress and headless platforms for US law firms, leading teams as Technical Lead and Scrum Master along the way. More recently I've been building LLM and agent-driven features into products that are live.",
+      "Outside work: hardware and 3D printing, and usually something new I'm learning."
+    ],
     "stats": [
       {
-        "value": "10+",
+        "value": "15",
         "label": "Years of experience"
       },
       {
@@ -31,8 +30,8 @@
         "label": "Projects delivered"
       },
       {
-        "value": "5",
-        "label": "Teams led / roles"
+        "value": "40+",
+        "label": "Sites in production support"
       }
     ],
     "socials": [
@@ -265,32 +264,38 @@
   ],
   "projects": [
     {
-      "title": "AI-Assisted Development & LLM Integration",
-      "tag": "AI · Ongoing",
+      "title": "Semantic search for a client platform",
+      "tag": "AI · Client work",
       "kind": "AI",
-      "blurb": "Integrating LLMs and agent-style workflows into applications, and using AI-assisted tooling to accelerate delivery.",
-      "points": [
-        "LLM and agent workflows wired into real product loops.",
-        "Claude Code with MCP servers — GitHub, MySQL, filesystem, Playwright, Figma.",
-        "Prompt engineering and AI-assisted development as part of the everyday toolkit."
-      ],
-      "tech": ["LLMs", "AI agents", "Claude Code", "MCP", "Prompt engineering"],
+      "blurb": "Designed a vector-based search capability using OpenAI embeddings and a vector store, decoupled from the platform's existing search provider. Evaluated Pinecone, Qdrant and pgvector against what the client could realistically run and pay for.",
+      "tech": ["OpenAI embeddings", "Vector store", "Pinecone", "Qdrant", "pgvector"],
       "image": "/images/projects/ai-integration.png",
       "imageAlt": "AI microchip icon over a dark background"
     },
     {
-      "title": "Embedded & IoT Experiments",
-      "tag": "ESP32 · Personal build",
-      "kind": "IoT",
-      "blurb": "WiFi-connected applications on ESP32 boards, including a live news ticker with category rotation on a TFT display.",
-      "points": [
-        "NewsAPI + ArduinoJson pipeline feeding a rotating, categorized ticker.",
-        "TFT LCD (ST7735) driven over SPI with the TFT_eSPI library.",
-        "Hands-on sensor integration and display-driver troubleshooting."
-      ],
-      "tech": ["ESP32", "TFT_eSPI", "SPI", "NewsAPI", "ArduinoJson"],
-      "image": "/images/projects/embedded-iot.jpg",
-      "imageAlt": "ESP32 on a breadboard driving a TFT display with a live weather and world-clock app"
+      "title": "CRM and e-commerce integrations",
+      "tag": "Integrations · Client work",
+      "kind": "Integrations",
+      "blurb": "Custom SugarCRM development and REST endpoints connecting the CRM to Shopify, VTEX and WooCommerce stores, payment gateways and internal business systems, plus ActiveCampaign automations keeping contacts, events and sales pipelines in sync.",
+      "tech": ["SugarCRM", "REST", "Shopify", "VTEX", "WooCommerce", "ActiveCampaign"],
+      "flow": [
+        {
+          "label": "CRM",
+          "icon": "fa-solid fa-address-book"
+        },
+        {
+          "label": "Stores",
+          "icon": "fa-solid fa-cart-shopping"
+        },
+        {
+          "label": "Payments",
+          "icon": "fa-solid fa-credit-card"
+        },
+        {
+          "label": "Automation",
+          "icon": "fa-solid fa-envelope"
+        }
+      ]
     },
     {
       "title": "4WD Exploration Rover",
@@ -346,6 +351,7 @@
     }
   ],
   "clientWork": {
+    "position": 3,
     "client": "Content Pilot",
     "role": "Full-Stack Web Developer",
     "built": "10+",

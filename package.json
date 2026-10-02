@@ -26,9 +26,11 @@
   "dependencies": {
     "animejs": "^4.5.0",
     "next": "16.3.6",
+    "postprocessing": "^6.39.5",
     "react": "19.2.4",
     "react-dom": "19.2.4",
-    "react-icons": "^5.7.0"
+    "react-icons": "^5.7.0",
+    "three": "^0.186.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

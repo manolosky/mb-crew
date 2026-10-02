@@ -13,7 +13,7 @@ export const Contact = ({ profile }) => {
     <Section id="contact">
       <Reveal
         direction="fade"
-        className="bg-hero relative overflow-hidden rounded-[26px] p-[clamp(32px,6vw,72px)] text-white"
+        className="bg-hero border-brand relative overflow-hidden border-b-[3px] p-[clamp(32px,6vw,72px)] text-white"
       >
         <Image
           src="/images/contact-poster.webp"
@@ -30,8 +30,8 @@ export const Contact = ({ profile }) => {
         <div className="relative z-[2] max-w-[620px]">
           <SectionHeading
             kicker="05 — Contact"
-            title="Let's build something."
-            description="Full-stack, an LLM in the loop or embedded — happy to talk. Reach me directly:"
+            title="Let's talk."
+            description="Full-stack, integrations, or an LLM in the loop — happy to hear what you're building."
             tone="dark"
             className="mb-8"
           />

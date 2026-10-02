@@ -5,7 +5,7 @@ export const ContactMethod = ({ label, value, href, icon }) => {
   return (
     <a
       href={href}
-      className="flex max-w-full min-w-0 items-center gap-3.5 rounded-[14px] border border-white/20 bg-white/15 px-[22px] py-4 text-white backdrop-blur-sm transition hover:bg-white/25"
+      className="flex max-w-full min-w-0 items-center gap-3.5 border-b-2 border-white/35 bg-white/15 px-[22px] py-4 text-white backdrop-blur-sm transition hover:border-white hover:bg-white/25"
     >
       <Icon name={icon} className="text-lg opacity-85" />
       <span className="flex min-w-0 flex-col">
