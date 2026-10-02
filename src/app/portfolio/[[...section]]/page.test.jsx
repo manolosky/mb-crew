@@ -76,6 +76,19 @@ describe('portfolio route', () => {
     );
   });
 
+  it('slots the client-work summary in among the projects at its position', async () => {
+    await renderPage(undefined);
+
+    const titles = Array.from(
+      document.querySelectorAll('#projects h3'),
+      (heading) => heading.textContent,
+    );
+
+    expect(titles).toHaveLength(portfolio.projects.length + 1);
+    expect(titles[portfolio.clientWork.position - 1]).toMatch(/Content Pilot/);
+    expect(titles[0]).toBe(portfolio.projects[0].title);
+  });
+
   it('summarizes confidential client work instead of listing client sites', async () => {
     await renderPage(undefined);
 

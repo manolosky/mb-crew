@@ -23,15 +23,16 @@ export const About = ({ profile, hobbies }) => {
       }
     >
       <Reveal>
-        <SectionHeading kicker="01 — About" title="A hybrid engineer, on purpose." />
+        <SectionHeading kicker="01 — About" title="About me." />
       </Reveal>
 
       <div className="mt-9 grid grid-cols-[repeat(auto-fit,minmax(min(280px,100%),1fr))] items-start gap-[clamp(20px,3vw,36px)]">
-        <Reveal direction="left">
-          <p className="text-body mb-5 text-[clamp(16px,1.8vw,18px)] leading-[1.62]">
-            {profile.summary}
-          </p>
-          <p className="text-body text-[clamp(16px,1.8vw,18px)] leading-[1.62]">{profile.hybrid}</p>
+        <Reveal direction="left" className="flex flex-col gap-5">
+          {profile.about.map((paragraph) => (
+            <p key={paragraph} className="text-body text-[clamp(16px,1.8vw,18px)] leading-[1.62]">
+              {paragraph}
+            </p>
+          ))}
         </Reveal>
         <Reveal direction="right">
           <AboutPortrait />

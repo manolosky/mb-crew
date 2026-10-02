@@ -30,8 +30,8 @@ export const Contact = ({ profile }) => {
         <div className="relative z-[2] max-w-[620px]">
           <SectionHeading
             kicker="05 — Contact"
-            title="Let's build something."
-            description="Full-stack, an LLM in the loop or embedded — happy to talk. Reach me directly:"
+            title="Let's talk."
+            description="Full-stack, integrations, or an LLM in the loop — happy to hear what you're building."
             tone="dark"
             className="mb-8"
           />

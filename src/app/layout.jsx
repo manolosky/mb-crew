@@ -2,6 +2,7 @@ import { IBM_Plex_Mono, IBM_Plex_Sans, Space_Grotesk } from 'next/font/google';
 
 import { Analytics } from '@/components/consent/Analytics';
 import { CookieBanner } from '@/components/consent/CookieBanner';
+import portfolio from '@/data/portfolio.json';
 import { getSiteUrl } from '@/lib/site';
 import './globals.css';
 
@@ -26,8 +27,7 @@ const plexMono = IBM_Plex_Mono({
 export const metadata = {
   metadataBase: new URL(getSiteUrl()),
   title: 'Manuel Bolaños — Full-Stack, AI & IoT/Embedded',
-  description:
-    'A decade shipping the web stack — now wiring LLMs and microcontrollers into the loop.',
+  description: portfolio.profile.tagline,
 };
 
 const RootLayout = ({ children }) => {
