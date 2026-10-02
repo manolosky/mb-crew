@@ -15,7 +15,7 @@ const spaceGrotesk = Space_Grotesk({
 const plexSans = IBM_Plex_Sans({
   variable: '--font-plex-sans',
   subsets: ['latin'],
-  weight: ['400', '500', '600'],
+  weight: ['300', '400', '500', '600'],
 });
 
 const plexMono = IBM_Plex_Mono({

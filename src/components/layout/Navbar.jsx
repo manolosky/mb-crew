@@ -3,11 +3,11 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useRef, useState } from 'react';
+import { LuHouse } from 'react-icons/lu';
 
 import { LogoMark } from '@/components/layout/LogoMark';
 import { AnimationToggle } from '@/components/ui/AnimationToggle';
 import { cn } from '@/lib/cn';
-import { Icon } from '@/lib/icons';
 import { portfolioHref } from '@/lib/routes';
 
 const NAV_LINKS = [
@@ -15,9 +15,18 @@ const NAV_LINKS = [
   { label: 'Stack', href: portfolioHref('stack') },
   { label: 'Experience', href: portfolioHref('experience') },
   { label: 'Projects', href: portfolioHref('projects') },
+  { label: 'Contact', href: portfolioHref('contact') },
 ];
 
-const CONTACT_HREF = portfolioHref('contact');
+const ICON_LINK_STYLES =
+  'text-slate hover:text-ink flex h-10 w-10 items-center justify-center transition';
+
+// Line-art house that takes visitors back to the two-lens homepage.
+const HomeLink = ({ onClick }) => (
+  <Link href="/" onClick={onClick} aria-label="Home" className={ICON_LINK_STYLES}>
+    <LuHouse aria-hidden="true" className="text-[18px]" strokeWidth={1.5} />
+  </Link>
+);
 
 export const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -50,31 +59,27 @@ export const Navbar = () => {
 
         {/* Desktop links */}
         <div className="nav:flex hidden items-center gap-1.5">
+          <HomeLink />
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
               href={link.href}
               aria-current={pathname === link.href ? 'page' : undefined}
               className={cn(
-                'text-slate hover:text-ink hover:bg-line-strong px-3 py-2 text-[14.5px] font-medium transition',
+                'text-slate hover:text-ink hover:bg-line-strong px-3 py-2 text-[15px] font-light transition',
                 pathname === link.href && 'text-brand-start bg-line-strong',
               )}
             >
               {link.label}
             </Link>
           ))}
-          <Link
-            href={CONTACT_HREF}
-            className="bg-brand-gradient-soft shadow-nav-cta text-ink-on-brand border-brand-end ml-1.5 inline-flex items-center gap-2 border-b-2 px-[18px] py-[9px] text-[14.5px] font-semibold transition hover:brightness-[1.06]"
-          >
-            <Icon name="fa-solid fa-paper-plane" className="text-xs" /> Contact
-          </Link>
-          <AnimationToggle />
+          <AnimationToggle variant="bare" />
         </div>
 
-        {/* Mobile: animation toggle + hamburger */}
-        <div className="nav:hidden flex items-center gap-2">
-          <AnimationToggle />
+        {/* Mobile: home, animation toggle and hamburger */}
+        <div className="nav:hidden flex items-center gap-1">
+          <HomeLink onClick={closeMenu} />
+          <AnimationToggle variant="bare" />
           <button
             ref={menuButtonRef}
             type="button"
@@ -82,11 +87,11 @@ export const Navbar = () => {
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
             onClick={() => setMenuOpen((open) => !open)}
-            className="border-line bg-surface flex cursor-pointer flex-col gap-[5px] border p-2.5"
+            className={cn(ICON_LINK_STYLES, 'cursor-pointer flex-col gap-[5px]')}
           >
-            <span className="bg-ink block h-0.5 w-5 rounded-sm" />
-            <span className="bg-ink block h-0.5 w-5 rounded-sm" />
-            <span className="bg-ink block h-0.5 w-5 rounded-sm" />
+            <span className="block h-[1.5px] w-5 bg-current" />
+            <span className="block h-[1.5px] w-5 bg-current" />
+            <span className="block h-[1.5px] w-5 bg-current" />
           </button>
         </div>
       </nav>
@@ -106,20 +111,13 @@ export const Navbar = () => {
               onClick={closeMenu}
               aria-current={pathname === link.href ? 'page' : undefined}
               className={cn(
-                'text-ink-soft border-line-soft border-b px-2 py-3 text-base font-semibold',
+                'text-ink-soft border-line-soft border-b px-2 py-3 text-base font-light',
                 pathname === link.href && 'text-brand-start border-l-brand-start border-l-2 pl-3',
               )}
             >
               {link.label}
             </Link>
           ))}
-          <Link
-            href={CONTACT_HREF}
-            onClick={closeMenu}
-            className="bg-brand-gradient-soft text-ink-on-brand border-brand-end mt-2 border-b-2 p-3 text-center text-base font-bold"
-          >
-            Contact
-          </Link>
         </nav>
       ) : null}
     </>
