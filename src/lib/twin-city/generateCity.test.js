@@ -37,6 +37,35 @@ describe('generateCity', () => {
     });
   });
 
+  it('lays an organic patch of ground under every building and tree', () => {
+    const { buildings, trees, ground } = generateCity();
+    // Ray casting: a point is inside when a ray from it crosses the outline an odd number of times.
+    const inside = (x, z) =>
+      ground.outline.reduce((crossings, a, index) => {
+        const b = ground.outline[(index + 1) % ground.outline.length];
+        const crosses = a.z > z !== b.z > z && x < ((b.x - a.x) * (z - a.z)) / (b.z - a.z) + a.x;
+
+        return crosses ? !crossings : crossings;
+      }, false);
+
+    buildings.forEach(({ x, z, width, depth }) => {
+      [-0.5, 0.5].forEach((sideX) => {
+        [-0.5, 0.5].forEach((sideZ) => {
+          expect(inside(x + sideX * width, z + sideZ * depth)).toBe(true);
+        });
+      });
+    });
+    trees.forEach(({ x, z, radius }) => {
+      expect(inside(x - radius, z + radius)).toBe(true);
+      expect(inside(x + radius, z + radius)).toBe(true);
+    });
+
+    const distances = ground.outline.map(({ x, z }) =>
+      Math.hypot(x - ground.center.x, z - ground.center.z),
+    );
+    expect(Math.max(...distances) - Math.min(...distances)).toBeGreaterThan(8);
+  });
+
   it('puts the forest belt beyond the blocks and lays out the streets', () => {
     const { trees, streets, bounds } = generateCity({ blocks: 5 });
 

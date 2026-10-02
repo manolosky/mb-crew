@@ -9,7 +9,6 @@ import {
   ConeGeometry,
   DirectionalLight,
   Fog,
-  GridHelper,
   HalfFloatType,
   HemisphereLight,
   InstancedMesh,
@@ -30,6 +29,7 @@ import {
 
 import { areAnimationsPaused, onAnimationsChange, prefersReducedMotion } from '@/lib/motion';
 import { createRandom } from '@/lib/random';
+import { createGrass } from '@/lib/twin-city/createGrass';
 import { createRoofs } from '@/lib/twin-city/createRoofs';
 import { generateCity } from '@/lib/twin-city/generateCity';
 import { SplitLensEffect } from '@/lib/twin-city/SplitLensEffect';
@@ -196,17 +196,16 @@ export const createTwinCity = (host, { cssTarget = host, onReady, onContextLost 
   const groundGeometry = new PlaneGeometry(400, 400).rotateX(-Math.PI / 2);
   const groundMaterial = new MeshStandardMaterial({ color: '#0d0b09', roughness: 1 });
   const ground = new Mesh(groundGeometry, groundMaterial);
-  const grid = new GridHelper(city.bounds.half * 2 + 24, 44, '#ff7a1a', '#2a1a0e');
-  grid.material.transparent = true;
-  grid.material.opacity = 0.32;
-  grid.position.y = 0.02;
+  const grass = createGrass(city.ground, {
+    anisotropy: renderer.capabilities.getMaxAnisotropy(),
+  });
 
   const flows = createFlows(city.streets, random);
   const fireflies = createFireflies(city.bounds, random);
 
   scene.add(
     ground,
-    grid,
+    grass.mesh,
     buildings,
     ...roofs.meshes,
     trees,
@@ -444,11 +443,11 @@ export const createTwinCity = (host, { cssTarget = host, onReady, onContextLost 
         roof,
         treeMaterial,
         groundMaterial,
-        grid.material,
         flows.points.material,
         fireflies.points.material,
       ].forEach((material) => material.dispose());
       roofs.dispose();
+      grass.dispose();
       windows.dispose();
       renderer.dispose();
       renderer.domElement.remove();

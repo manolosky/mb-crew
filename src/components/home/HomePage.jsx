@@ -4,13 +4,14 @@ import { CookieSettingsButton } from '@/components/consent/CookieSettingsButton'
 import { HomePoster } from '@/components/home/HomePoster';
 import { HomeStage } from '@/components/home/HomeStage';
 import { AnimationToggle } from '@/components/ui/AnimationToggle';
+import { Button } from '@/components/ui/Button';
 import { cn } from '@/lib/cn';
 import { portfolioHref } from '@/lib/routes';
 
 const LEGAL_LINK_STYLES = 'hover:text-white underline-offset-2 transition hover:underline';
 
 // One lens of the homepage: a square panel with a coloured bottom rule,
-// holding the lens type, the headline and a text call to action.
+// holding the lens type, the headline and a call-to-action button.
 const LensCard = ({ lens, eyebrow, title, accentClassName, children }) => {
   const titleId = `home-${lens}-title`;
 
@@ -18,8 +19,13 @@ const LensCard = ({ lens, eyebrow, title, accentClassName, children }) => {
     <section
       aria-labelledby={titleId}
       className={cn(
-        'flex items-end p-[clamp(16px,4vw,56px)] pb-[clamp(56px,7vw,80px)]',
-        'twin' === lens ? 'justify-start pt-28' : 'justify-end',
+        'flex p-[clamp(16px,4vw,56px)]',
+        // Landscape: both cards hug the window edges, centred on the city
+        // (which sits a little below the middle of the frame).
+        'landscape:items-center landscape:pt-[14svh] landscape:pb-[3svh]',
+        // Portrait: each card rests at the bottom of its half.
+        'portrait:items-end portrait:pb-[clamp(56px,7vw,80px)]',
+        'twin' === lens ? 'justify-start portrait:pt-28' : 'justify-end',
       )}
     >
       <div
@@ -51,9 +57,9 @@ export const HomePage = () => {
     <HomeStage poster={<HomePoster />}>
       <header className="pointer-events-none absolute inset-x-0 top-0 z-10 px-16 pt-6 text-center">
         <h1 className="font-heading leading-tight font-bold tracking-[-0.015em]">
-          <span className="text-[clamp(21px,2.3vw,30px)]">Manuel Bolaños</span>
+          <span className="block text-[clamp(21px,2.3vw,30px)]">Manuel Bolaños</span>
           <span className="sr-only"> — </span>
-          <span className="nav:inline nav:ml-3 block text-[clamp(14px,1.4vw,18px)] font-medium text-white/80">
+          <span className="mt-0.5 block text-[clamp(14px,1.4vw,18px)] font-medium text-white/80">
             Full-Stack · AI · IoT/Embedded
           </span>
         </h1>
@@ -78,12 +84,12 @@ export const HomePage = () => {
           title="Don’t read my résumé. Talk to it."
           accentClassName="border-brand"
         >
-          <p className="font-heading flex items-center gap-2 text-[16px] font-semibold text-white/55">
+          <Button variant="glass" size="sm" disabled className="font-heading">
             Talk to MB-01 <span aria-hidden="true">→</span>
             <span className="text-brand-start font-mono text-[12px] font-medium tracking-[0.1em] uppercase">
               (soon)
             </span>
-          </p>
+          </Button>
         </LensCard>
 
         <LensCard
@@ -92,10 +98,7 @@ export const HomePage = () => {
           title="Prefer the classic way?"
           accentClassName="border-ink"
         >
-          <Link
-            href={portfolioHref()}
-            className="group font-heading inline-flex items-center gap-2 text-[16px] font-semibold text-white underline-offset-4 hover:underline"
-          >
+          <Button variant="glass" size="sm" href={portfolioHref()} className="group font-heading">
             Explore the portfolio
             <span
               aria-hidden="true"
@@ -103,7 +106,7 @@ export const HomePage = () => {
             >
               →
             </span>
-          </Link>
+          </Button>
         </LensCard>
       </div>
 

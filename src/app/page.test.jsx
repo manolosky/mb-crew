@@ -23,7 +23,7 @@ describe('home route', () => {
     render(<Home />);
 
     const twin = screen.getByRole('region', { name: /talk to it/i });
-    expect(within(twin).getByText(/talk to mb-01/i)).toBeInTheDocument();
+    expect(within(twin).getByRole('button', { name: /talk to mb-01/i })).toBeDisabled();
     expect(within(twin).getByText('(soon)')).toBeInTheDocument();
     expect(within(twin).queryByRole('link')).not.toBeInTheDocument();
 

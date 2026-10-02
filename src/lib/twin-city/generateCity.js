@@ -14,6 +14,12 @@ const DEFAULTS = {
 // Buildings below this height get a pitched roof most of the time.
 const PITCHED_MAX_HEIGHT = 9;
 
+// Grass patch under the city and the forest.
+const GROUND_SAMPLES = 120;
+const GROUND_MARGIN = 3; // minimum clearance around the outermost lots and trees
+const GROUND_ROUNDNESS = 4; // superellipse exponent: 2 is an ellipse, higher is boxier
+const GROUND_WOBBLE = 0.32; // how far the organic edge bulges out, relative to the radius
+
 export const generateCity = (options = {}) => {
   const { seed, blocks, blockSize, streetWidth, forestDepth } = { ...DEFAULTS, ...options };
   const random = createRandom(seed);
@@ -112,5 +118,51 @@ export const generateCity = (options = {}) => {
     };
   });
 
-  return { buildings, trees, streets, bounds: { half, forestEnd: forestStart + forestDepth } };
+  // Ground: a superellipse through the corners of the area to cover (blocks
+  // plus forest), pushed outwards by a few waves so the edge looks organic
+  // instead of square. The waves only add, so nothing is left off.
+  const groundRandom = createRandom(seed + 2);
+  const forestEnd = forestStart + forestDepth;
+  const center = { x: 0, z: (forestEnd - half) / 2 };
+  const halfX = half + GROUND_MARGIN;
+  const halfZ = (forestEnd + half) / 2 + GROUND_MARGIN;
+  const corner = 2 ** (1 / GROUND_ROUNDNESS);
+  const waves = [3, 4, 6, 9, 13].map((frequency) => ({
+    frequency,
+    phase: groundRandom.range(0, Math.PI * 2),
+    weight: groundRandom.range(0.5, 1) / frequency ** 0.7,
+  }));
+  const angles = Array.from(
+    { length: GROUND_SAMPLES },
+    (_, index) => (index / GROUND_SAMPLES) * Math.PI * 2,
+  );
+  const bulges = angles.map((angle) =>
+    waves.reduce(
+      (sum, { frequency, phase, weight }) => sum + weight * Math.sin(frequency * angle + phase),
+      0,
+    ),
+  );
+  const lowest = Math.min(...bulges);
+  const spread = Math.max(...bulges) - lowest;
+
+  const outline = angles.map((angle, index) => {
+    const cos = Math.cos(angle);
+    const sin = Math.sin(angle);
+    const reach =
+      (Math.abs(cos) / (halfX * corner)) ** GROUND_ROUNDNESS +
+      (Math.abs(sin) / (halfZ * corner)) ** GROUND_ROUNDNESS;
+    // From 0 in the deepest bay to 1 at the furthest bulge.
+    const wobble = (bulges[index] - lowest) / spread;
+    const radius = reach ** (-1 / GROUND_ROUNDNESS) * (1 + GROUND_WOBBLE * wobble);
+
+    return { x: center.x + cos * radius, z: center.z + sin * radius };
+  });
+
+  return {
+    buildings,
+    trees,
+    streets,
+    ground: { center, outline },
+    bounds: { half, forestEnd },
+  };
 };
