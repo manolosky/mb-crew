@@ -122,6 +122,17 @@ body {
   outline-offset: 2px;
 }
 
+/* The cookie banner is server-rendered but only shown while the consent prompt
+   is open (set before the first paint, see consentPromptScript). Without
+   JavaScript nothing can be tracked, so it stays hidden. */
+[data-cookie-banner] {
+  display: none;
+}
+
+html[data-consent-prompt='open'] [data-cookie-banner] {
+  display: block;
+}
+
 /* Site-wide pause switch for decorative CSS animations (WCAG 2.2.2) */
 html[data-animations='paused'] * {
   animation-play-state: paused !important;

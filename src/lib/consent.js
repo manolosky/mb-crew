@@ -7,6 +7,10 @@ const CONSENT_VERSION = 1;
 // Decisions are renewed after a year (the AEPD accepts up to 24 months).
 const MAX_AGE_MS = 365 * 24 * 60 * 60 * 1000;
 
+// Mirrors the prompt state on <html> ('open' | 'closed'); the banner's CSS
+// reads it, so the server-rendered banner shows only to undecided visitors.
+const PROMPT_ATTRIBUTE = 'data-consent-prompt';
+
 // Fallback for browsers that block localStorage: the choice still applies for
 // the rest of the visit.
 let memoryChoice = null;
@@ -55,6 +59,21 @@ export const requestConsentPrompt = () => {
 };
 
 export const isConsentPromptOpen = () => promptRequested || null === readConsent();
+
+export const syncConsentPromptAttribute = () => {
+  document.documentElement.setAttribute(
+    PROMPT_ATTRIBUTE,
+    isConsentPromptOpen() ? 'open' : 'closed',
+  );
+};
+
+// Inline script for the root layout's <head>: sets the prompt attribute while
+// the HTML is still being parsed, so the banner is painted with the page (or
+// not at all) instead of popping in once React has loaded. Same rules as
+// readConsent(); if storage is unavailable the prompt stays open.
+export const consentPromptScript = `(function(){var open=true;try{var s=JSON.parse(localStorage.getItem(${JSON.stringify(
+  STORAGE_KEY,
+)})||"null");open=!(s&&${CONSENT_VERSION}===s.version&&Date.now()-s.savedAt<=${MAX_AGE_MS})}catch(e){}document.documentElement.setAttribute("${PROMPT_ATTRIBUTE}",open?"open":"closed")})()`;
 
 // Notifies on changes from this tab and from other open tabs.
 export const onConsentChange = (callback) => {
