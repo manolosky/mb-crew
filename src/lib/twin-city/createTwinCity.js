@@ -32,6 +32,7 @@ import { createRandom } from '@/lib/random';
 import { createGrass } from '@/lib/twin-city/createGrass';
 import { createRoofs } from '@/lib/twin-city/createRoofs';
 import { generateCity } from '@/lib/twin-city/generateCity';
+import { precompileShaders } from '@/lib/twin-city/precompileShaders';
 import { SplitLensEffect } from '@/lib/twin-city/SplitLensEffect';
 import { createWindowsTexture } from '@/lib/twin-city/windowsTexture';
 
@@ -142,6 +143,9 @@ export const createTwinCity = (host, { cssTarget = host, onReady, onContextLost 
     stencil: false,
     depth: false,
   });
+  // Reading shader logs waits for every program to link, which stalls the main
+  // thread; keep that check for development only.
+  renderer.debug.checkShaderErrors = 'production' !== process.env.NODE_ENV;
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, coarsePointer ? 1.25 : 1.5));
   renderer.setSize(host.clientWidth, host.clientHeight);
   renderer.domElement.style.display = 'block';
@@ -223,18 +227,14 @@ export const createTwinCity = (host, { cssTarget = host, onReady, onContextLost 
     multisampling: Math.min(4, renderer.capabilities.maxSamples),
   });
   const lens = new SplitLensEffect();
+  const bloom = new BloomEffect({
+    luminanceThreshold: 0.32,
+    luminanceSmoothing: 0.25,
+    intensity: 1.15,
+    mipmapBlur: true,
+  });
   composer.addPass(new RenderPass(scene, camera));
-  composer.addPass(
-    new EffectPass(
-      camera,
-      new BloomEffect({
-        luminanceThreshold: 0.32,
-        luminanceSmoothing: 0.25,
-        intensity: 1.15,
-        mipmapBlur: true,
-      }),
-    ),
-  );
+  composer.addPass(new EffectPass(camera, bloom));
   composer.addPass(new EffectPass(camera, lens));
 
   // Interaction state.
@@ -246,6 +246,9 @@ export const createTwinCity = (host, { cssTarget = host, onReady, onContextLost 
   const ndc = new Vector2();
 
   let ready = false;
+  // Nothing is drawn until every shader has compiled (see below).
+  let compiled = false;
+  let disposed = false;
 
   const isPortrait = () => host.clientWidth <= host.clientHeight;
 
@@ -340,7 +343,7 @@ export const createTwinCity = (host, { cssTarget = host, onReady, onContextLost 
   };
 
   const start = () => {
-    if (null !== frame || document.hidden || !motionAllowed()) {
+    if (!compiled || null !== frame || document.hidden || !motionAllowed()) {
       return;
     }
 
@@ -357,7 +360,9 @@ export const createTwinCity = (host, { cssTarget = host, onReady, onContextLost 
 
   // Reduced motion or paused animations: a single still frame.
   const renderStill = () => {
-    update(0, elapsed);
+    if (compiled) {
+      update(0, elapsed);
+    }
   };
 
   const syncMotion = () => {
@@ -412,7 +417,14 @@ export const createTwinCity = (host, { cssTarget = host, onReady, onContextLost 
   resizeObserver.observe(host);
   const unsubscribeMotion = onAnimationsChange(syncMotion);
 
-  syncMotion();
+  // Compile every shader in parallel (KHR_parallel_shader_compile) before the
+  // first frame, so starting the scene doesn't freeze the page in one long task.
+  precompileShaders(renderer, composer, { scene, camera, bloom }).then(() => {
+    if (!disposed) {
+      compiled = true;
+      syncMotion();
+    }
+  });
 
   return {
     // Keyboard focus on a column behaves like hovering it.
@@ -423,6 +435,7 @@ export const createTwinCity = (host, { cssTarget = host, onReady, onContextLost 
       }
     },
     dispose: () => {
+      disposed = true;
       stop();
       unsubscribeMotion();
       resizeObserver.disconnect();
