@@ -16,6 +16,9 @@ const scheduleIdle = (callback) =>
 const cancelIdle = (handle) =>
   'cancelIdleCallback' in window ? window.cancelIdleCallback(handle) : window.clearTimeout(handle);
 
+// Ends the current task so input can be handled before the next chunk of work.
+const yieldToMain = () => new Promise((resolve) => window.setTimeout(resolve, 0));
+
 // Without motion, or when the visitor asked to save data, the poster is enough.
 const sceneWanted = () =>
   !prefersReducedMotion() && !areAnimationsPaused() && true !== navigator.connection?.saveData;
@@ -36,6 +39,9 @@ export const HomeStage = ({ poster, children }) => {
 
     const mount = async () => {
       const { createTwinCity } = await import('@/lib/twin-city/createTwinCity');
+      // Evaluating the engine and building the scene are both heavy; keep them
+      // in separate tasks instead of one long one.
+      await yieldToMain();
 
       if (disposed) {
         return;

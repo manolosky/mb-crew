@@ -18,6 +18,22 @@ const FEATHER = 7; // width of the soft outer edge, in world units
 const EDGE_SHADE = 0.08; // grass brightness at the very edge (blends into the ground)
 const HEIGHT = 0.02; // just above the ground plane
 
+// Copies needed along one axis for a blade from `start` to `start + tip`: the
+// blade itself, plus a wrapped copy when it crosses either edge of the tile.
+const wrapOffsets = (start, tip) => {
+  const offsets = [0];
+
+  if (Math.min(start, start + tip) - 1 < 0) {
+    offsets.push(TEXTURE_SIZE);
+  }
+
+  if (Math.max(start, start + tip) + 1 > TEXTURE_SIZE) {
+    offsets.push(-TEXTURE_SIZE);
+  }
+
+  return offsets;
+};
+
 // Seamless canvas of short grass blades in a few close greens. Blades that
 // cross an edge are drawn again on the opposite side so the tiles join.
 const createGrassTexture = (seed) => {
@@ -40,8 +56,8 @@ const createGrassTexture = (seed) => {
     context.strokeStyle = `hsl(${random.range(88, 122)} ${random.range(34, 56)}% ${random.range(27, 46)}%)`;
     context.lineWidth = random.range(0.8, 1.6);
 
-    [-TEXTURE_SIZE, 0, TEXTURE_SIZE].forEach((offsetX) => {
-      [-TEXTURE_SIZE, 0, TEXTURE_SIZE].forEach((offsetY) => {
+    wrapOffsets(x, tipX).forEach((offsetX) => {
+      wrapOffsets(y, tipY).forEach((offsetY) => {
         context.beginPath();
         context.moveTo(x + offsetX, y + offsetY);
         context.lineTo(x + offsetX + tipX, y + offsetY + tipY);

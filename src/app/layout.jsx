@@ -3,6 +3,7 @@ import { IBM_Plex_Mono, IBM_Plex_Sans, Space_Grotesk } from 'next/font/google';
 import { Analytics } from '@/components/consent/Analytics';
 import { CookieBanner } from '@/components/consent/CookieBanner';
 import portfolio from '@/data/portfolio.json';
+import { consentPromptScript } from '@/lib/consent';
 import { getSiteUrl } from '@/lib/site';
 import './globals.css';
 
@@ -32,10 +33,16 @@ export const metadata = {
 
 const RootLayout = ({ children }) => {
   return (
+    // The consent script below adds an attribute to <html> before React loads.
     <html
       lang="en"
       className={`${spaceGrotesk.variable} ${plexSans.variable} ${plexMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
+      <head>
+        {/* Decides before the first paint whether the cookie banner shows. */}
+        <script dangerouslySetInnerHTML={{ __html: consentPromptScript }} />
+      </head>
       <body className="flex min-h-full flex-col">
         {/* First in the tab order so keyboard users can decide right away. */}
         <CookieBanner />

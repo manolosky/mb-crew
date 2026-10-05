@@ -61,6 +61,17 @@ describe('CookieBanner', () => {
     expect(screen.getByRole('button', { name: 'Accept' })).toBeInTheDocument();
   });
 
+  it('keeps the <html> prompt attribute that drives its visibility in step', async () => {
+    const { CookieBanner } = await loadBanner();
+    const user = userEvent.setup();
+    render(<CookieBanner />);
+
+    expect(document.documentElement).toHaveAttribute('data-consent-prompt', 'open');
+
+    await user.click(screen.getByRole('button', { name: 'Reject' }));
+    expect(document.documentElement).toHaveAttribute('data-consent-prompt', 'closed');
+  });
+
   it('stays hidden once the visitor has decided', async () => {
     window.localStorage.setItem(
       'mb-analytics-consent',
